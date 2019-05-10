@@ -1,14 +1,14 @@
 <?php 
-session_start();
+
 require "../inc/functions.php";
-//logged_only();
+logged_only();
 
 require "../inc/header.php"
 ?>
 
 	<h2>Paramètres de votre compte: <h2>
 
-		<a href="update-pwd.php">Changement de mot de passe</a>
+		<a href="../page/update-pwd.php">Changement de mot de passe</a>
 
 	
 

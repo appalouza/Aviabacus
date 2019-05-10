@@ -1,45 +1,63 @@
-<?php 
-session_start();
+<?php
+
 require "../inc/functions.php";
+require_once '../inc/bootstrap.php';
 logged_only();
+/*$validator = new Validator($_POST);
+$validator->isPassword2('password_new', "Votre mot de passe est incorrect");*/
 
-if (!empty($_POST)) {
-	# code...
-	if (!empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm']) {
-		# code...
-		$_SESSION['flash']['danger'] = 'Les mots de passes ne correspondent pas';
-	}else{
-		$user_id = $_SESSION['auth']->$id;
+    if (!empty($_POST) /*&& $validator->isValid()*/) {
 
-		$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        if(password_verify($_POST['old_password'], $_SESSION['auth']->password)){
+            if (!empty($_POST['password_new']) && $_POST['password_new'] == $_POST['password_new_confirm']) {
 
-		require_once '../bdd/bd.php';
+                $db = App::getDatabase();
+                $user_id = $_SESSION['auth']->id;
+                $password = password_hash($_POST['password_new'], PASSWORD_BCRYPT);
+                $db->query("UPDATE t_pilote SET password = ? WHERE id = ?",[$password, $user_id]);
+                $_SESSION['flash']['success'] = "Votre mot de passe à bien été mis à jour";
+                header('Location: accueil.php');
 
-		$req = $pdo->prepare('UPDATE users SET password = ? WHERE id = ?') -> execute([$password, $user_id]);
+                exit();
+            }else{
 
-		$_SESSION['flash']['success'] = 'Votre mot de passe a bein été mis à jour';
-	}
-}
+                $_SESSION['flash']['error'] = 'Les mots de passe ne correspondent pas';
+        }}
+        else{
+
+            $_SESSION['flash']['error'] = 'Veuillez renseigner votre ancien mot de passe';
+        }
+        }
+
 require "../inc/header.php"
 ?>
 
-	<h3>Veuillez entre votre nouveau mot de passe <?= $_SESSION['auth']->username; ?></h3>
 
 
-	<form action="" method="POST">
-		
-		<div class="form-group">
-			<input class="form-control" type="password" name="password" placeholder="Changer de mot de passe">
-		</div>	
+<div class="container">
 
-		<div class="form-group">
-			<input class="form-control" type="password" name="password_confirm" placeholder="Confirmation du mot de passe">
-		</div>	
+    <h4>Changer le mot de passe</h4>
+    <form action="" method="POST">
 
-		<button class="btn btn-primary">Changer mon mot de passe</button>
+        <div class="form-group">
+            <label>Votre ancien mot de passe: </label>
+            <input class="form-control" type="password" name="old_password">
+        </div>
 
-	</form>
+        <div class="form-group">
+            <label>Votre nouveau mot de passe: </label>
+            <input class="form-control" type="password" name="password_new" >
+        </div>
 
-<?php debug($_SESSION); ?>
+        <div class="form-group">
+            <label>Confirmation de votre nouveau mot de passe: </label>
+            <input class="form-control" type="password" name="password_new_confirm">
+        </div>
+
+        <button class="btn btn-primary">Changer mon mot de passe</button>
+
+    </form>
+</div>
+<?php //debug($_SESSION); ?>
 
 <?php require "../inc/footer.php" ?>

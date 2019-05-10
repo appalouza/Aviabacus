@@ -13,87 +13,46 @@ require_once '../inc/bootstrap.php';
 		//connexion à la bdd grâce à la classe App
 		$db = App::getDatabase();
 
-		/*$validator = new Validator($_POST);
+		$validator = new Validator($_POST);
 
-		$validator->alphanumeric('username', "Votre pseudo n'est pas valide (alphanumérique)");
+		$validator->isAlphanumeric('username', "Votre pseudo n'est pas valide (alphanumérique)");
+		if ($validator->isValid()){
 
-		var_dump($validator);
-		die();*/
+            $validator->isUniq('username', $db, "users", "Ce pseudo est déjà pris");
 
-		session_start();
+        }
 
-		if (empty($_POST['username']) || !preg_match('/^[A-Za-z0-9]+$/', $_POST['username'])) {
-			
-			//ajout d'un message d'erreur dans la liste $errors
-			$errors['username'] = "Votre pseudo n'est pas valide (alphanumérique)";
-		}
-		else{
+        $validator->isAlphanumeric('userfirstname', "Votre prénom n'est pas valide (alphanumérique)");
 
-			//envoie et reception de la requête
-			$user = $db->query('SELECT id FROM users WHERE username = ?',[$_POST['username']])->fetch();
+        $validator->isAlphanumeric('userlastname', "Votre nom n'est pas valide (alphanumérique)");
 
-			if ($user) {
-				
-				$errors['username']="Ce pseudo est déjà pris";
-			}
-			
-		}
+        $validator->isEmail('email',"Votre email n'est pas valide ");
 
-		if(empty($_POST['lvl_user'])){
+		if ($validator->isValid()){
 
-			$errors['lvl_user'] = "Veuillez choisir un niveau d'utilisateur";
-		}
+            $validator->isUniq('email', $db, "users", "Cet email est déjà pris");
+        }
 
-		if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-	
-			$errors['email'] = "Votre email n'est pas valide";
-		}
-		else{
+        $validator->isLevel('lvl_user', "Veuillez choisir un niveau d'utilisateur");
 
-			$user = $db->query('SELECT id FROM users WHERE email = ?', [$_POST['email']]) ->fetch();
-			
-			if ($user) {
-				# code...
-				$errors['email']="Cet email est déjà pris";
-			}
+        $validator->isPassword('password', "Ce mot de passe n'est pas valide");
 
-		}
-
-		if (empty($_POST['password']) || $_POST['password'] != $_POST['password-confirm']){
-
-			$errors['password'] = "Votre mot de passe n'est pas valide!";
-		}
 
 		//requête pour enregistrer un utilisateurs
-		if (empty($errors)) {
+		if ($validator->isValid()) {
 
-			//hash du mot de passe renseigné
-			$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+			$auth = new Auth($db);
 
-			//création d'un token random
-			$token = str_random(60);
+			$auth->register($_POST['username'], $_POST['userfirstname'], $_POST['userlastname'], $_POST['password'], $_POST['email'], $_POST['lvl_user'],$db);
 
-			$req = $db->query("INSERT INTO users SET username= ?, email = ?, password = ?, confirmation_token=?, lvl_user=?",[
-				$_POST['username'], 
-				$_POST['email'],
-				$password, 
-				$token, 
-				$_POST['lvl_user']]) ->fetch();
-
-			//récupération de l'id de l'user
-			$user_id = $db->lastInsertId();
-
-			//envoie d'un mail de confirmation
-			mail($_POST['email'], "confrimation de votre compte", 'Afin de valider votre compte, veuillez cliquer sur ce lien : \n\n
-				http://localhost/log_utilisateurs/page/confirm.php?id=$user_id&token=$token');
-
-			//ajout d'un message flash de succès dans la variable SESSION
-			$_SESSION['flash']['success'] = 'Un email de confirmation vous a été envoyé pour valider votre compte';
+			Session::getInstance()->setFlash('success','Un email de confirmation vous a été envoyé pour valider votre compte' );
 
 			//redirection vers la page login.php
-			header('Location: login.php');
+			header('Location: ../page/login.php');
 			exit();
-		}
+		} else {
+		    $errors = $validator->getErrors();
+        }
 		
 		//permet de voir le contenu de la liste erreurs
 		//debug($errors);
@@ -104,7 +63,7 @@ require '../inc/header.php';
 
 ?>
 
-<h1>Inscription d'un nouvel utilisateur</h1>
+<h3>Inscription d'un nouvel utilisateur</h3>
 
 <?php if (!empty($errors)): ?>
 	<div class="alert alert-danger">
@@ -120,10 +79,22 @@ require '../inc/header.php';
 <form action="" method="POST">
 	
 	<div class="form-group">
-		<label for="">Pseudo</label>	
-		<input type="text" name="username" class = "form-control" >
+        <label for="">Pseudo</label>
+        <input type="text" name="username" class = "form-control" >
 
-	</div>
+    </div>
+
+    <div class="form-group">
+        <label for="">Nom</label>
+        <input type="text" name="userfirstname" class = "form-control" >
+
+    </div>
+
+    <div class="form-group">
+        <label for="">Prénom</label>
+        <input type="text" name="userlastname" class = "form-control" >
+
+    </div>
 
 	<div class="form-group">
 		<label for="">Email</label>	
@@ -151,7 +122,7 @@ require '../inc/header.php';
 	</div>
 
 	<div class="form-group">
-		<label for="">Confirmation</label>	
+		<label for="">Confirmation du mot de passe</label>
 		<input type="password" name="password-confirm" class = "form-control" >
 
 	</div>

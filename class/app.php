@@ -10,12 +10,18 @@ class App{
 		//lors du démarage, on initialise la variable db
 		if (!self::$db) {
 			# code...
-			self::$db = new database('root', '', 'tuto_mdp');
+			self::$db = new database('root', '');
 		}
 		
 
 		return self::$db;
 	}
+
+	static function redirect($page){
+
+	    header("Location: $page");
+
+    }
 
 
 

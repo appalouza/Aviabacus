@@ -7,7 +7,7 @@
 	{	
 		private $pdo;
 
-		public function __construct($login, $password, $database_name, $host = 'localhost'){
+		public function __construct($login, $password, $database_name = "tuto_mdp", $host = 'localhost'){
 
 			//connexion à la bdd MySQL
 

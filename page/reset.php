@@ -1,48 +1,52 @@
 
-<?php require "../inc/header.php" ?>
+<?php
+require '../inc/bootstrap.php';
+require '../inc/functions.php';
+?>
 
 <?php
-	if (isset($_GET['id']) && isset($_GET['token'])) {
-		# code...
-		require '../bdd/db.php';
-		require '../inc/functions.php';
+if (!isset($_SESSION['auth'])){
+    logout();
+}
 
-		$req = $pdo->prepare('SELECT * FROM users WHERE id = ? AND reset_token IS NOT NULL AND reset_token = ? AND reset_at >DATE_SUB(NOW(), INTERVAL 30 MINUTE)');
-		$req->execute([$_GET['id'], $_GET['token']]);
+$user_id = $_GET['id'];
+$token = $_GET['token'];
 
-		$user = $req->fetch();
+	if (isset($user_id) && isset($token)) {
+
+        $db = App::getDatabase();
+        //récupération d'info'mations de l'utilisateur
+		$user = $db->query('SELECT * FROM t_pilote WHERE id = ? AND reset_token IS NOT NULL AND reset_token = ? AND reset_at >DATE_SUB(NOW(), INTERVAL 30 MINUTE)',[$user_id,$token])->fetch();
 
 		if ($user) {
-			# code...
-			debug($user);
-
+			//vérifications et changement de mot de passe
 			if (!empty($_POST)) {
 				# code...
-				if (!empty($_POST['password']) && $_POST['password'] == $_POST['password_confirm']) {
+				if (!empty($_POST['password']) && $_POST['password'] == $_POST['password-confirm']) {
 					# code...
 					$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-					$pdo->prepare('UPDATE users SET password = ?, reset_at = NULL, reset_token = NULL') -> execute([$password]);
+					$db->query('UPDATE t_pilote SET password = ?, reset_at = NULL, reset_token = NULL',[$password]);
 
-					session_start();
 					$_SESSION['flash']['success'] = "Votre mot de passe à bien été modifié";
 					$_SESSION['auth'] = $user;
-					header('Location: account.php');
+					header('Location: ../page/login.php');
 					exit();
 				}
 			}
 			
 		}else{
-			session_start();
-			$_SESSION['flash']['error'] = "Ce token n'est pas valide";
+		    $_SESSION['flash']['error'] = "Ce token n'est pas valide";
+            header('Location: ../page/login.php');
+            exit();
 		}
 	}
 	else{
 		header('Location: ../page/login.php');
 	}
-
+require "../inc/header.php";
 
 ?>
-<h1>Réinitialisation du mot de passe</h1>
+<h3>Réinitialisation du mot de passe</h3>
 
 	<form action="" method="POST">
 
@@ -54,7 +58,7 @@
 
 	<div class="form-group">
 		<label for="">Confirmation du mot de passe</label>	
-		<input type="text" name="password_confirm" class = "form-control" >
+		<input type="password" name="password-confirm" class = "form-control" >
 
 	</div>
 
