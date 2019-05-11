@@ -7,7 +7,7 @@ $list = array();
 //Connexion MySQL
 try
 {
-    $db = new PDO('mysql:host=localhost;dbname=bdname', 'root', 'root');
+    $db = App::getDatabase();
 }
 catch (Exception $ex)
 {
