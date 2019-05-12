@@ -15,7 +15,9 @@
 
       <script src="../js/jquery-slim.min.js"></script>
       <script src="../js/bootstrap.min.js"></script>
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+      <link rel="Stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" />
 
     <title>Aviabacus 2</title>
 

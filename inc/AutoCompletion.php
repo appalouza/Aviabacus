@@ -7,7 +7,7 @@ $list = array();
 //Connexion MySQL
 try
 {
-    $db = App::getDatabase();
+    $db = new PDO('mysql:host=localhost;dbname=tuto_mdp', 'root', '');
 }
 catch (Exception $ex)
 {
@@ -15,7 +15,7 @@ catch (Exception $ex)
 }
 
 //Construction de la requete
-$strQuery = "SELECT CP CodePostal, VILLE Ville FROM autocomplete WHERE ";
+$strQuery = "SELECT CP CodePostal, VILLE Ville FROM cp_autocomplete WHERE ";
 if (isset($_POST["codePostal"]))
 {
     $strQuery .= "CP LIKE :codePostal ";

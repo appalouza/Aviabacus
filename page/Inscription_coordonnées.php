@@ -81,7 +81,7 @@ require "../inc/header.php"
         </div>
     <?php endif; ?>
 
-    <form action="" method="POST">
+    <form action="#" method="POST">
   	 <!--	<div class="form-group">
   	 		<picture>
   	 			<img src="img_orange_flowers.jpg" alt="Photo" style="width:auto;">
@@ -132,16 +132,19 @@ require "../inc/header.php"
                   <input type="text" name="adresse" class="form-control">
               </div>
 
+              <form action="#">
               <div class="form-group col-md-3">
                   <label >Code postal</label>
-                  <input type="number" name="codpost" class="form-control">
+                  <input type="text" id="cp" size="6" name="codpost" class="form-control"/>
+
               </div>
 
               <div class="form-group col-md-3">
                   <label>Ville</label>
-                  <input type="text" name="ville" class="form-control">
-              </div>
+                  <input type="text" id="ville" name="ville" class="form-control"/>
 
+              </div>
+              </form>
           </div>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -218,11 +221,14 @@ require "../inc/header.php"
             <textarea class="form-control" rows="3"> </textarea>
         </div>
 
-
 		<button type="submit" class="btn btn-primary">Enregistrer</button>
 
 
 	</form>
+    <form action="#">
+        CP :<input type="text" id="cp" size="6"/>
+        Ville : <input type="text" id="ville" />
+    </form>
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
