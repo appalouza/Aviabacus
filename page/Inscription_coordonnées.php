@@ -69,7 +69,9 @@ if (!empty($_POST)) {
 
 require "../inc/header.php"
 ?>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.10/jquery-ui.js"></script>
+    <script type="text/javascript" src="../js/cp_auto.js"></script>
   		<h1>Inscription d'un nouveau pilote</h1>
     <?php if (!empty($errors)): ?>
         <div class="alert alert-danger">
@@ -81,7 +83,7 @@ require "../inc/header.php"
         </div>
     <?php endif; ?>
 
-    <form action="#" method="POST">
+    <form action="" method="POST">
   	 <!--	<div class="form-group">
   	 		<picture>
   	 			<img src="img_orange_flowers.jpg" alt="Photo" style="width:auto;">
@@ -132,7 +134,7 @@ require "../inc/header.php"
                   <input type="text" name="adresse" class="form-control">
               </div>
 
-              <form action="#">
+
               <div class="form-group col-md-3">
                   <label >Code postal</label>
                   <input type="text" id="cp" size="6" name="codpost" class="form-control"/>
@@ -144,7 +146,7 @@ require "../inc/header.php"
                   <input type="text" id="ville" name="ville" class="form-control"/>
 
               </div>
-              </form>
+
           </div>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -225,10 +227,6 @@ require "../inc/header.php"
 
 
 	</form>
-    <form action="#">
-        CP :<input type="text" id="cp" size="6"/>
-        Ville : <input type="text" id="ville" />
-    </form>
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
