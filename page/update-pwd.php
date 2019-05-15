@@ -3,13 +3,12 @@
 require "../inc/functions.php";
 require_once '../inc/bootstrap.php';
 logged_only();
-/*$validator = new Validator($_POST);
-$validator->isPassword2('password_new', "Votre mot de passe est incorrect");*/
+$validator = new Validator($_POST);
+$validator->isPassword('password_new', "Votre mot de passe est incorrect");
+    if (!empty($_POST)){
 
-    if (!empty($_POST) /*&& $validator->isValid()*/) {
-
-        if(password_verify($_POST['old_password'], $_SESSION['auth']->password)){
-            if (!empty($_POST['password_new']) && $_POST['password_new'] == $_POST['password_new_confirm']) {
+        if ($validator->isValid()){
+            if(password_verify($_POST['old_password'], $_SESSION['auth']->password)){
 
                 $db = App::getDatabase();
                 $user_id = $_SESSION['auth']->id;
@@ -19,24 +18,43 @@ $validator->isPassword2('password_new', "Votre mot de passe est incorrect");*/
                 header('Location: accueil.php');
 
                 exit();
-            }else{
-
-                $_SESSION['flash']['error'] = 'Les mots de passe ne correspondent pas';
-        }}
-        else{
-
-            $_SESSION['flash']['error'] = 'Veuillez renseigner votre ancien mot de passe';
+            }
+            else{
+                $errors['password_new']= 'Veuillez renseigner votre ancien mot de passe';
+            }
+        }else{
+            $errors = $validator->getErrors();
         }
-        }
+    }else{
+        $errors = $validator->getErrors();
+    }
 
 require "../inc/header.php"
 ?>
+<?php if (!empty($errors)): ?>
+    <div class="alert alert-danger">
+        <p>Vous n'avez pas renseigné votre mot de passe correctement: </p>
+        <?php foreach ($errors as $error): ?>
+            <li><?=$error; ?> </li>
+        <?php endforeach ?>
 
+    </div>
+<?php endif; ?>
 
 
 <div class="container">
 
     <h4>Changer le mot de passe</h4>
+    <h5>Il doit contenir au minimum: </h5>
+    <ul>
+        <li>Une lettre minuscule</li>
+        <li>Une lettre majuscule</li>
+        <li>Une chiffre</li>
+        <li>Un caractère spécial (!@#$%^&*-)</li>
+        <li>Entre 8 et 12 caractères</li>
+
+
+    </ul>
     <form action="" method="POST">
 
         <div class="form-group">

@@ -22,6 +22,17 @@
     	}
 	}
 
+function logged_admin(){
+    if(session_status() == PHP_SESSION_NONE){
+        session_start();
+    }
+    if(!isset($_SESSION['auth']) || $_SESSION['auth']->level_user != 'Administrateur'){
+        $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
+        header('Location: ../page/login.php');
+        exit();
+    }
+}
+
 	function logout(){
         setcookie('remember', NULL, -1 );
         if(session_status() == PHP_SESSION_NONE){

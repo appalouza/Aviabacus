@@ -41,7 +41,7 @@ $(function ()
                     objData = { ville: request.term, pays: 'FR', maxRows: 10 };
                 }
                 $.ajax({
-                    url: "../inc/AutoCompletion.php",
+                    url: "../inc/CPAutoCompletion.php",
                     dataType: "json",
                     data: objData,
                     type: 'POST',

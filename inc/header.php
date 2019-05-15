@@ -95,6 +95,7 @@
                           <a class="dropdown-item" href="../page/planche_vol.php">Accès aux vols</a>
                           <a class="dropdown-item" href="../page/fiche_pilote.php">Fiche formation pilote</a>
                           <a class="dropdown-item" href="../page/Inscription_coordonnées.php">Inscription d'un nouveau pilote</a>
+                          <a class="dropdown-item" href="../page/Modification_user.php">Modification d'un utilisateurs</a>
                           <a class="dropdown-item" href="../page/info_med.php">Renseignement médicaux d'un pilote</a>
 
                       </div>

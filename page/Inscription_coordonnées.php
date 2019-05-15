@@ -2,23 +2,26 @@
 
 require '../inc/bootstrap.php';
 require "../inc/functions.php";
-logged_only();
-
+require '../test_menu/db.php';
+logged_admin();
 
 //vérification si des données ont été postées ou non, on passe en mode traitement
 if (!empty($_POST)) {
 
+    $db = App::getDatabase();
     //création d'une méthode de detection d'erreurs utilisant un tableau
     $errors = array();
 
     //connexion à la bdd grâce à la classe App
-    $db = App::getDatabase();
+
 
     $validator = new Validator($_POST);
 
     $validator->isAlphanumeric('prenom', "Votre prénom n'est pas valide (alphanumérique)");
 
     $validator->isAlphanumeric('nom', "Votre nom n'est pas valide (alphanumérique)");
+
+    $validator->isSexe($_POST['sexe'], 'Veuillez renseigner votre sexe');
 
     $validator->isEmail('email',"Votre email n'est pas valide ");
 
@@ -48,12 +51,11 @@ if (!empty($_POST)) {
     //requête pour enregistrer un utilisateurs
     if ($validator->isValid()) {
 
-        $db = App::getDatabase();
-        //création d'un token random
+            //création d'un token random
         $token = Str::random(60);
         $db->query("INSERT INTO t_pilote 
-            SET nom= ? , prenom = ?, ville = ?, teldomicile = ?, telcellulaire = ?, email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=? ",
-            [$_POST['nom'], $_POST['prenom'],$_POST['ville'],$_POST['telperso'],$_POST['telcell'], $_POST['email'],
+            SET nom= ? , prenom = ?, codsexe = ?,adresse =?, codpost = ?, ville = ?, teldomicile = ?, telcellulaire = ?, email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=? ",
+            [$_POST['nom'], $_POST['prenom'], $_POST['sexe'],$_POST['adresse'],$_POST['codpost'],$_POST['ville'],$_POST['telperso'],$_POST['telcell'], $_POST['email'],
                 $_POST['profession'],$_POST['datenaissance'],$_POST['age'],$_POST['lieunaissance'],
                 $_POST['nationalite'], $_POST['lvl_user'],$token]);
         $user_id = $db->lastInsertId();
@@ -66,6 +68,7 @@ if (!empty($_POST)) {
         $errors = $validator->getErrors();
     }
     }
+
 
 require "../inc/header.php"
 ?>
@@ -94,9 +97,10 @@ require "../inc/header.php"
         <div class="form-row">
   		<div class="form-group col-md-4">
             <label>Sexe</label>
-  			<select class="form-control">
-  				<option>Mme.</option>
-  				<option>M.</option>
+  			<select class="form-control" name = "sexe">
+                <option value="2">Select...</option>
+  				<option value=1>Mme.</option>
+  				<option value=0>M.</option>
   			</select>
   		</div>
 		  <div class="form-group col-md-4" >
@@ -117,7 +121,7 @@ require "../inc/header.php"
          <div class="form-group">
              <p><label for="">Niveau</label></p>
              <select name="lvl_user" class="form-control col-md-4" size="1">
-                 <option></option>
+                 <option>Select...</option>
                  <option>Pilote</option>
                  <option>Chef-Pilote</option>
                  <option>Trésorier</option>
@@ -126,6 +130,32 @@ require "../inc/header.php"
              </select>
 
          </div>
+
+
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+
+
+
+                <label>Nationalité</label>
+                <select name="pays" class="form-control col-md-5">
+                    <option>Select...</option>
+                    <?php
+                    //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
+                    $dbi->set_charset("utf8");
+                    $requete = 'SELECT * FROM pays';
+                    $resultat = $dbi->query($requete);
+                    while ($ligne = $resultat->fetch_assoc()) {
+                        echo '<option>'.$ligne['nom_fr_fr'].' </option>';
+
+                    }
+                    $dbi->close();
+                    ?>
+                </select>
+                <input type="text" id="nationalite" name="nationalite" class="form-control">
+            </div>
+        </div>
 
 
 		  <div class="form-row">
@@ -185,12 +215,7 @@ require "../inc/header.php"
             </div>
 
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label>Nationalité</label>
-                <input type="text" name="nationalite" class="form-control">
-            </div>
-        </div>
+
 
 
 		<h3>Personnes à contacter en cas d'accident</h3>

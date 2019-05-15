@@ -73,44 +73,42 @@ class Validator
         }
     }
 
+    public function isSexe($field, $errorMsg){
+
+	    $sexe = array(0,1);
+	    if(!in_array($field, $sexe)){
+            $this->errors['sexe'] = $errorMsg;
+
+        }
+    }
+
 
     public function isPassword($field, $errorMsg)
     {
-        if (empty($this->getField($field)) || $this->getField($field) != $this->getField($field . '-confirm')){
+        if (empty($this->getField($field))){
+            $this->errors[$field] = 'Veuillez rentrer un mot de passe';
 
-            $this->errors[$field] = $errorMsg;
+        }elseif ($this->getField($field) != $this->getField($field . '_confirm')){
+            $this->errors[$field] = 'Les mots de passe sont différents';
         }
-        /*if(!empty($this->getField($field))&& $this->getField($field) == $this->getField($field . '_confirm') ){
-            if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$#', $this->getField($field))){
-
-                    $_SESSION['flash']['success']="Votre mot de passe à été changé";}
-                else{
-                    $this->errors[$field] = "Votre mot de passe est non conforme";
-                }
-            }
-        else{
-            $this->errors[$field] = $errorMsg;
-
-        }*/
+        elseif (!preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,12}$/',  $this->getField($field)))
+        {
+            $this->errors[$field] = "Votre mot de passe n'est pas assez sécurisé";
+        }
 }
     public function isPassword2($field, $errorMsg)
     {
-        if (empty($this->getField($field)) || $this->getField($field) != $this->getField($field . '_new_confirm')){
+        if (empty($this->getField($field))){
+            $this->errors[$field] = 'Veuillez rentrer un mot de passe';
 
-            $this->errors[$field] = $errorMsg;
-        }
-        /*if(!empty($this->getField($field))&& $this->getField($field) == $this->getField($field . '_confirm') ){
-            if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$#', $this->getField($field))){
-
-                    $_SESSION['flash']['success']="Votre mot de passe à été changé";}
-                else{
-                    $this->errors[$field] = "Votre mot de passe est non conforme";
-                }
+        }elseif ($this->getField($field) != $this->getField($field . '-confirm')){
+            $this->errors[$field] = 'Les mots de passe sont différents';
             }
-        else{
-            $this->errors[$field] = $errorMsg;
+        elseif (!preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,12}$/',  $this->getField($field)))
+        {
+            $this->errors[$field] = "Votre mot de passe n'est pas assez sécurisé";
+        }
 
-        }*/
     }
 
 

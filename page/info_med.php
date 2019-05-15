@@ -1,6 +1,6 @@
 <?php
 require "../inc/functions.php";
-logged_only();
+logged_admin();
 
 require "../inc/header.php"
 ?>
