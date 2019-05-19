@@ -8,7 +8,7 @@ require "../inc/header.php"
 
 	<h2>Paramètres de votre compte: <h2>
 
-		<a href="../page/update-pwd.php">Changement de mot de passe</a>
+		<a href="../page/connexion/update-pwd.php">Changement de mot de passe</a>
 
 	
 

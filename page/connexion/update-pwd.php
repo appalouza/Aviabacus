@@ -1,7 +1,7 @@
 <?php
 
-require "../inc/functions.php";
-require_once '../inc/bootstrap.php';
+require "../../inc/functions.php";
+require_once '../../inc/bootstrap.php';
 logged_only();
 $validator = new Validator($_POST);
 $validator->isPassword('password_new', "Votre mot de passe est incorrect");
@@ -29,7 +29,7 @@ $validator->isPassword('password_new', "Votre mot de passe est incorrect");
         $errors = $validator->getErrors();
     }
 
-require "../inc/header.php"
+require "../../inc/header_sous_dossier.php"
 ?>
 <?php if (!empty($errors)): ?>
     <div class="alert alert-danger">
@@ -78,4 +78,4 @@ require "../inc/header.php"
 </div>
 <?php //debug($_SESSION); ?>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

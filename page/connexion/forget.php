@@ -1,5 +1,5 @@
-<?php require "../inc/functions.php";
-require '../inc/bootstrap.php';?>
+<?php require "../../inc/functions.php";
+require '../../inc/bootstrap.php';?>
 
 <?php
 
@@ -32,7 +32,7 @@ require '../inc/bootstrap.php';?>
                         Bienvenue sur VotreSite, <br />
  
                 Afin de changer votre mot de passe, veuillez cliquer sur ce lien : <br/> 
-				http://localhost/log_utilisateurs/page/reset.php?id='.$user->id.'&token='.$reset_token.'\'<br/>
+				http://localhost/log_utilisateurs/page/connexion/reset.php?id='.$user->id.'&token='.$reset_token.'\'<br/>
  
  
                 ---------------<br/>
@@ -44,14 +44,14 @@ require '../inc/bootstrap.php';?>
 
             mail("test.aviabacus@gmail.com", "Réinitialisation du mot de passe", $message, $header) ; // Envoi du mail
 			$_SESSION['flash']['success']='Les instructions du rappel de mot de passe vous ont été envoyées par email';
-			header('Location: ../page/login.php');
+			header('Location: login.php');
 			exit();
 		}else{
 			$_SESSION['flash']['danger'] = 'Aucun compte ne correspond à cette adresse';
 		}
 
 	}
-require "../inc/header.php";
+require "../../inc/header_sous_dossier.php";
 ?>
 <h3>Mot de passe oublié</h3>
 
@@ -68,4 +68,4 @@ require "../inc/header.php";
 
 	</form>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

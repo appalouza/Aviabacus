@@ -1,5 +1,6 @@
 <?php
 require "../inc/functions.php";
+require '../inc/db.php';
 logged_only();
 
 require "../inc/header.php"
@@ -16,23 +17,47 @@ require "../inc/header.php"
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>Avion: </label>
-                        <select class="form-control">
-                            <option value="PH">PH |F BOPH</option>
-                            <option value="QZ">QZ |F BBQZ</option>
-                            <option value="RR">RR |F BPRR</option>
-                            <option value="TI">TI |F BDTI</option>
-                            <option value="VH">VH |F BRVH</option>
+
+                        <select name = 'avion' class="form-control">
+                            <option>Selectionnez un avion</option>
+                            <?php
+                            $dbi->set_charset("utf8");
+                            $requete = 'SELECT * FROM t_avion';
+                            $resultat = $dbi->query($requete);
+
+                            while ($ligne = $resultat->fetch_assoc()) {
+                                if ($ligne['en_flotte'] == 1){
+                                    echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
+                                }
+                            }
+
+                            $dbi->close();
+                            ?>
+
                         </select>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label>Pilote:</label>
-                        <select class="form-control">
-                            //bdd
+                    <div class="form-group col-md-6">
+
+                        <label>Liste des utilisateurs</label>
+                        <select name="user" class="form-control col-md-6">
+                            <option>Selection de l'utilisateur</option>
+                            <?php
+                            $dbi->set_charset("utf8");
+                            $requete2 = 'SELECT * FROM t_pilote';
+                            $resultat2 = $dbi->query($requete);
+                            while ($ligne2 = $resultat2->fetch_assoc()) {
+                                echo '<option value="'.$ligne2['id'].'" >'.$ligne2['nom'].' '.$ligne2['prenom'].' </option>';
+                            }
+
+                            $dbi->close();
+                            ?>
                         </select>
+
                     </div>
+
 
                     <div class="form-group col-md-4">
                         <label>Fonction à bord:</label>

@@ -17,7 +17,7 @@
     }
     if(!isset($_SESSION['auth'])){
         $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
-        header('Location: ../page/login.php');
+        header('Location: ../connexion/login.php');
         exit();
     	}
 	}
@@ -28,7 +28,7 @@ function logged_admin(){
     }
     if(!isset($_SESSION['auth']) || $_SESSION['auth']->level_user != 'Administrateur'){
         $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
-        header('Location: ../page/login.php');
+        header('Location: ../connexion/login.php');
         exit();
     }
 }
@@ -62,7 +62,7 @@ function logged_admin(){
                 Pour activer votre compte, veuillez cliquer sur le lien ci dessous
                 ou copier/coller dans votre navigateur internet. <br/>
  
-                http://localhost/log_utilisateurs/page/confirm_2.php?id='.$user_id.'&token='.$token.'<br/>
+                http://localhost/log_utilisateurs/page/inscription_user/confirm_2.php?id='.$user_id.'&token='.$token.'<br/>
  
  
                 ---------------
@@ -122,4 +122,7 @@ function logged_admin(){
 		}
 	}*/
 
+	function modifUser($post){
+
+    }
 

@@ -224,6 +224,11 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+
+}
+.affiche{
+  font-size: large;
+  color: #0a6ebd;
 }
 
 button {

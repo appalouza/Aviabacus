@@ -5,6 +5,6 @@
 
 	$_SESSION['flash']['success'] = 'Vous êtes maintenant déconnecté';
 
-	header('Location: ../page/login.php');
+	header('Location: login.php');
 
 	exit();

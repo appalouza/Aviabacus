@@ -1,8 +1,8 @@
 <?php
-require "../inc/functions.php";
+require "../../inc/functions.php";
 logged_only();
 
-require "../inc/header.php"
+require "../../inc/header_sous_dossier.php"
 
 ?>
 
@@ -95,4 +95,4 @@ require "../inc/header.php"
 
 <?php //debug($_SESSION); ?>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

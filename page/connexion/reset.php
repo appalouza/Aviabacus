@@ -1,7 +1,7 @@
 
 <?php
-require '../inc/bootstrap.php';
-require '../inc/functions.php';
+require '../../inc/bootstrap.php';
+require '../../inc/functions.php';
 ?>
 
 <?php
@@ -29,21 +29,21 @@ $token = $_GET['token'];
 
 					$_SESSION['flash']['success'] = "Votre mot de passe à bien été modifié";
 					$_SESSION['auth'] = $user;
-					header('Location: ../page/login.php');
+					header('Location: login.php');
 					exit();
 				}
 			}
 			
 		}else{
 		    $_SESSION['flash']['error'] = "Ce token n'est pas valide";
-            header('Location: ../page/login.php');
+            header('Location: login.php');
             exit();
 		}
 	}
 	else{
-		header('Location: ../page/login.php');
+		header('Location: login.php');
 	}
-require "../inc/header.php";
+require "../../inc/header_sous_dossier.php";
 
 ?>
 <h3>Réinitialisation du mot de passe</h3>
@@ -67,4 +67,4 @@ require "../inc/header.php";
 
 	</form>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

@@ -1,8 +1,8 @@
 <?php
-require "../inc/functions.php";
+require "../../inc/functions.php";
 logged_admin();
 
-require "../inc/header.php"
+require "../../inc/header_sous_dossier.php"
 ?>
 
 <div class="container">
@@ -159,4 +159,4 @@ require "../inc/header.php"
 
 </div>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

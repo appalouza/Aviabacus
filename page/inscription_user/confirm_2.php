@@ -1,7 +1,7 @@
 <?php
 
-require_once '../inc/bootstrap.php';
-require "../inc/functions.php";
+require_once '../../inc/bootstrap.php';
+require "../../inc/functions.php";
 if (!isset($_SESSION['auth'])){
     logout();
 }
@@ -16,8 +16,9 @@ $validator = new Validator($_POST);
 $validator->isPassword('password', "Ce mot de passe n'est pas valide");
 
 if($user->confirmation_token == null){
-    $_SESSION['flash']['error'] = "Ce token n'est plus valide";
-    header('Location: ../page/login.php');
+    $_SESSION['flash']['danger'] = "Ce token n'est plus valide";
+    header('Location: ../connexion/login.php');
+    exit();
 }
 
 if (!empty($_POST)){
@@ -27,14 +28,14 @@ if (!empty($_POST)){
         $db->query('UPDATE t_pilote SET confirmation_token = NULL, password =?, confirmed_at = NOW() WHERE id = ?',[$password,$user_id] );
         $_SESSION['flash']['success'] = 'Votre compte a bien été validé';
         $_SESSION['auth'] = $user;
-        header('Location: ../page/login.php');
+        header('Location: ../connexion/login.php');
     }else{
         $errors = $validator->getErrors();
 
     }
 }
 
-require "../inc/header.php"
+require "../../inc/header_sous_dossier.php"
 ?>
 <?php if (!empty($errors)): ?>
     <div class="alert alert-danger">
@@ -75,4 +76,4 @@ require "../inc/header.php"
 
     </form>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

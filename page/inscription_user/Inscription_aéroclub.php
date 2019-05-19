@@ -1,8 +1,8 @@
 <?php
-require '../inc/bootstrap.php';
-require "../inc/functions.php";
+require '../../inc/bootstrap.php';
+require "../../inc/functions.php";
 logged_admin();
-require "../inc/header.php";
+require "../../inc/header_sous_dossier.php";
 ?>
 <div class="container">
 		<h1>Inscription Aéroclub</h1>
@@ -162,13 +162,13 @@ require "../inc/header.php";
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item ">
-                        <a class="page-link" href="../page/Inscription_coordonnées.php" tabindex="-1">Previous</a>
+                        <a class="page-link" href="Inscription_coordonnées.php" tabindex="-1">Previous</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="../page/Inscription_coordonnées.php">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="../page/Inscription_aéroclub.php">2</a></li>
-                    <li class="page-item"><a class="page-link" href="../page/Inscription_licence.php">3</a></li>
+                    <li class="page-item"><a class="page-link" href="Inscription_coordonnées.php">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="Inscription_aéroclub.php">2</a></li>
+                    <li class="page-item"><a class="page-link" href="Inscription_licence.php">3</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="../page/Inscription_licence.php">Next</a>
+                        <a class="page-link" href="Inscription_licence.php">Next</a>
                     </li>
                 </ul>
             </nav>
@@ -176,4 +176,4 @@ require "../inc/header.php";
 	</form>
 	</div>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

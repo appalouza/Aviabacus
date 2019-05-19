@@ -1,10 +1,10 @@
 <?php
-require "../inc/functions.php";
-require '../inc/bootstrap.php';
+require "../../inc/functions.php";
+require '../../inc/bootstrap.php';
+session_start();
 //reconnect_cookie();
 if (!empty($_POST) &&  !empty($_POST['password'])) {
-    # code...
-
+    sleep(1); // Une pause de 1 sec afin de ralentir les tentatives de brute force
     $db = App::getDatabase();
     $user = $db->query('SELECT * FROM t_pilote WHERE email= ? && confirmed_at IS NOT null', [$_POST['email']])->fetch();
 
@@ -43,17 +43,30 @@ if (!empty($_POST) &&  !empty($_POST['password'])) {
     <title>Aviabacus 2</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/signin.css" rel="stylesheet">
-    <link href="../css/floating-labels.css" rel="stylesheet">
-    <link href="../css/footer.css" rel="stylesheet">
+    <link href="../../css/signin.css" rel="stylesheet">
+    <link href="../../css/floating-labels.css" rel="stylesheet">
+    <link href="../../css/footer.css" rel="stylesheet">
 
 </head>
 
 <body class="text-center">
+
 <form class="form-signin" method="post" action="">
+    <?php if(isset($_SESSION['flash'])): ?>
+
+        <?php foreach($_SESSION['flash'] as $type => $message): ?>
+            <div class="alert alert-<?= $type; ?>">
+                <?= $message; ?>
+            </div>
+
+        <?php endforeach; ?>
+        <?php unset($_SESSION['flash']);
+
+        ?>
+    <?php endif; ?>
     <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="h3 mb-3 font-weight-normal">Se connecter : </h1>
     <label for="inputEmail" class="sr-only">Adresse mail</label>
@@ -66,7 +79,7 @@ if (!empty($_POST) &&  !empty($_POST['password'])) {
         </label>
     </div> -->
     <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
-    <a href="../page/forget.php">Mot de passe oublié</a>
+    <a href="forget.php">Mot de passe oublié</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
 </form>
 <footer class="footer">

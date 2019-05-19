@@ -1,8 +1,8 @@
 <?php
 
-require '../inc/bootstrap.php';
-require "../inc/functions.php";
-require '../test_menu/db.php';
+require '../../inc/bootstrap.php';
+require "../../inc/functions.php";
+require '../../inc/db.php';
 logged_admin();
 
 //vérification si des données ont été postées ou non, on passe en mode traitement
@@ -62,7 +62,7 @@ if (!empty($_POST)) {
         envoie_mail($user_id, $token);
         $_SESSION['flash']['success'] = "Un email de confirmation a été envoyé à l'utilisateur pour valider son compte";
         //redirection vers la page login.php
-        header('Location: ../page/Inscription_coordonnées.php');
+        header('Location: Inscription_coordonnées.php');
         exit();
     } else {
         $errors = $validator->getErrors();
@@ -70,11 +70,11 @@ if (!empty($_POST)) {
     }
 
 
-require "../inc/header.php"
+require "../../inc/header_sous_dossier.php"
 ?>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.10/jquery-ui.js"></script>
-    <script type="text/javascript" src="../js/cp_auto.js"></script>
+    <script type="text/javascript" src="../../js/cp_auto.js"></script>
   		<h1>Inscription d'un nouveau pilote</h1>
     <?php if (!empty($errors)): ?>
         <div class="alert alert-danger">
@@ -258,16 +258,14 @@ require "../inc/header.php"
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1">Previous</a>
             </li>
-            <li class="page-item active"><a class="page-link" href="../page/Inscription_coordonnées.php">1</a></li>
-            <li class="page-item"><a class="page-link" href="../page/Inscription_aéroclub.php">2</a></li>
-            <li class="page-item"><a class="page-link" href="../page/Inscription_licence.php">3</a></li>
+            <li class="page-item active"><a class="page-link" href="Inscription_coordonnées.php">1</a></li>
+            <li class="page-item"><a class="page-link" href="Inscription_aéroclub.php">2</a></li>
+            <li class="page-item"><a class="page-link" href="Inscription_licence.php">3</a></li>
             <li class="page-item">
-                <a class="page-link" href="../page/Inscription_aéroclub.php">Next</a>
+                <a class="page-link" href="Inscription_aéroclub.php">Next</a>
             </li>
         </ul>
     </nav>
 
 
-<?php //debug($_SESSION); ?>
-
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

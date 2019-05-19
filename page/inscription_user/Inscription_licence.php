@@ -1,8 +1,8 @@
 <?php
-require '../inc/bootstrap.php';
-require "../inc/functions.php";
+require '../../inc/bootstrap.php';
+require "../../inc/functions.php";
 logged_admin();
-require "../inc/header.php";
+require "../../inc/header_sous_dossier.php";
 ?>
 
 <div class="container">
@@ -157,9 +157,9 @@ require "../inc/header.php";
             <li class="page-item ">
                 <a class="page-link" href="Inscription_aéroclub.php" >Previous</a>
             </li>
-            <li class="page-item"><a class="page-link" href="../page/Inscription_coordonnées.php">1</a></li>
-            <li class="page-item "><a class="page-link" href="../page/Inscription_aéroclub.php">2</a></li>
-            <li class="page-item active"><a class="page-link" href="../page/Inscription_licence.php">3</a></li>
+            <li class="page-item"><a class="page-link" href="Inscription_coordonnées.php">1</a></li>
+            <li class="page-item "><a class="page-link" href="Inscription_aéroclub.php">2</a></li>
+            <li class="page-item active"><a class="page-link" href="Inscription_licence.php">3</a></li>
             <li class="page-item disabled">
                 <a class="page-link" href="#">Next</a>
             </li>
@@ -167,4 +167,4 @@ require "../inc/header.php";
     </nav>
      </div>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>
