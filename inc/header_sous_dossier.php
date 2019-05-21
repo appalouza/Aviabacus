@@ -25,6 +25,7 @@
     <link href="../../css/footer.css" rel="stylesheet">
 
 
+
 </head>
 
 <body>
@@ -49,7 +50,7 @@
 
                 <!--Menu spécfique aux utilisateurs loggés -->
                 <?php if(isset($_SESSION['auth'])): ?>
-                <a class="nav-link" href="../../page/accueil.php">Aviabacus 2</a>
+                <a class="nav-link" href="../../page/connexion/accueil.php">Aviabacus 2</a>
                 <!--Menu spécifique au pilote -->
                 <?php if($_SESSION['auth']->level_user == 'Pilote'): ?>
                     <li class="nav-item dropdown">
@@ -81,7 +82,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="../../page/avion/planche_vol.php">Informations sur les vols</a></p>
-                            <a class="dropdown-item" href="../../page/Fiche_de_saisie_avant_vol.php">Fiche de saisie avant vol</a>
+                            <a class="dropdown-item" href="../../page/vol/Fiche_de_saisie_avant_vol.php">Fiche de saisie avant vol</a>
 
                         </div>
                     </li>
@@ -93,7 +94,7 @@
                             <a class="dropdown-item" href="../../page/avion/planche_vol.php">Accès aux vols</a>
                             <a class="dropdown-item" href="../../page/info_user/fiche_pilote.php">Fiche formation pilote</a>
                             <a class="dropdown-item" href="../../page/inscription_user/Inscription_coordonnées.php">Inscription d'un nouveau pilote</a>
-                            <a class="dropdown-item" href="../../page/info_user/Modification_user.php">Modification d'un utilisateurs</a>
+                            <a class="dropdown-item" href="../../page/info_user/Liste_User.php">Liste des pilotes</a>
                             <a class="dropdown-item" href="../../page/inscription_user/info_med.php">Renseignement médicaux d'un pilote</a>
                             <a class="dropdown-item" href="../../page/avion/Liste_Avion.php">Liste des avions</a>
 
@@ -107,8 +108,8 @@
                         Paramètres
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="../../page/update-pwd.php">Changement du mot de passe</a>
-                        <a class="dropdown-item" href="../../page/update-pwd.php">Contacter le suppport</a>
+                        <a class="dropdown-item" href="../../page/connexion/update-pwd.php">Changement du mot de passe</a>
+                        <a class="dropdown-item" href="../../page/connexion/update-pwd.php">Contacter le suppport</a>
 
 
                     </div>

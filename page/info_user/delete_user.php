@@ -14,12 +14,12 @@ if (!empty($_POST)){
         $user_sup = $_SESSION['modif']->nom;
         $db->query('DELETE FROM t_pilote WHERE nom = ?', [$user_sup]);
         $_SESSION['flash']['success']="L'utilisateur à bien été supprimé";
-        header('Location: Modification_user.php');
+        header('Location: Liste_User.php');
         exit();
 
     }elseif ($_POST['supp']==1){
         $_SESSION['flash']['danger']='La suppression a été annulée';
-        header('Location: Modification_user.php');
+        header('Location: Liste_User.php');
         exit();
     }
 

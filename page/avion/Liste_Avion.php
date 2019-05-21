@@ -6,24 +6,22 @@ require '../../inc/db.php';
 require "../../class/app.php";
 require "../../class/database.php";
 logged_admin();
-
 $db = App::getDatabase();
+
 
 require "../../inc/header_sous_dossier.php"
 ?>
 
-
     <h1>Liste des avions</h1>
-    <form method="post" action="">
+
         <div class="form-row">
             <div class="container">
-
-
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Avion</th>
                         <th>Status</th>
+                        <th>Association</th>
                         <th>Options</th>
 
                     </tr>
@@ -43,19 +41,17 @@ require "../../inc/header_sous_dossier.php"
                     }
                     ?>">
 
-                        <td><?php echo $ligne['codavion']?> </td>
+                        <td><?php echo $ligne['codavion'] ?> </td>
                         <td><?php if ($ligne['en_flotte'] == 1){
                                 echo 'DISPO';
                             }elseif ($ligne['en_flotte'] == 0){
                                 echo 'ARRET';
                             }
                             ?></td>
+                        <td><?php echo $ligne['codassoc']?></td>
 
                         <td>
-                            <a href="modif_avion.php">Modifier</a>
-                           <!--<button type="submit" class="btn btn-primary">Modifier</button>-->
-                            <!-- <a href="#">Delete</a> -->
-                            <!--(click)="deleteContact.ById(item.id,$event)"-->
+                            <a class="btn btn-primary" href="modif_avion.php?id=<?php echo $ligne['id'];?>">Modifier</a>
 
                         </td>
 
@@ -64,13 +60,18 @@ require "../../inc/header_sous_dossier.php"
                     </tbody>
                 </table>
 
-
-
             </div>
         </div>
 
         <a href="ajout_avion.php" class="btn btn-primary">Ajouter un avion</a>
-    </form>
+
+
+
+
+
+
+
+
 
 
 <?php require "../../inc/footer.php" ?>

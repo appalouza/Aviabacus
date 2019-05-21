@@ -1,9 +1,10 @@
 <?php
-require "../inc/functions.php";
-require '../inc/db.php';
+require '../../inc/bootstrap.php';
+require "../../inc/functions.php";
+require '../../inc/db.php';
 logged_only();
 
-require "../inc/header.php"
+require "../../inc/header_sous_dossier.php"
 ?>
 <body>
 
@@ -13,12 +14,12 @@ require "../inc/header.php"
             <h4>Infos générales</h4>
             <br>
 
-            <form>
+            <form method="post" action="">
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>Avion: </label>
 
-                        <select name = 'avion' class="form-control">
+                        <select name = 'avion' class="form-control ">
                             <option>Selectionnez un avion</option>
                             <?php
                             $dbi->set_charset("utf8");
@@ -31,32 +32,36 @@ require "../inc/header.php"
                                 }
                             }
 
-                            $dbi->close();
+
                             ?>
 
                         </select>
                     </div>
                 </div>
 
+
+
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                        <div class="form-group col-md-6">
 
-                        <label>Liste des utilisateurs</label>
-                        <select name="user" class="form-control col-md-6">
-                            <option>Selection de l'utilisateur</option>
-                            <?php
-                            $dbi->set_charset("utf8");
-                            $requete2 = 'SELECT * FROM t_pilote';
-                            $resultat2 = $dbi->query($requete);
-                            while ($ligne2 = $resultat2->fetch_assoc()) {
-                                echo '<option value="'.$ligne2['id'].'" >'.$ligne2['nom'].' '.$ligne2['prenom'].' </option>';
-                            }
+                            <label>Liste des utilisateurs</label>
+                            <select name="user" class="form-control col-md-6">
+                                <option>Selection de l'utilisateur</option>
+                                <?php
+                                //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
+                                $dbi->set_charset("utf8");
+                                $requete = 'SELECT * FROM t_pilote';
+                                $resultat = $dbi->query($requete);
+                                while ($ligne = $resultat->fetch_assoc()) {
+                                    echo '<option value="'.$ligne['id'].'" >'.$ligne['nom'].' '.$ligne['prenom'].' </option>';
+                                }
 
-                            $dbi->close();
-                            ?>
-                        </select>
+                                $dbi->close();
+                                ?>
+                            </select>
 
-                    </div>
+                        </div>
+
 
 
                     <div class="form-group col-md-4">
@@ -201,4 +206,4 @@ require "../inc/header.php"
 </div>
 <?php //debug($_SESSION); ?>
 
-<?php require "../inc/footer.php" ?>
+<?php require "../../inc/footer.php" ?>

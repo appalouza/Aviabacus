@@ -13,7 +13,7 @@ puissance = ? , vitesse = ?, consoreel = ?, observations = ?, prixheure = ?, en_
             $_POST['marque'],$_POST['puissance'],$_POST['vitesse'],$_POST['consoreelle'],$_POST['observations'],$_POST['prixheure'],$_POST['cenflotte']]);
         $_SESSION['flash']['success'] = "Le nom à été modifié";
 
-    header('Location: ../page/Modification_user.php');
+    header('Location: ../page/Liste_User.php');
     exit();
 }
 require "../../inc/header_sous_dossier.php";
@@ -62,6 +62,7 @@ require "../../inc/header_sous_dossier.php";
 
         </table>
         <button type="submit" class="btn btn-primary">Validation des modifications</button>
+        <a href="Liste_Avion.php" class="btn btn-primary">Retour à la liste</a>
     </form>
 
 

@@ -25,9 +25,9 @@ $validator->isPassword('password_new', "Votre mot de passe est incorrect");
         }else{
             $errors = $validator->getErrors();
         }
-    }else{
+    }/*else{
         $errors = $validator->getErrors();
-    }
+    }*/
 
 require "../../inc/header_sous_dossier.php"
 ?>

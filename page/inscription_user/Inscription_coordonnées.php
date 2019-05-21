@@ -17,9 +17,9 @@ if (!empty($_POST)) {
 
     $validator = new Validator($_POST);
 
-    $validator->isAlphanumeric('prenom', "Votre prénom n'est pas valide (alphanumérique)");
+    $validator->isAlpha('prenom', "Votre prénom n'est pas valide (alphanumérique)");
 
-    $validator->isAlphanumeric('nom', "Votre nom n'est pas valide (alphanumérique)");
+    $validator->isAlpha('nom', "Votre nom n'est pas valide (alphanumérique)");
 
     $validator->isSexe($_POST['sexe'], 'Veuillez renseigner votre sexe');
 
@@ -43,7 +43,7 @@ if (!empty($_POST)) {
 
     $validator->isNumeric('age', "Veuillez saisir un age valide");
 
-    $validator->isAlphanumeric('lieunaissance', "Veuillez saisir une ville de naissance");
+    $validator->isAlpha('lieunaissance', "Veuillez saisir une ville de naissance");
 
     $validator->isLevel('lvl_user', "Veuillez choisir un niveau d'utilisateur");
 

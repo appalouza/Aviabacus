@@ -1,7 +1,9 @@
 <?php
 require '../../inc/bootstrap.php';
 require "../../inc/functions.php";
+require '../../inc/db.php';
 logged_admin();
+$db = App::getDatabase();
 require "../../inc/header_sous_dossier.php";
 ?>
 <div class="container">
@@ -91,18 +93,22 @@ require "../../inc/header_sous_dossier.php";
         <div class="form-group">
     <label>Avion</label>
     <select class="form-control">
-      <option>F BBQZ</option>
-      <option>F BDTI</option>
-      <option>F BMJM</option>
-      <option>F BNQZ</option>
-      <option>F BOPH</option>
-      <option>F BPRR</option>
-      <option>F BRVH</option>
-      <option>F BSXD</option>
-      <option>F BXRA</option>
+      <option>Selectionnez un avion</option>
+        <?php
+        //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
+        $dbi->set_charset("utf8");
+        $requete = 'SELECT * FROM t_avion';
+        $resultat = $dbi->query($requete);
+        while ($ligne = $resultat->fetch_assoc()) {
+            echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].' </option>';
+        }
 
+        $dbi->close();
+        ?>
     </select>
   </div>
+
+
   <div class="form-check">
 
     <input type="checkbox" class="form-check-input">

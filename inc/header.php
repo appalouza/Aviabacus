@@ -16,6 +16,8 @@ require_once '../inc/bootstrap.php'; ?>
 
       <script src="../js/jquery-slim.min.js"></script>
       <script src="../js/bootstrap.min.js"></script>
+      <link href="../../css/jtable.min.css" rel="stylesheet" type="text/css" />
+      <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css">
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
       <link rel="Stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" />
@@ -61,7 +63,7 @@ require_once '../inc/bootstrap.php'; ?>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="../page/avion/planche_vol.php">Informations sur les vols</a></p>
-                          <a class="dropdown-item" href="../page/Fiche_de_saisie_avant_vol.php">Fiche de saisie avant vol</a>
+                          <a class="dropdown-item" href="../page/vol/Fiche_de_saisie_avant_vol.php">Fiche de saisie avant vol</a>
 
                       </div>
                   </li>
@@ -84,7 +86,7 @@ require_once '../inc/bootstrap.php'; ?>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="../page/avion/planche_vol.php">Informations sur les vols</a></p>
-                          <a class="dropdown-item" href="../page/Fiche_de_saisie_avant_vol.php">Fiche de saisie avant vol</a>
+                          <a class="dropdown-item" href="../page/vol/Fiche_de_saisie_avant_vol.php">Fiche de saisie avant vol</a>
 
                       </div>
                   </li>
@@ -96,7 +98,7 @@ require_once '../inc/bootstrap.php'; ?>
                           <a class="dropdown-item" href="../page/avion/planche_vol.php">Accès aux vols</a>
                           <a class="dropdown-item" href="../page/info_user/fiche_pilote.php">Fiche formation pilote</a>
                           <a class="dropdown-item" href="../page/Inscription_coordonnées.php">Inscription d'un nouveau pilote</a>
-                          <a class="dropdown-item" href="../page/info_user/Modification_user.php">Modification d'un utilisateurs</a>
+                          <a class="dropdown-item" href="../page/info_user/Liste_User.php">Modification d'un utilisateurs</a>
                           <a class="dropdown-item" href="../page/inscription_user/info_med.php">Renseignement médicaux d'un pilote</a>
                           <a class="dropdown-item" href="../page/avion/Liste_Avion.php">Liste des avions</a>
 
