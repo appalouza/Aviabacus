@@ -58,8 +58,8 @@ require "../../inc/ClubMenu.php"
                 <th></th>
                 <th><span data-feather="check"></span></th>
                 <th><span data-feather="check"></span></th>
-                <th><a href="modif_user.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="eye"></span></a></th>
-                <th><a href="modif_user.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="edit"></span></a></th>
+                <th><a href="ModifMenu.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="eye"></span></a></th>
+                <th><a href="ModifMenu.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="edit"></span></a></th>
 
             </tr>
             <?php }$dbi->close();?>

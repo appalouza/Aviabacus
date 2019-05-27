@@ -1,7 +1,5 @@
 
-<div class="container">
-	  	 <h2>Aéro-Club</h2>
-		<form>
+
 
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -71,7 +69,6 @@
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-
 
       <!-- Modal content-->
       <div class="modal-content">
@@ -156,19 +153,3 @@
 	</table>
 
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item ">
-                        <a class="page-link" href="Inscription_coordonnées.php" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="Inscription_coordonnées.php">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="Inscription_aéroclub.php">2</a></li>
-                    <li class="page-item"><a class="page-link" href="Inscription_licence.php">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="Inscription_licence.php">Next</a>
-                    </li>
-                </ul>
-            </nav>
-
-	</form>
-	</div>

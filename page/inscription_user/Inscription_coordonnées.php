@@ -121,7 +121,7 @@ if (!empty($_POST)) {
 
 require "../../inc/GestionMenu.php"
 ?>
-   
+
     <form action="" method="POST">
   	 <!--	<div class="form-group">
   	 		<picture>
@@ -293,10 +293,10 @@ require "../../inc/GestionMenu.php"
                 <a class="page-link" href="#" tabindex="-1">Previous</a>
             </li>
             <li class="page-item active"><a class="page-link" href="Inscription_coordonnées.php">1</a></li>
-            <li class="page-item"><a class="page-link" href="Inscription_aéroclub.php">2</a></li>
+            <li class="page-item"><a class="page-link" href="AéroclubInscription.php">2</a></li>
             <li class="page-item"><a class="page-link" href="Inscription_licence.php">3</a></li>
             <li class="page-item">
-                <a class="page-link" href="Inscription_aéroclub.php">Next</a>
+                <a class="page-link" href="AéroclubInscription.php">Next</a>
             </li>
         </ul>
     </nav>

@@ -59,7 +59,7 @@
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
 
                     <span>Comptes pilotes</span>
-                    <a class="d-flex align-items-center text-muted" href="../../page/inscription_user/Inscription_coordonnées.php">
+                    <a class="d-flex align-items-center text-muted" href="../../page/inscription_user/Inscription_Menu.php">
                         <span data-feather="plus-circle"></span>
                     </a>
                 </h6>

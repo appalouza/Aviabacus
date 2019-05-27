@@ -155,10 +155,10 @@ require "../../inc/GestionMenu.php";
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item ">
-                <a class="page-link" href="Inscription_aéroclub.php" >Previous</a>
+                <a class="page-link" href="AéroclubInscription.php" >Previous</a>
             </li>
             <li class="page-item"><a class="page-link" href="Inscription_coordonnées.php">1</a></li>
-            <li class="page-item "><a class="page-link" href="Inscription_aéroclub.php">2</a></li>
+            <li class="page-item "><a class="page-link" href="AéroclubInscription.php">2</a></li>
             <li class="page-item active"><a class="page-link" href="Inscription_licence.php">3</a></li>
             <li class="page-item disabled">
                 <a class="page-link" href="#">Next</a>

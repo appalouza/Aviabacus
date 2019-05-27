@@ -1,0 +1,401 @@
+<?php
+
+require '../../inc/bootstrap.php';
+require "../../inc/functions.php";
+require '../../inc/db.php';
+logged_admin();
+$id = $_GET['id'];
+$db = App::getDatabase();
+$resultat = $db->query('SELECT * FROM t_pilote WHERE id =?', [$id])->fetch();
+$pilote['modif'] = $resultat;
+
+if (!empty($_POST)){
+
+    $validator = new Validator($_POST);
+    $requete = 'UPDATE t_pilote SET ';
+    $donnees = array();
+    $requete2 = "";
+    $errors = array();
+    $nb_donnee = 0;
+
+    //Test du nouveau nom, si le test est concluant, la requête SQL est modifiée pour mettre à jour le nouveau nom
+    if ($_POST['nom']!=null){
+        $nb_donnee++;
+
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('nom', "Ce nom n'est pas valable");
+
+        if ($validator->isValid()){
+            $requete2 .='nom = ?';
+            $donnees[] = $_POST['nom'];
+
+        }
+    }
+    if ($_POST['sexe']!=null  && $_POST['sexe'] != $pilote['modif']->codsexe){
+        $nb_donnee++;
+
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $requete2 .='codsexe = ?';
+        $donnees[] = $_POST['sexe'];
+
+
+    }
+    if ($_POST['prenom']!=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('prenom', "Ce prenom n'est pas valable");
+        if ($validator->isValid()){
+            $requete2 .='prenom = ?';
+            $donnees[] = $_POST['prenom'];
+
+        }
+    }
+
+    if ($_POST['email'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isEmail('email', "Cet email n'est pas valide");
+        if ($validator->isValid()){
+            $requete2 .='email = ?';
+            $donnees[] = $_POST['email'];
+
+        }
+    }
+    if ($_POST['lvl_user'] !=null && $_POST['lvl_user'] != $pilote['modif']->level_user){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+
+
+        $requete2 .='level_user = ?';
+        $donnees[] = $_POST['lvl_user'];
+
+
+    }
+    if ($_POST['nationalite'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('nationalite', 'Veuillez entrer une nationalité valide');
+        if ($validator->isValid()){
+            $requete2 .='nationalite = ?';
+            $donnees[] = $_POST['nationalite'];
+
+        }
+    }
+    if ($_POST['adresse'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlphanumeric('adresse', 'Veuillez entrer une adresse valide');
+        if ($validator->isValid()){
+            $requete2 .='adresse = ?';
+            $donnees[] = $_POST['adresse'];
+
+        }
+    }
+    if ($_POST['codpost'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isLen('codpost', 'Veuillez entrer un code postale valide');
+        if ($validator->isValid()){
+            $requete2 .='codpost = ?';
+            $donnees[] = $_POST['codpost'];
+
+        }
+    }
+    if ($_POST['ville'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('ville', 'Veuillez entrer une nationalité valide');
+        if ($validator->isValid()){
+            $requete2 .='ville = ?';
+            $donnees[] = $_POST['ville'];
+
+        }
+    }
+    if ($_POST['telcell'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isNumeric('telcell', "Ce numéro de téléphone portable valide");
+        if ($validator->isValid()){
+            $requete2 .='telcellulaire = ?';
+            $donnees[] = $_POST['telcell'];
+
+        }
+    }
+    if ($_POST['teldom'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isNumeric('teldom', "Ce numéro de téléphone domicile valide");
+        if ($validator->isValid()){
+            $requete2 .='teldomicile = ?';
+            $donnees[] = $_POST['teldom'];
+
+        }
+    }
+    if ($_POST['telpro'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isNumeric('telpro', 'Veuillez entrer un téléphone pro valide');
+        if ($validator->isValid()){
+            $requete2 .='telpro = ?';
+            $donnees[] = $_POST['telpro'];
+
+        }
+    }
+    if ($_POST['profession'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('profession', 'Veuillez entrer une profession valide');
+        if ($validator->isValid()){
+            $requete2 .='profession = ?';
+            $donnees[] = $_POST['profession'];
+
+        }
+    }
+    if ($_POST['datenaissance'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $requete2 .='datnaissance = ?';
+        $donnees[] = $_POST['datenaissance'];
+
+
+    }
+    if ($_POST['age'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isNumeric('age', 'Veuillez entrer un age valide');
+        if ($validator->isValid()){
+            $requete2 .='age = ?';
+            $donnees[] = $_POST['age'];
+
+        }
+    }
+    if ($_POST['lieunaissance'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('lieunaissance', 'Veuillez entrer un lieu de naissance valide');
+        if ($validator->isValid()){
+            $requete2 .='lieunaissance = ?';
+            $donnees[] = $_POST['lieunaissance'];
+
+        }
+    }
+    if ($_POST['userFirstContactName'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('userFirstContactName', 'Veuillez entrer un nom de premier contact valide');
+        if ($validator->isValid()){
+            $requete2 .='userFirstContactName = ?';
+            $donnees[] = $_POST['userFirstContactName'];
+
+        }
+    }
+    if ($_POST['userFirstContactPhone'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isNumeric('userFirstContactPhone', 'Veuillez entrer un téléphone de premier contact valide');
+        if ($validator->isValid()){
+            $requete2 .='userFirstContactPhone = ?';
+            $donnees[] = $_POST['userFirstContactPhone'];
+
+        }
+    }
+    if ($_POST['userSecondContactName'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('userSecondContactName', 'Veuillez entrer un nom de second contact valide');
+        if ($validator->isValid()){
+            $requete2 .='userSecondContactName = ?';
+            $donnees[] = $_POST['userSecondContactName'];
+
+        }
+    }
+    if ($_POST['userSecondContactPhone'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isNumeric('userSecondContactPhone', 'Veuillez entrer un téléphone de second contact valide');
+        if ($validator->isValid()){
+            $requete2 .='userSecondContactPhone = ?';
+            $donnees[] = $_POST['userSecondContactPhone'];
+
+        }
+    }
+
+    if ($_POST['observations'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlphanumeric('observations', 'Veuillez entrer une observation valide');
+        if ($validator->isValid()){
+            $requete2 .='Observations = ?';
+            $donnees[] = $_POST['observations'];
+
+        }
+    }
+
+
+
+    if (sizeof($donnees) == $nb_donnee){
+        $requete .= $requete2;
+        $requete .= 'WHERE id = ?';
+        $donnees[] = $id;
+
+        $db->query($requete, $donnees);
+        $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
+        unset($_POST);
+        header('Location: Liste_User.php');
+        exit();
+    } else{
+        $errors = $validator->getErrors();
+        unset($_POST);
+    }
+
+
+
+}
+require "../../inc/ClubMenu.php"
+?>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.10/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="../../js/cp_auto.js"></script>
+    <script type="text/javascript" src="../../js/calcullAge.js"></script>
+    <script type="text/javascript" src="../../js/jquery.smartWizard.js"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace()
+    </script>
+
+    <link href="../../css/smart_wizard.css" rel="stylesheet">
+
+<?php if (!empty($errors)): ?>
+    <div class="alert alert-danger">
+        <p>Vous n'avez pas remplis le formulaire correctement </p>
+        <?php foreach ($errors as $error): ?>
+            <li><?=$error; ?> </li>
+        <?php endforeach ?>
+
+    </div>
+<?php endif; ?>
+    <h2>Modification du pilote <?php echo $pilote['modif']->prenom?> <?php echo $pilote['modif']->nom?></h2>
+
+    <form action="" method="post">
+            <!-- SmartWizard 2 html -->
+            <div id="smartwizard2">
+                <ul>
+                    <li><a href="#step-1">Etape 1<br /><small>Coordonnées</small></a></li>
+                    <li><a href="#step-2">Etape 2<br /><small>Aéroclub</small></a></li>
+                    <li><a href="#step-3">Etape 3<br /><small>Licence - Visite Médicale</small></a></li>
+                </ul>
+
+                <div>
+                    <div id="step-1" class="">
+                        <h2>Modification des coordonnées</h2>
+                        <?php require "../../page/info_user/CoordonnéesModif.php" ?>
+                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                    </div>
+                    <div id="step-2" class="">
+                        <h2>Inscription Aéroclub</h2>
+                        <?php require "../../page/info_user/AéroclubModif.php" ?>
+                    </div>
+                    <div id="step-3" class="">
+                        <h2>Licence - Visite médicale</h2>
+                        <?php require "../../page/info_user/LicenceModif.php" ?>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+    </form>
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Include SmartWizard JavaScript source -->
+    <script type="text/javascript" src="../../js/jquery.smartWizard.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            // Step show event
+            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
+                //alert("You are on step "+stepNumber+" now");
+                if(stepPosition === 'first'){
+                    $("#prev-btn").addClass('enabled');
+                }else if(stepPosition === 'final'){
+                    $("#next-btn").addClass('enabled');
+                }else{
+                    $("#prev-btn").removeClass('disabled');
+                    $("#next-btn").removeClass('disabled');
+                }
+            });
+
+            // Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('Finish')
+                .addClass('btn btn-info')
+                .on('click', function(){ alert('Finish Clicked'); });
+            var btnCancel = $('<button></button>').text('Cancel')
+                .addClass('btn btn-danger')
+                .on('click', function(){ $('#smartwizard').smartWizard("reset"); });
+
+            // Please note enabling option "showStepURLhash" will make navigation conflict for multiple wizard in a page.
+            // so that option is disabling => showStepURLhash: false
+
+            // Smart Wizard 2
+            $('#smartwizard2').smartWizard({
+                selected: 0,
+                theme: 'default',
+                transitionEffect:'fade',
+                showStepURLhash: false
+            });
+
+        });
+    </script>
+
+
+<?php require "../../inc/footerInscription.php"?>

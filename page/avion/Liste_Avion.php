@@ -65,13 +65,4 @@ require "../../inc/AvionMenu.php"
 
         <a href="ajout_avion.php" class="btn btn-primary">Ajouter un avion</a>
 
-
-
-
-
-
-
-
-
-
 <?php require "../../inc/newFooter.php" ?>

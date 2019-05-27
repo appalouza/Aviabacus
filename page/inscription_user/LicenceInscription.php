@@ -1,86 +1,6 @@
 
-<?php
-require "../../inc/functions.php";
-logged_admin();
-
-require '../../inc/bootstrap.php';
-
-// connection le bdd
 
 
-
-
-//check les info sont enregistre ou non
-if (!empty($_POST)) {
-
-     $db = App::getDatabase();
-
-     $errors = array();
-
-     $validator = new Validator($_POST);
-
-
-     $validator->isAlpha('nom_medecin', "Veuillez saisir le nom de médecin ");
-
-
-    /* if($validator->isValid())
-     {
-        $restictions_medicales = strlen($restictions_medicales);
-
-        }
-        else {
-            $erreur ="la limitation de text est 255 caractères.";
-        }
-     }*/
-
-    /* $validator->isNumeric('datvaliditeppl', "Veuillez saisir une date de la licence TT/PPL");
-
-     $validator->isNumeric('datvaliditelicence', "Veuillez saisir une date de la licence FFA");
-
-     $validator->isNumeric('datvaliditelicence', "Veuillez saisir une date de la visite médicale");*/
-
-     if ($validator->isValid()) {
-
-         $db->query("INSERT INTO t_pilote SET 
-                datvaliditeppl=?, datfinvaliditeppl=?,
-                datvaliditelicence=?, datfinvaliditelicence=?,
-                datvaliditevisitemed=?,datfinvaliditevisitemed=? " ,
-
-                [$_POST['datvaliditeppl'],$_POST['datfinvaliditeppl'],
-                $_POST['datvaliditelicence'], $_POST['datfinvaliditelicence'],
-                $_POST['datvaliditevisitemed'], $_POST['datfinvaliditevisitemed']]
-            );
-
-        //redirection vers la page login.php
-        header('Location: Inscription_coordonnées.php');
-        exit();
-     }
-     else{
-         $errors = $validator->getErrors();
-     }
-}
-
-require "../../inc/header_sous_dossier.php"
-
-
-?>
-
-<div class="container">
-    <h1>Licences - Visite médicale</h1>
-
-
-    <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger">
-            <p>Vous n'avez pas remplis le formulaire correctement </p>
-            <?php foreach ($errors as $error): ?>
-                <li><?=$error; ?> </li>
-            <?php endforeach ?>
-
-        </div>
-    <?php endif; ?>
-
-
-    <form action="" method="POST">
         <div class="form-row">
             <div class=" form-group col">
                 <label>Validité de la licence TT/PPL</label>
@@ -118,7 +38,7 @@ require "../../inc/header_sous_dossier.php"
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Début</div>
-                        <input type="date"  name="datvaliditevisitemed" class="form-control">
+                        <input type="date" name="datvaliditevisitemed" class="form-control">
                     </div>
                 </div>
                 <div class="input-group">
@@ -132,12 +52,11 @@ require "../../inc/header_sous_dossier.php"
         </div>
         <div class="form-group col-6">
             <label>Nom du médecin</label>
-            <input type="text" name="nom_medecin" class="form-control">
+            <input type="text" name="nom_medecin" class="form-control" required>
         </div>
         <div class="form-group col-6">
             <label>Réstrictions "éventuelles</label>
-            <input type="text" name="restictions_medicales" class="form-control" >
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" name="restictions_medicales" rows="3"></textarea>
         </div>
 
 
@@ -150,7 +69,6 @@ require "../../inc/header_sous_dossier.php"
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
-
 
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -221,21 +139,7 @@ require "../../inc/header_sous_dossier.php"
 
             </tbody>
         </table>
-        <button type="submit"  name="enregistrer" class="btn btn-primary">Enregistrer</button>
-        <button type="button" class="btn btn-danger">Supprimer la fiche</button>
-
-    </form>
 
 
 
 
-
-</div>
-
-<?php require "../../inc/footer.php" ?>
-
-
-
-
-
-<!-- (!empty($_POST['datvaliditeppl'])AND!empty($_POST['datfinvaliditeppl'])AND!empty($_POST['datvaliditelicence'])AND!empty($_POST['datfinvaliditelicence'])AND!empty($_POST['datvaliditevisitemed'])AND!empty($_POST['datfinvaliditevisitemed'])AND!empty($_POST['nom_medecin'])AND!empty($_POST['restictions_medicales'])) -->
