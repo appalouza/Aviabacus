@@ -2,7 +2,7 @@
 require "../../inc/functions.php";
 logged_only();
 
-require "../../inc/header_sous_dossier.php"
+require "../../inc/ClubMenu.php"
 ?>
 
 <div class="container">
@@ -100,4 +100,4 @@ require "../../inc/header_sous_dossier.php"
     </form>
 </div>
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

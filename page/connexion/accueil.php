@@ -3,7 +3,7 @@ require "../../inc/functions.php";
 require '../../inc/db.php';
 logged_only();
 
-require "../../inc/header_sous_dossier.php"
+require "../../inc/AvionMenu.php"
 
 ?>
 <div>
@@ -64,4 +64,4 @@ require "../../inc/header_sous_dossier.php"
 
 <?php //debug($_SESSION); ?>
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

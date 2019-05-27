@@ -11,12 +11,12 @@ if (!empty($_POST)){
     $selected_val = $_POST['user'];
 
 }
-require "../../inc/header_sous_dossier.php"
+require "../../inc/ClubMenu.php"
 ?>
 
 
     <div class="table-responsive">
-
+<h3>Liste des membres</h3>
         <table class="table table-striped table-bordere table-sm">
             <thead>
             <tr>
@@ -119,4 +119,4 @@ require "../../inc/header_sous_dossier.php"
 
 
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

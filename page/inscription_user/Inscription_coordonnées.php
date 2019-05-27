@@ -119,23 +119,9 @@ if (!empty($_POST)) {
     }
 }
 
-require "../../inc/header_sous_dossier.php"
+require "../../inc/GestionMenu.php"
 ?>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
-    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.10/jquery-ui.js"></script>
-    <script type="text/javascript" src="../../js/cp_auto.js"></script>
-<script type="text/javascript" src="../../js/calcullAge.js"></script>
-  		<h1>Inscription d'un nouveau pilote</h1>
-    <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger">
-            <p>Vous n'avez pas remplis le formulaire correctement </p>
-            <?php foreach ($errors as $error): ?>
-                <li><?=$error; ?> </li>
-            <?php endforeach ?>
-
-        </div>
-    <?php endif; ?>
-
+   
     <form action="" method="POST">
   	 <!--	<div class="form-group">
   	 		<picture>
@@ -316,4 +302,4 @@ require "../../inc/header_sous_dossier.php"
     </nav>
 
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/footerInscription.php"?>

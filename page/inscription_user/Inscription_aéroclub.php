@@ -1,15 +1,6 @@
-<?php
-require '../../inc/bootstrap.php';
-require "../../inc/functions.php";
-require '../../inc/db.php';
-logged_admin();
-$db = App::getDatabase();
-require "../../inc/header_sous_dossier.php";
-?>
-<div class="container">
-		<h1>Inscription Aéroclub</h1>
 
-  	 <h2>Aéro-Club</h2>
+<div class="container">
+	  	 <h2>Aéro-Club</h2>
 		<form>
 
         <div class="form-row">
@@ -181,5 +172,3 @@ require "../../inc/header_sous_dossier.php";
 
 	</form>
 	</div>
-
-<?php require "../../inc/footer.php" ?>

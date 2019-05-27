@@ -2,7 +2,7 @@
 require "../../inc/functions.php";
 logged_only();
 
-require "../../inc/header_sous_dossier.php"
+require "../../inc/AvionMenu.php"
 
 ?>
 
@@ -95,4 +95,4 @@ require "../../inc/header_sous_dossier.php"
 
 <?php //debug($_SESSION); ?>
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

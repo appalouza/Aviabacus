@@ -2,7 +2,7 @@
 require '../../inc/bootstrap.php';
 require "../../inc/functions.php";
 logged_admin();
-require "../../inc/header_sous_dossier.php";
+require "../../inc/GestionMenu.php";
 ?>
 
 <div class="container">
@@ -167,4 +167,4 @@ require "../../inc/header_sous_dossier.php";
     </nav>
      </div>
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

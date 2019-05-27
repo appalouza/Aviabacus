@@ -9,7 +9,7 @@ logged_admin();
 $db = App::getDatabase();
 
 
-require "../../inc/header_sous_dossier.php"
+require "../../inc/AvionMenu.php"
 ?>
 
     <h1>Liste des avions</h1>
@@ -74,4 +74,4 @@ require "../../inc/header_sous_dossier.php"
 
 
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

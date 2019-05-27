@@ -35,12 +35,12 @@ puissance = ? , vitesse = ?, consoreel = ?, observations = ?, prixheure = ?, en_
         }
 
 }
-require "../../inc/header_sous_dossier.php";
+require "../../inc/AvionMenu.php";
 ?>
 
 <form action="" method="POST">
 
-    <h2>Coordonnées</h2>
+    <h2>Ajout d'un avion</h2>
     <div class="form-row">
         <div class="form-group col-md-2">
             <label>Code abrégé</label>
@@ -99,6 +99,6 @@ require "../../inc/header_sous_dossier.php";
 </form>
 
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>
 
 

@@ -182,7 +182,7 @@ Les requêtes SQL sont constituées de plusieurs parties:
     }
 
 }
-require "../../inc/header_sous_dossier.php";
+require "../../inc/AvionMenu.php";
 ?>
 <?php if (!empty($errors)): ?>
     <div class="alert alert-danger">
@@ -256,4 +256,4 @@ require "../../inc/header_sous_dossier.php";
     </form>
 
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

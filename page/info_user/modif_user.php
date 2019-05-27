@@ -293,7 +293,7 @@ if (sizeof($donnees) == $nb_donnee){
 
 
 }
-require "../../inc/header_sous_dossier.php";
+require "../../inc/ClubMenu.php";
 ?>
 
 
@@ -495,5 +495,5 @@ require "../../inc/header_sous_dossier.php";
 
 
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>
 

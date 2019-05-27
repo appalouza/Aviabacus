@@ -25,7 +25,7 @@ if (!empty($_POST)){
 
 }
 
-require "../../inc/header_sous_dossier.php";
+require "../../inc/ClubMenu.php";
 ?>
 <h1>Suppression d'un utilisateurs</h1>
 
@@ -39,4 +39,4 @@ require "../../inc/header_sous_dossier.php";
 </form>
 
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>

@@ -3,8 +3,12 @@ require '../../inc/bootstrap.php';
 require "../../inc/functions.php";
 require '../../inc/db.php';
 logged_only();
+if ($_SESSION['auth']->level_user == "administrateur"){
+    require "../../inc/AvionMenu.php";
+}else{
+    require "../../inc/AvionMenu.php";
+}
 
-require "../../inc/header_sous_dossier.php"
 ?>
 <body>
 
@@ -16,7 +20,27 @@ require "../../inc/header_sous_dossier.php"
 
             <form method="post" action="">
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+
+                    <div class="form-group col-md-4">
+
+                        <label>Liste des utilisateurs: </label>
+                        <select name="user" class="form-control">
+                            <option>Selection de l'utilisateur</option>
+                            <?php
+                            //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
+                            $dbi->set_charset("utf8");
+                            $requete = 'SELECT * FROM t_pilote';
+                            $resultat = $dbi->query($requete);
+                            while ($ligne = $resultat->fetch_assoc()) {
+                                echo '<option value="'.$ligne['id'].'" >'.$ligne['nom'].' '.$ligne['prenom'].' </option>';
+                            }
+
+
+                            ?>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-4">
                         <label>Avion: </label>
 
                         <select name = 'avion' class="form-control ">
@@ -37,36 +61,10 @@ require "../../inc/header_sous_dossier.php"
 
                         </select>
                     </div>
-                </div>
-
-
-
-                <div class="form-row">
-                        <div class="form-group col-md-6">
-
-                            <label>Liste des utilisateurs</label>
-                            <select name="user" class="form-control col-md-6">
-                                <option>Selection de l'utilisateur</option>
-                                <?php
-                                //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
-                                $dbi->set_charset("utf8");
-                                $requete = 'SELECT * FROM t_pilote';
-                                $resultat = $dbi->query($requete);
-                                while ($ligne = $resultat->fetch_assoc()) {
-                                    echo '<option value="'.$ligne['id'].'" >'.$ligne['nom'].' '.$ligne['prenom'].' </option>';
-                                }
-
-                                $dbi->close();
-                                ?>
-                            </select>
-
-                        </div>
-
-
-
                     <div class="form-group col-md-4">
                         <label>Fonction à bord:</label>
                         <select class="form-control">
+                            <option>Selection d'une fonction: </option>
                             <option>Cdt de bord - Monomoteur - Jour</option>
                             <option>Double - Monomoteur - Jour</option>
                             <option>Pilote - Vols aux instruments</option>
@@ -75,23 +73,22 @@ require "../../inc/header_sous_dossier.php"
                     </div>
                 </div>
 
+
+
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                     <label>Instructeur:</label>
                     <select class="form-control">
                         //bdd
                     </select>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label>Nature du vol:</label>
                         <select class="form-control">
                             //bdd
                         </select>
                     </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label>Nombre de passagers:</label>
                         <input type="number" class="form-control">
                     </div>
@@ -206,4 +203,4 @@ require "../../inc/header_sous_dossier.php"
 </div>
 <?php //debug($_SESSION); ?>
 
-<?php require "../../inc/footer.php" ?>
+<?php require "../../inc/newFooter.php" ?>
