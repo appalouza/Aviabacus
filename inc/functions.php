@@ -9,7 +9,11 @@
 		return substr(str_shuffle(str_repeat($alphabet, $length)),0,$length);
 	}
 
-
+    function getCaptcha($SecretKey){
+        $Response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response={$SecretKey}");
+        $Return = json_decode($Response);
+        return $Return;
+    }
 
 	function logged_only(){
     if(session_status() == PHP_SESSION_NONE){
@@ -50,7 +54,7 @@ function logged_admin(){
         $header.='Content-Transfer-Encoding: 8bit';
         $destinataire = "antoine.quetin@gmail.com";
         $sujet = "Activer votre compte" ;
-        $entete = "From: inscription@votresite.com" ;
+        $entete = "From: inscription@aviabacus.com" ;
 
         // Le lien d'activation est composé du login(log) et de la clé(cle)
         $message = '

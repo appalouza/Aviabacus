@@ -23,41 +23,90 @@ if (!empty($_POST)) {
 
     $validator->isSexe($_POST['sexe'], 'Veuillez renseigner votre sexe');
 
-    $validator->isEmail('email',"Votre email n'est pas valide ");
+    $validator->isEmail('email', "Votre email n'est pas valide ");
 
-    if ($validator->isValid()){
+    if ($validator->isValid()) {
 
-        $validator->isUniq('email', $db,  "Cet email est déjà pris");
+        $validator->isUniq('email', $db, "Cet email est déjà pris");
     }
 
     $validator->isNumeric('codpost', "Votre code postal est invalide");
-    if ($validator->isValid()){
+    if ($validator->isValid()) {
         $validator->isLen('codpost', "Votre Code postal n'est pas du bon format");
     }
 
     $validator->isNumeric('telcell', "Veuillez saisir un numéro de téléphone portable valide");
 
     $validator->isNumeric('telperso', "Veuillez saisir un numéro de téléphone perso valide");
-
-    $validator->isNumeric('telpro', "Veuillez saisir un numéro de téléphone pro valide");
+    if ($_POST['telpro'] != null) {
+        $validator->isNumeric('telpro', "Veuillez saisir un numéro de téléphone pro valide");
+    }
 
     $validator->isNumeric('age', "Veuillez saisir un age valide");
 
     $validator->isAlpha('lieunaissance', "Veuillez saisir une ville de naissance");
 
     $validator->isLevel('lvl_user', "Veuillez choisir un niveau d'utilisateur");
+    if ($_POST["userFirstContactName"] != null) {
+        $validator->isAlpha('userFirstContactName', "Le nom du premier contact est invalide");
+        $validator->isNumeric('userFirstContactPhone', "Le téléphone du premier contact est invalide");
+    }
+
+    if ($_POST["userSecondContactName"] != null) {
+        $validator->isAlpha('userSecondContactName', "Le nom du Second contact est invalide");
+        $validator->isNumeric('userSecondContactPhone', "Le téléphone du second contact est invalide");
+    }
+    if ($_POST['observations'] != null) {
+        $validator->isAlphanumeric('observations', 'Les observations sont invalides');
+    }
+
+
+    /* if ($_POST['nationalite']=='FR'){
+         $validator->isMobilePhone('userFirstcontactPhone',"Le numéro de portable du premier contact n'est pas bon." );
+         $validator->isMobilePhone('telcell', "Veuillez saisir un numéro de téléphone portable valide");
+
+         $validator->isPhone('telperso', "Veuillez saisir un numéro de téléphone perso valide");
+
+         $validator->isPhone('telpro', "Veuillez saisir un numéro de téléphone pro valide");
+     }elseif ($_POST['nationalite'] == 'BEL'){
+
+     }*/
 
 
     //requête pour enregistrer un utilisateurs
     if ($validator->isValid()) {
 
-            //création d'un token random
+        //création d'un token random
         $token = Str::random(60);
-        $db->query("INSERT INTO t_pilote 
-            SET nom= ? , prenom = ?, codsexe = ?,adresse =?, codpost = ?, ville = ?, teldomicile = ?, telcellulaire = ?, email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=? ",
-            [$_POST['nom'], $_POST['prenom'], $_POST['sexe'],$_POST['adresse'],$_POST['codpost'],$_POST['ville'],$_POST['telperso'],$_POST['telcell'], $_POST['email'],
-                $_POST['profession'],$_POST['datenaissance'],$_POST['age'],$_POST['lieunaissance'],
-                $_POST['nationalite'], $_POST['lvl_user'],$token]);
+        $requete = "INSERT INTO t_pilote 
+            SET nom= ? , prenom = ?, codsexe = ?,adresse =?, codpost = ?, ville = ?, teldomicile = ?, telcellulaire = ?,
+             email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=?";
+        $donnees = array($_POST['nom'], $_POST['prenom'], $_POST['sexe'], $_POST['adresse'], $_POST['codpost'], $_POST['ville'], $_POST['telperso'], $_POST['telcell'], $_POST['email'],
+            $_POST['profession'], $_POST['datenaissance'], $_POST['age'], $_POST['lieunaissance'],
+            $_POST['nationalite'], $_POST['lvl_user'], $token);
+
+
+
+        if ($_POST["userFirstContactName"] != null) {
+            $requete .= ",userFirstContactName=?, userFirstContactPhone=?";
+            $donnees[] = $_POST['userFirstContactName'];
+            $donnees[] = $_POST['userFirstContactPhone'];
+        }
+
+        if ($_POST["userSecondContactName"] != null) {
+            $requete .= ",userSecondContactName=?, userSecondContactPhone =?";
+            $donnees[] = $_POST['userSecondContactName'];
+            $donnees[] = $_POST['userSecondContactPhone'];
+        }
+        if ($_POST["observations"] != null){
+            $requete .= ',Observations=?';
+            $donnees[] = $_POST['observations'];
+        }
+        print_r($_POST["observations"]);
+        print_r($donnees);
+        print_r($requete);
+
+        $db->query($requete, $donnees);
         $user_id = $db->lastInsertId();
         envoie_mail($user_id, $token);
         $_SESSION['flash']['success'] = "Un email de confirmation a été envoyé à l'utilisateur pour valider son compte";
@@ -66,15 +115,16 @@ if (!empty($_POST)) {
         exit();
     } else {
         $errors = $validator->getErrors();
-    }
-    }
 
+    }
+}
 
 require "../../inc/header_sous_dossier.php"
 ?>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.10/jquery-ui.js"></script>
     <script type="text/javascript" src="../../js/cp_auto.js"></script>
+<script type="text/javascript" src="../../js/calcullAge.js"></script>
   		<h1>Inscription d'un nouveau pilote</h1>
     <?php if (!empty($errors)): ?>
         <div class="alert alert-danger">
@@ -97,7 +147,7 @@ require "../../inc/header_sous_dossier.php"
         <div class="form-row">
   		<div class="form-group col-md-4">
             <label>Sexe</label>
-  			<select class="form-control" name = "sexe">
+  			<select class="form-control" name = "sexe" required>
                 <option value="2">Select...</option>
   				<option value=1>Mme.</option>
   				<option value=0>M.</option>
@@ -105,22 +155,22 @@ require "../../inc/header_sous_dossier.php"
   		</div>
 		  <div class="form-group col-md-4" >
 		    <label >Nom</label>
-		    <input type="text" name="nom" class="form-control" >
+		    <input type="text" name="nom" class="form-control" required>
 		  </div>
 		  <div class="form-group col-md-4">
 		  	<label >Prénom</label>
-		    <input type="text" name="prenom" class="form-control"  >
+		    <input type="text" name="prenom" class="form-control" required >
 		  </div>
         </div>
 
          <div class="form-group">
              <label >Email</label>
-             <input type="text" name="email" class="form-control"  >
+             <input type="text" name="email" class="form-control"  required>
          </div>
 
          <div class="form-group">
              <p><label for="">Niveau</label></p>
-             <select name="lvl_user" class="form-control col-md-4" size="1">
+             <select name="lvl_user" class="form-control col-md-4" size="1" required>
                  <option>Select...</option>
                  <option>Pilote</option>
                  <option>Chef-Pilote</option>
@@ -139,21 +189,21 @@ require "../../inc/header_sous_dossier.php"
 
 
                 <label>Nationalité</label>
-                <select name="pays" class="form-control col-md-5">
+             <!--   <select name="pays" class="form-control col-md-5">
                     <option>Select...</option>
                     <?php
                     //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
-                    $dbi->set_charset("utf8");
+                    /*$dbi->set_charset("utf8");
                     $requete = 'SELECT * FROM pays';
                     $resultat = $dbi->query($requete);
                     while ($ligne = $resultat->fetch_assoc()) {
                         echo '<option>'.$ligne['nom_fr_fr'].' </option>';
 
                     }
-                    $dbi->close();
+                    $dbi->close();*/
                     ?>
-                </select>
-                <input type="text" id="nationalite" name="nationalite" class="form-control">
+                </select>-->
+                <input type="text" id="nationalite" name="nationalite" class="form-control" required>
             </div>
         </div>
 
@@ -161,19 +211,19 @@ require "../../inc/header_sous_dossier.php"
 		  <div class="form-row">
               <div class="form-group col-md-6">
                   <label>Adresse</label>
-                  <input type="text" name="adresse" class="form-control">
+                  <input type="text" name="adresse" class="form-control" required>
               </div>
 
 
               <div class="form-group col-md-3">
                   <label >Code postal</label>
-                  <input type="text" id="cp" size="6" name="codpost" class="form-control"/>
+                  <input type="text" id="cp" size="6" name="codpost" class="form-control" required>
 
               </div>
 
               <div class="form-group col-md-3">
                   <label>Ville</label>
-                  <input type="text" id="ville" name="ville" class="form-control"/>
+                  <input type="text" id="ville" name="ville" class="form-control"required/>
 
               </div>
 
@@ -181,11 +231,11 @@ require "../../inc/header_sous_dossier.php"
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Téléphone portable</label>
-                <input type="tel" name="telcell" class="form-control">
+                <input type="tel" name="telcell" class="form-control" required>
             </div>
             <div class="form-group col-md-4">
                 <label>Téléphone domicile </label>
-                <input type="tel" name="telperso" class="form-control">
+                <input type="tel" name="telperso" class="form-control" >
             </div>
             <div class="form-group col-md-4">
                 <label>Téléphone professionnel</label>
@@ -195,7 +245,7 @@ require "../../inc/header_sous_dossier.php"
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Profession</label>
-                <input type="text" name="profession" class="form-control">
+                <input type="text" name="profession" class="form-control" required>
             </div>
 
         </div>
@@ -203,31 +253,29 @@ require "../../inc/header_sous_dossier.php"
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Date de naissance</label>
-                <input type="date" name="datenaissance" class="form-control">
+                <input type="date" name="datenaissance" id="DateNais" class="form-control" required Onblur="CalculAge()">
             </div>
             <div class="form-group col-md-4">
                 <label>Age</label>
-                <input type="number" name="age" class="form-control">
+                <input type="number" name="age" id = "Age" class="form-control"required>
             </div>
             <div class="form-group col-md-4">
                 <label>Lieu de naissance</label>
-                <input type="text" name="lieunaissance" class="form-control">
+                <input type="text" name="lieunaissance" class="form-control" required>
             </div>
 
         </div>
-
-
 
 		<h3>Personnes à contacter en cas d'accident</h3>
 		<h4>1er contact</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Nom</label>
-                <input type="text" name="userFirstcontactName" class="form-control">
+                <input type="text" name="userFirstContactName" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label>Téléphone</label>
-                <input type="tel" name="userFirstcontactPhone" class="form-control">
+                <input type="tel" name="userFirstContactPhone" class="form-control">
             </div>
         </div>
 
@@ -235,17 +283,17 @@ require "../../inc/header_sous_dossier.php"
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Nom</label>
-                <input type="text" name="userSecondcontactName" class="form-control">
+                <input type="text" name="userSecondContactName" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label>Téléphone</label>
-                <input type="tel" name="userSecondcontactPhone" class="form-control">
+                <input type="tel" name="userSecondContactPhone" class="form-control">
             </div>
 
         </div>
         <div class="form-group">
             <label>Observations</label>
-            <textarea class="form-control" rows="3"> </textarea>
+            <textarea name="observations" id="comment" class="form-control" rows="3"></textarea>
         </div>
 
 		<button type="submit" class="btn btn-primary">Enregistrer</button>

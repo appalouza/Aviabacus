@@ -4,6 +4,7 @@ require '../../inc/bootstrap.php';
 require "../../inc/functions.php";
 require '../../inc/db.php';
 logged_admin();
+
 $id = $_GET['id'];
 $db = App::getDatabase();
 $resultat = $db->query('SELECT * FROM t_avion WHERE id =?', [$id])->fetch();
@@ -16,9 +17,12 @@ if (!empty($_POST)) {
     $requete2 = "";
     $donnees = array();
     $errors = array();
-
-    //Test du nouveau nom, si le test est concluant, la requête SQL est modifiée pour mettre à jour le nouveau nom
+    $nb_donnee = 0;
+  //  print_r($_POST);
+    /*Test du nouveau nom, si le test est concluant, la requête SQL est modifiée pour mettre à jour le nouveau nom,
+    sinon, les données ne sont pas ajoutées au tableau de données */
     if ($_POST['optradio'] != null) {
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
@@ -31,7 +35,7 @@ if (!empty($_POST)) {
         }
     }
     if ($_POST['codavioabrege'] != null) {
-
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
@@ -45,23 +49,25 @@ if (!empty($_POST)) {
     }
 
     if ($_POST['codeassoc'] != null) {
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
 
         $validator->isAlphanumeric('codeassoc', "Veuillez entrer un code assoc valide");
         if ($validator->isValid()) {
-            $requete2 .= 'codeassoc = ?';
+            $requete2 .= 'codassoc = ?';
             $donnees[] = $_POST['codeassoc'];
 
         }
     }
     if ($_POST['typeavion'] != null) {
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
 
-        //$validator->isEmail('modifEmail', "Cet email n'est pas valide");
+        $validator->isAlphanumeric('typeavion', "Ce type d'avion n'est pas valide");
         if ($validator->isValid()) {
             $requete2 .= 'typeavion = ?';
             $donnees[] = $_POST['typeavion'];
@@ -69,11 +75,12 @@ if (!empty($_POST)) {
         }
     }
     if ($_POST['marque'] != null) {
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
 
-        $validator->isAlpha('marque', 'Veuillez entrer une marque valide');
+        $validator->isAlphanumeric('marque', 'Veuillez entrer une marque valide');
         if ($validator->isValid()) {
             $requete2 .= 'marque = ?';
             $donnees[] = $_POST['marque'];
@@ -81,6 +88,7 @@ if (!empty($_POST)) {
         }
     }
     if ($_POST['puissance'] != null) {
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
@@ -93,6 +101,7 @@ if (!empty($_POST)) {
         }
     }
     if ($_POST['vitesse'] != null) {
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
@@ -105,6 +114,7 @@ if (!empty($_POST)) {
         }
     }
     if ($_POST['consoreel'] != null) {
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
@@ -118,31 +128,57 @@ if (!empty($_POST)) {
     }
 
     if ($_POST['observations'] != null) {
+        print_r($_POST['observations']);
+        echo "test";
+        die();
+        $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
 
-        $validator->isAlpha('observations', "Votre commentaire n'est pas valide");
+        $validator->isAlphanumeric('observations', "Votre commentaire n'est pas valide");
         if ($validator->isValid()) {
             $requete2 .= 'observations = ?';
             $donnees[] = $_POST['observations'];
 
         }
     }
+    if ($_POST['codeavion'] != null) {
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
 
+        $validator->isAlphanumeric('codeavion', "Votre code avion n'est pas valide");
+        if ($validator->isValid()) {
+            $requete2 .= 'codavion = ?';
+            $donnees[] = $_POST['codeavion'];
 
-    $requete .= $requete2;
-echo $requete;
+        }
+    }
 
-    if ($donnees != null && $validator->isValid()) {
+/*Test de la taille du tableau donnee qui contient toutes les données pour la requête SQL et du nombre de données qui doivent être
+    récoltées, si un validator renvoi une erreur, l'égalité sera fausse
+
+Les requêtes SQL sont constituées de plusieurs parties:
+- l'entête, qui contiens l'objectif de la requête
+- les champs à modifiés, qui sont ajoutées lorsqu'un champ est effectivement modifié,
+- la fin, qui permet de selectionner l'id de l'avion à modifier*/
+    if (sizeof($donnees) == $nb_donnee) {
+
+        $requete .= $requete2;
         $requete .= 'WHERE id = ?';
         $donnees[] = $id;
 
         $db->query($requete, $donnees);
         $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
+        unset($_POST);
+
         //header('Location : ../../page/avion/Liste_Avion.php');
     }else{
         $errors = $validator->getErrors();
+
+        unset($_POST);
     }
 
 }

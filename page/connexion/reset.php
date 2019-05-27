@@ -47,9 +47,17 @@ require "../../inc/header_sous_dossier.php";
 
 ?>
 <h3>Réinitialisation du mot de passe</h3>
-
+<h5>Il doit contenir au minimum: </h5>
 	<form action="" method="POST">
+        <ul>
+            <li>Une lettre minuscule</li>
+            <li>Une lettre majuscule</li>
+            <li>Un chiffre</li>
+            <li>Un caractère spécial (!@#$%^&*-)</li>
+            <li>Entre 8 et 12 caractères</li>
 
+
+        </ul>
 	<div class="form-group">
 		<label for="">Mot de passe</label>	
 		<input type="password" name="password" class = "form-control" >

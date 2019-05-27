@@ -49,7 +49,7 @@ require "../../inc/header_sous_dossier.php"
     <ul>
         <li>Une lettre minuscule</li>
         <li>Une lettre majuscule</li>
-        <li>Une chiffre</li>
+        <li>Un chiffre</li>
         <li>Un caractère spécial (!@#$%^&*-)</li>
         <li>Entre 8 et 12 caractères</li>
 

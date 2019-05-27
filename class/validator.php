@@ -23,15 +23,50 @@ class Validator
 		return $this->data[$field];
 	}
 
+    public function isPhone($field, $errorMsg, $nationalite){
+        //les caractères de délimitation tout les 2 chiffres sont le point, le tiret et l'espace
+        if ($nationalite == "FR"){
+            if (!preg_match("[0][1234589][- \.—]?([0-9][0-9][- \.—]?){4}$", $this->getField($field))) {
+
+                //ajout d'un message d'erreur dans la liste $errors
+                $this->errors[$field] = $errorMsg;
+            }
+        }elseif ($nationalite == "BEL"){
+            if (!preg_match("[0][1234589][- \.—]?([0-9][0-9][- \.—]?){4}$", $this->getField($field))) {
+
+                //ajout d'un message d'erreur dans la liste $errors
+                $this->errors[$field] = $errorMsg;
+            }
+        }elseif ($nationalite == "GB"){
+            if (!preg_match("[0][1234589][- \.—]?([0-9][0-9][- \.—]?){4}$", $this->getField($field))) {
+
+                //ajout d'un message d'erreur dans la liste $errors
+                $this->errors[$field] = $errorMsg;
+            }
+        }else{
+            $this->isNumeric($field, $errorMsg);
+        }
+
+    }
+
+	public function isMobilePhone($field, $errorMsg){
+	    //les caractères de délimitation tout les 2 chiffres sont le point, le tiret et l'espace
+        if (!preg_match('`^(06[-. ]?(\d{2}[-. ]?){3}\d{2})$`', $this->getField($field))) {
+
+            //ajout d'un message d'erreur dans la liste $errors
+            $this->errors[$field] = $errorMsg;
+        }
+    }
+
 	public function isAlpha($field, $errorMsg){
-		if (!preg_match('/^[A-Za-z]+$/', $this->getField($field))) {
+		if (!preg_match('#^[a-zA-Z -]+$#', $this->getField($field))) {
 			
 			//ajout d'un message d'erreur dans la liste $errors
 			$this->errors[$field] = $errorMsg;
 		}
 	}
     public function isAlphanumeric($field, $errorMsg){
-        if (!preg_match('/^[A-Za-z0-9]+$/', $this->getField($field))) {
+        if (!preg_match('/^[A-Za-z0-9 -]+$/', $this->getField($field))) {
 
             //ajout d'un message d'erreur dans la liste $errors
             $this->errors[$field] = $errorMsg;
@@ -89,7 +124,11 @@ class Validator
         }
     }
 
-
+    public function isDate($field, $errorMsg){
+	    if (!var_dump(checkdate($this->getField($field)))){
+            $this->errors[$field] = $errorMsg;
+        }
+    }
     public function isPassword($field, $errorMsg)
     {
         if (empty($this->getField($field))){

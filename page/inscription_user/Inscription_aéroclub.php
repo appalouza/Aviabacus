@@ -46,7 +46,7 @@ require "../../inc/header_sous_dossier.php";
             </div>
             <div class="form-row">
 	<div class="form-group col-md-6">
-		<label>Adminsitration : </label>
+		<label>Administration : </label>
 		<select class="form-control">
 			<option>Membre actif FNA à notre club</option>
 			<option>Membre actif FNA ou majoritaire club voisin</option>

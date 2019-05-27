@@ -208,7 +208,15 @@ svg {
 table {
   border-collapse: collapse;
 }
-
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
 caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
