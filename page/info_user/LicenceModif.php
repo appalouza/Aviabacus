@@ -7,13 +7,13 @@
         <div class="input-group mb-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
-                <input type="date" class="form-control">
+                <input type="date" name="datvaliditeppl" class="form-control">
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
-                <input type="date" class="form-control">
+                <input type="date" name="datfinvaliditeppl" class="form-control">
             </div>
         </div>
     </div>
@@ -23,13 +23,13 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
-                <input type="date" class="form-control">
+                <input type="date" name="datvaliditelicence" class="form-control">
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
-                <input type="date" class="form-control">
+                <input type="date" name="datfinvaliditelicence" class="form-control">
             </div>
         </div>
     </div>
@@ -38,25 +38,26 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
-                <input type="date" class="form-control">
+                <input type="date" name="datvaliditevisitemed" class="form-control">
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
-                <input type="date" class="form-control">
+                <input type="date"  name="datfinvaliditevisitemed" class="form-control">
             </div>
         </div>
     </div>
 
 </div>
-<div class="form-group col-6">
+<div class="form-g
+roup col-6">
     <label>Nom du médecin</label>
-    <input type="text" class="form-control" required>
+    <input type="text" name="nom_medecin" class="form-control" placeholder="<?php echo $pilote['modif']->nom_medecin?>">
 </div>
 <div class="form-group col-6">
     <label>Réstrictions "éventuelles</label>
-    <textarea class="form-control" rows="3"></textarea>
+    <textarea class="form-control" name="restrictions_medicales" rows="3" placeholder="<?php echo $pilote['modif']->restrictions_medicales?>"></textarea>
 </div>
 
 
@@ -69,7 +70,6 @@
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
-
 
             <!-- Modal content-->
             <div class="modal-content">

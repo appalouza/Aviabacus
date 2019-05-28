@@ -272,6 +272,107 @@ if (!empty($_POST)){
 
         }
     }
+    if ($_POST['datvaliditeppl'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+            $requete2 .='datvaliditeppl = ?';
+            $donnees[] = $_POST['datvaliditeppl'];
+
+        }
+
+
+    if ($_POST['datfinvaliditeppl'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+
+            $requete2 .='datfinvaliditeppl = ?';
+            $donnees[] = $_POST['datfinvaliditeppl'];
+
+
+    }
+
+    if ($_POST['datvaliditelicence'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+
+
+            $requete2 .='datvaliditelicence= ?';
+            $donnees[] = $_POST['datvaliditelicence'];
+
+
+    }
+
+    if ($_POST['datfinvaliditelicence'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+
+
+        $requete2 .='datfinvaliditelicence= ?';
+        $donnees[] = $_POST['datfinvaliditelicence'];
+
+
+    }
+
+    if ($_POST['datvaliditevisitemed'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+
+
+        $requete2 .='datvaliditevisitemed= ?';
+        $donnees[] = $_POST['datvaliditevisitemed'];
+
+
+    }
+
+    if ($_POST['datfinvaliditevisitemed'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+
+
+        $requete2 .='datfinvaliditevisitemed= ?';
+        $donnees[] = $_POST['datvaliditevisitemed'];
+
+
+    }
+
+    if ($_POST['nom_medecin'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('nom_medecin', 'Veuillez entrer un nom medecin');
+        if ($validator->isValid()){
+            $requete2 .='nom_medecin = ?';
+            $donnees[] = $_POST['nom_medecin'];
+
+        }
+    }
+
+    if ($_POST['resticitions_medicales'] !=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isAlpha('resticitions_medicales', 'resticitions_medicales');
+        if ($validator->isValid()){
+            $requete2 .='resticitions_medicales = ?';
+            $donnees[] = $_POST['resticitions_medicales'];
+
+        }
+    }
+
 
 
 

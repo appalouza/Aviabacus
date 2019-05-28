@@ -63,7 +63,7 @@
 	<div class="form-group">
 		<h2>Liste des avions autorisés</h2>
 		 <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Ajouter un avion</button>
+<!--  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Ajouter un avion</button>-->
 
 
   <!-- Modal -->
@@ -91,7 +91,7 @@
             echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].' </option>';
         }
 
-        $dbi->close();
+
         ?>
     </select>
   </div>
@@ -125,31 +125,44 @@
   </div>
 	</div>
 	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">Avion</th>
-				<th scope="col">Laché Tdp</th>
-				<th scope="col"> Autorisé local</th>
-				<th scope="col">Autorisé Nav</th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>F BDTI</td>
-				<td>Oui</td>
-				<td>Non</td>
-				<td>Non</td>
-				<td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button></td>
-			</tr>
-			<tr>
-				<td>F BPRR</td>
-				<td>Non</td>
-				<td>Non</td>
-				<td>Non</td>
-				<td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button>
-			</tr>
-		</tbody>
-	</table>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Avion</th>
+                <th scope="col">Laché Tdp</th>
+                <th scope="col"> Autorisé local</th>
+                <th scope="col">Autorisé Nav</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
 
+
+               <tr>
+                    <td>F BPRR</td>;
+                    <td><input type="checkbox" class="form-check-input" name = "a[]" value="ltdp"> </td>
+                    <td><input type="checkbox" class="form-check-input" name = "a[]" value = "aloc"> </td>
+                    <td><input type="checkbox" class="form-check-input" name = "a[]" value="anav"> </td>
+               </tr>
+               <tr>
+                    <td>F BDTI</td>
+                    <td><input type="checkbox" class="form-check-input" name = "b[]" value="ltdp"></td>
+                    <td><input type="checkbox" class="form-check-input" name = "b[]" value = "aloc"></td>
+                    <td><input type="checkbox" class="form-check-input" name = "b[]" value="anav"></td>
+               </tr>
+
+          <tr>
+              <td>F BBQZ</td>
+              <td><input type="checkbox" class="form-check-input" name = "c[]" value="ltdp"></td>
+              <td><input type="checkbox" class="form-check-input" name = "c[]" value="aloc"></td>
+              <td><input type="checkbox" class="form-check-input" name = "c[]" value="anav"></td>
+          </tr>
+               <tr>
+                   <td>F BOPH</td>
+                   <td><input type="checkbox" class="form-check-input" name = "d[]" value="ltdp"></td>
+                   <td><input type="checkbox" class="form-check-input" name = "d[]" value="aloc"></td>
+                   <td><input type="checkbox" class="form-check-input" name = "d[]" value="anav"></td>
+               </tr>
+            </tbody>
+        </table>
 

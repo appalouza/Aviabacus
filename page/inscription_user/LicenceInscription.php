@@ -7,13 +7,13 @@
                 <div class="input-group mb-1">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Début</div>
-                        <input type="date" name="datvaliditeppl" class="form-control">
+                        <input type="date" required name="datvaliditeppl" class="form-control">
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Fin</div>
-                        <input type="date" name="datfinvaliditeppl" class="form-control">
+                        <input type="date" required name="datfinvaliditeppl" class="form-control">
                     </div>
                 </div>
             </div>
@@ -23,13 +23,13 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Début</div>
-                        <input type="date" name="datvaliditelicence" class="form-control">
+                        <input type="date" required name="datvaliditelicence" class="form-control">
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Fin</div>
-                        <input type="date" name="datfinvaliditelicence" class="form-control">
+                        <input type="date" required name="datfinvaliditelicence" class="form-control">
                     </div>
                 </div>
             </div>
@@ -38,13 +38,13 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Début</div>
-                        <input type="date" name="datvaliditevisitemed" class="form-control">
+                        <input type="date" required name="datvaliditevisitemed" class="form-control">
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Fin</div>
-                        <input type="date" name="datfinvaliditevisitemed" class="form-control">
+                        <input type="date" required name="datfinvaliditevisitemed" class="form-control">
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group col-6">
             <label>Réstrictions "éventuelles</label>
-            <textarea class="form-control" name="restictions_medicales" rows="3"></textarea>
+            <textarea class="form-control" name="restrictions_medicales" rows="3"></textarea>
         </div>
 
 

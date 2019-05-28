@@ -25,10 +25,10 @@ require "../../inc/ClubMenu.php"
                 <th>Actif</th>
                 <th>TI</th>
                 <th>QZ</th>
-                <th>JM</th>
+                <th>PH</th>
                 <th>RR</th>
                 <th>RA</th>
-                <th>PH</th>
+                <th>QZ</th>
                 <th>TT/PPL</th>
                 <th>Cotis.</th>
                 <th>FNA</th>
@@ -48,10 +48,10 @@ require "../../inc/ClubMenu.php"
                 <td><?php echo $ligne['nom'] ?></td>
                 <td><?php echo $ligne['prenom']?></td>
                 <th></th>
-                <th> <span data-feather="check"></span></th>
-                <th></th>
-                <th><span data-feather="check"></span></th>
-                <th><span data-feather="check"></span></th>
+                <th> <?php if($ligne['TIatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
+                <th><?php if($ligne['QZatdp'] == 1){echo "<span data-feather='check'>";}?></th>
+                <th><?php if($ligne['PHatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
+                <th><?php if($ligne['RRatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
                 <th></th>
                 <th></th>
                 <th><span data-feather="check"></span></th>

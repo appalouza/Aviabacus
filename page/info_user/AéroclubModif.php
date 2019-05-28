@@ -60,18 +60,17 @@
     <input type="checkbox" class="form-check-input">
     <label>Compte dans openflyer</label>
 </div>
-<div class="form-group">
+<!--<div class="form-group">
     <h2>Liste des avions autorisés</h2>
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Ajouter un avion</button>
+    Trigger the modal with a button -->
+ <!--   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Ajouter un avion</button>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+   Modal -->
+  <!--  <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
-
-            <!-- Modal content-->
+Modal conten
             <div class="modal-content">
                 <div class="container">
                     <div class="modal-header">
@@ -81,18 +80,18 @@
                     </div>
                     <div class="form-group">
                         <label>Avion</label>
-                        <select class="form-control">
+                        <select class="form-control" nam="aselect">
                             <option>Selectionnez un avion</option>
                             <?php
                             //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
-                            $dbi->set_charset("utf8");
+                           /* $dbi->set_charset("utf8");
                             $requete = 'SELECT * FROM t_avion';
                             $resultat = $dbi->query($requete);
                             while ($ligne = $resultat->fetch_assoc()) {
                                 echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].' </option>';
                             }
 
-                            $dbi->close();
+                            $dbi->close();*/
                             ?>
                         </select>
                     </div>
@@ -100,17 +99,17 @@
 
                     <div class="form-check">
 
-                        <input type="checkbox" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" name="ltdp">
                         <label class="form-check-label" >Laché Tdp</label>
                     </div>
                     <div class="form-check">
 
-                        <input type="checkbox" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" name="aloc">
                         <label class="form-check-label" >Autorisé Local</label>
                     </div>
                     <div class="form-check">
 
-                        <input type="checkbox" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" name = "anav">
                         <label class="form-check-label" >Autorisé Nav</label>
                     </div>
                     <div class="modal-footer">
@@ -124,7 +123,7 @@
 
         </div>
     </div>
-</div>
+</div> -->
 <table class="table">
     <thead>
     <tr>
@@ -136,8 +135,24 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>F BDTI</td>
+
+        <?php
+        //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
+        $dbi->set_charset("utf8");
+         $requete = 'SELECT * FROM t_avion';
+         $resultat = $dbi->query($requete);
+         while ($ligne = $resultat->fetch_assoc()) {
+             echo '<tr>';
+             echo '<td value="'.$ligne['id'].'" >'.$ligne['codavion'].' </td>';
+             echo '<td><input type="checkbox" class="form-check-input" value = "ltdp"> </td>';
+             echo '<td><input type="checkbox" class="form-check-input" value = "aloc"> </td>';
+             echo '<td><input type="checkbox" class="form-check-input" value = "anav"> </td>';
+             echo '</tr>';
+         }
+
+         $dbi->close();
+        ?>
+      <!--  <td>F BDTI</td>
         <td>Oui</td>
         <td>Non</td>
         <td>Non</td>
@@ -149,7 +164,7 @@
         <td>Non</td>
         <td>Non</td>
         <td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button>
-    </tr>
+    </tr> -->
     </tbody>
 </table>
 
