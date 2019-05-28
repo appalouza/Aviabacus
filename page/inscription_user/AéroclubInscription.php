@@ -4,51 +4,54 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Date d'entrée à l'AC</label>
-                <input type="Date" class="form-control">
+                <input type="Date" required name="dateEntree" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label>Date de cotisation</label>
-                <input type="Date" class="form-control">
+                <input type="Date" required name="dateCotis" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label>Date de fin de cotisation</label>
-                <input type="Date" class="form-control">
+                <input type="Date" required name="dateFinCotis" class="form-control">
             </div>
         </div>
 
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label>Membre actif:</label>
-                    <select>
-                        <option>Oui</option>
-                        <option>Non</option>
+                    <select class="form-control" required name = "mActif">
+                        <option value="2"></option>
+                        <option value="1">Oui</option>
+                        <option value="0">Non</option>
                     </select>
                 </div>
 
                 <div class="form-group col-md-2">
                     <label>Boursier:</label>
-                    <select >
-                        <option>Oui</option>
-                        <option>Non</option>
+                    <select class="form-control" required name = "bours">
+                        <option value="2"></option>
+                        <option value="1">Oui</option>
+                        <option value="0">Non</option>
                     </select>
                 </div>
             </div>
             <div class="form-row">
 	<div class="form-group col-md-6">
 		<label>Administration : </label>
-		<select class="form-control">
-			<option>Membre actif FNA à notre club</option>
-			<option>Membre actif FNA ou majoritaire club voisin</option>
-			<option>Membre du bureau</option>
-			<option>Membre du conseil d'administration</option>
-			<option>Membre du conseil d'administration instructeur</option>
-			<option>Membre exclu</option>
-			<option>Membre non-actif cotisation spéciale</option>
-			<option>Membre sans cotisation depuis plus de deux ans</option>
-			<option>Membre stagiaire sans cotisation depuis plus de deux ans</option>
-			<option>Président</option>
-			<option>Président d'honneur</option>
-			<option>Vice-président</option>
+		<select class="form-control" required name="lMembre">
+            <option></option>
+			<option value="1">Membre actif FNA à notre club</option>
+			<option value="2">Membre actif FNA ou majoritaire club voisin</option>
+			<option value="3">Membre du bureau</option>
+			<option value="4">Membre du conseil d'administration</option>
+			<option value="5">Membre du conseil d'administration instructeur</option>
+			<option value="6">Membre exclu</option>
+			<option value="7">Membre non-actif cotisation spéciale</option>
+			<option value="8">Membre sans cotisation depuis plus de deux ans</option>
+			<option value="9">Membre stagiaire sans cotisation depuis plus de deux ans</option>
+			<option value="10">Président</option>
+			<option value="11">Président d'honneur</option>
+			<option value="12">Vice-président</option>
 		</select>
 	</div>
             </div>
@@ -139,7 +142,7 @@
 
 
                <tr>
-                    <td>F BPRR</td>;
+                    <td>F BPRR</td>
                     <td><input type="checkbox" class="form-check-input" name = "a[]" value="ltdp"> </td>
                     <td><input type="checkbox" class="form-check-input" name = "a[]" value = "aloc"> </td>
                     <td><input type="checkbox" class="form-check-input" name = "a[]" value="anav"> </td>

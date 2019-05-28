@@ -117,6 +117,7 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>Date de naissance</label>
+            <label><?php echo $pilote['modif']->datnaissance;?></label>
             <input type="date" name="datenaissance" id="DateNais" Onblur="CalculAge()" class="form-control" placeholder="<?php echo $pilote['modif']->datnaissance?>">
         </div>
         <div class="form-group col-md-4">

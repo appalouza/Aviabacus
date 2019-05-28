@@ -106,6 +106,16 @@ class Validator
         }
     }
 
+    public function isAdmin($field, $errorMsg)
+{
+    if(empty($this->getField($field))){
+
+        $this->errors[$field] = $errorMsg;
+    }
+}
+
+
+
     public function isEmail($field, $errorMsg)
     {
         //this getField renvoie null sur le la variable n'existe pas
@@ -120,6 +130,30 @@ class Validator
 	    $sexe = array(0,1);
 	    if(!in_array($field, $sexe)){
             $this->errors['sexe'] = $errorMsg;
+
+        }
+    }
+    public function ismActif($field, $errorMsg){
+
+        $sexe = array(0,1);
+        if(!in_array($field, $sexe)){
+            $this->errors['mActif'] = $errorMsg;
+
+        }
+    }
+    public function isBours($field, $errorMsg){
+
+        $sexe = array(0,1);
+        if(!in_array($field, $sexe)){
+            $this->errors['bours'] = $errorMsg;
+
+        }
+    }
+    public function isMembre($field, $errorMsg){
+
+        $sexe = array(0,1,2,3,4,5,6,7,8,9,10,11,12);
+        if(!in_array($field, $sexe)){
+            $this->errors['lMembre'] = $errorMsg;
 
         }
     }

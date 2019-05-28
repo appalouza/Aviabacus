@@ -27,11 +27,10 @@ require "../../inc/ClubMenu.php"
                 <th>QZ</th>
                 <th>PH</th>
                 <th>RR</th>
-                <th>RA</th>
-                <th>QZ</th>
+
                 <th>TT/PPL</th>
                 <th>Cotis.</th>
-                <th>FNA</th>
+                <!--<th>FNA</th>-->
                 <th>Méd.</th>
                 <th></th>
                 <th></th>
@@ -47,17 +46,16 @@ require "../../inc/ClubMenu.php"
             <tr>
                 <td><?php echo $ligne['nom'] ?></td>
                 <td><?php echo $ligne['prenom']?></td>
-                <th></th>
+                <th><?php if($ligne['mActif'] == 1){echo "<span data-feather='check'>";}?></th>
                 <th> <?php if($ligne['TIatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
                 <th><?php if($ligne['QZatdp'] == 1){echo "<span data-feather='check'>";}?></th>
                 <th><?php if($ligne['PHatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
                 <th><?php if($ligne['RRatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
-                <th></th>
-                <th></th>
-                <th><span data-feather="check"></span></th>
-                <th></th>
-                <th><span data-feather="check"></span></th>
-                <th><span data-feather="check"></span></th>
+
+                <th><?php if($ligne['datvaliditelicence'] != null){echo "<span data-feather='check'>";}?></span></th>
+                <th><?php if($ligne['dateFinCotis'] != null){echo "<span data-feather='check'>";}?></th>
+                <!--<th><span data-feather="check"></span></th>-->
+                <th><?php if($ligne['datvaliditevisitemed'] !=null){echo "<span data-feather='check'>";}?></span></th>
                 <th><a href="ModifMenu.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="eye"></span></a></th>
                 <th><a href="ModifMenu.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="edit"></span></a></th>
 

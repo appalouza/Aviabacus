@@ -7,13 +7,17 @@
         <div class="input-group mb-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
+
                 <input type="date" name="datvaliditeppl" class="form-control">
+                <label><?php echo $pilote['modif']->datvaliditeppl;?></label>
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
+
                 <input type="date" name="datfinvaliditeppl" class="form-control">
+                <label><?php echo $pilote['modif']->datfinvaliditeppl;?></label>
             </div>
         </div>
     </div>
@@ -23,13 +27,17 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
+
                 <input type="date" name="datvaliditelicence" class="form-control">
+                <label><?php echo $pilote['modif']->datvaliditelicence;?></label>
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
+
                 <input type="date" name="datfinvaliditelicence" class="form-control">
+                <label><?php echo $pilote['modif']->datfinvaliditelicence;?></label>
             </div>
         </div>
     </div>
@@ -38,13 +46,17 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
+
                 <input type="date" name="datvaliditevisitemed" class="form-control">
+                <label><?php echo $pilote['modif']->datvaliditevisitemed;?></label>
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
+
                 <input type="date"  name="datfinvaliditevisitemed" class="form-control">
+                <label><?php echo $pilote['modif']->datfinvaliditevisitemed;?></label>
             </div>
         </div>
     </div>

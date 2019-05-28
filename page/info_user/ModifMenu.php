@@ -300,8 +300,6 @@ if (!empty($_POST)){
         if ($requete2 != null) {
             $requete2 .= ',';
         }
-
-
             $requete2 .='datvaliditelicence= ?';
             $donnees[] = $_POST['datvaliditelicence'];
 
@@ -372,9 +370,67 @@ if (!empty($_POST)){
 
         }
     }
+    if ($_POST['dateEntree']!=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+            $requete2 .='dateEntree = ?';
+            $donnees[] = $_POST['dateEntree'];
 
+    }
+    if ($_POST['dateCotis']!=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+            $requete2 .='dateCotis = ?';
+            $donnees[] = $_POST['dateCotis'];
 
+    }
+    if ($_POST['dateFinCotis']!=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+            $requete2 .='dateFinCotis = ?';
+            $donnees[] = $_POST['dateFinCotis'];
+    }
+    if ($_POST['mActif']!=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->ismActif($_POST['mActif'], "Veuillez spécifié si actif");
+        if ($validator->isValid()) {
+            $requete2 .= 'mActif = ?';
+            $donnees[] = $_POST['mActif'];
+        }
+    }
 
+    if ($_POST['bours']!=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isBours($_POST['bours'], "Veuillez spécifier si bousier");
+        if ($validator->isValid()) {
+            $requete2 .= 'bours = ?';
+            $donnees[] = $_POST['bours'];
+        }
+    }
+    if ($_POST['lMembre']!=null){
+        $nb_donnee++;
+        if ($requete2 != null) {
+            $requete2 .= ',';
+        }
+        $validator->isMembre($_POST['lMembre'], "Veuillez spécifier votre niveau de membre");
+
+        if ($validator->isValid()) {
+            $requete2 .= 'lMembre = ?';
+            $donnees[] = $_POST['lMembre'];
+        }
+    }
 
     if (sizeof($donnees) == $nb_donnee){
         $requete .= $requete2;
@@ -435,7 +491,7 @@ require "../../inc/ClubMenu.php"
                     <div id="step-1" class="">
                         <h2>Modification des coordonnées</h2>
                         <?php require "../../page/info_user/CoordonnéesModif.php" ?>
-                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+
                     </div>
                     <div id="step-2" class="">
                         <h2>Inscription Aéroclub</h2>

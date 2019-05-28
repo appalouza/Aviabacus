@@ -47,6 +47,14 @@ if (!empty($_POST)) {
 
         $validator->isNumeric('age', "Veuillez saisir un age valide");
 
+        $validator->ismActif($_POST['mActif'], "Veuillez spécifié si actif");
+
+        $validator->isBours($_POST['bours'], "Veuillez spécifier si bousier");
+
+        $validator->isMembre($_POST['lMembre'], "Veuillez spécifier votre niveau de membre");
+
+        $validator->isAdmin('lMembre', "Veuillez saisir le niveau du membre");
+
         $validator->isAlpha('lieunaissance', "Veuillez saisir une ville de naissance");
 
         $validator->isLevel('lvl_user', "Veuillez choisir un niveau d'utilisateur");
@@ -194,13 +202,17 @@ if (!empty($_POST)) {
             SET nom= ? , prenom = ?, codsexe = ?,adresse =?, codpost = ?, ville = ?, teldomicile = ?, telcellulaire = ?,
              email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=?,datvaliditeppl=?, datfinvaliditeppl=?,
                 datvaliditelicence=?, datfinvaliditelicence=?,
-                datvaliditevisitemed=?,datfinvaliditevisitemed=?, nom_medecin=?, restrictions_medicales=?";
+                datvaliditevisitemed=?,datfinvaliditevisitemed=?, 
+                nom_medecin=?, restrictions_medicales=?, 
+                dateEntree = ?, dateCotis = ?, dateFinCotis = ?,
+                mActif = ?, bours = ?, lMembre = ?";
         $donnees = array($_POST['nom'], $_POST['prenom'], $_POST['sexe'], $_POST['adresse'], $_POST['codpost'], $_POST['ville'], $_POST['telperso'], $_POST['telcell'], $_POST['email'],
             $_POST['profession'], $_POST['datenaissance'], $_POST['age'], $_POST['lieunaissance'],
             $_POST['nationalite'], $_POST['lvl_user'], $token,$_POST['datvaliditeppl'],$_POST['datfinvaliditeppl'],
             $_POST['datvaliditelicence'], $_POST['datfinvaliditelicence'],
             $_POST['datvaliditevisitemed'], $_POST['datfinvaliditevisitemed'],
-            $_POST['nom_medecin'], $_POST['restrictions_medicales']);
+            $_POST['nom_medecin'], $_POST['restrictions_medicales'], $_POST['dateEntree'], $_POST['dateCotis'], $_POST['dateFinCotis'],
+            $_POST['mActif'], $_POST['bours'], $_POST['lMembre']);
 
 
 
