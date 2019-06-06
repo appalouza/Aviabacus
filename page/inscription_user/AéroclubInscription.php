@@ -19,7 +19,7 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label>Membre actif:</label>
-                    <select class="form-control" required name = "mActif">
+                    <select required class="form-control"  name = "mActif">
                         <option value="2"></option>
                         <option value="1">Oui</option>
                         <option value="0">Non</option>
@@ -28,7 +28,7 @@
 
                 <div class="form-group col-md-2">
                     <label>Boursier:</label>
-                    <select class="form-control" required name = "bours">
+                    <select class="form-control" required name = "bours" >
                         <option value="2"></option>
                         <option value="1">Oui</option>
                         <option value="0">Non</option>
@@ -132,10 +132,12 @@
             <thead>
             <tr>
                 <th scope="col">Avion</th>
+                <th scope="col">Non autorisé</th>
                 <th scope="col">Laché Tdp</th>
                 <th scope="col"> Autorisé local</th>
                 <th scope="col">Autorisé Nav</th>
-                <th scope="col"></th>
+
+
             </tr>
             </thead>
             <tbody>
@@ -143,28 +145,33 @@
 
                <tr>
                     <td>F BPRR</td>
-                    <td><input type="checkbox" class="form-check-input" name = "a[]" value="ltdp"> </td>
-                    <td><input type="checkbox" class="form-check-input" name = "a[]" value = "aloc"> </td>
-                    <td><input type="checkbox" class="form-check-input" name = "a[]" value="anav"> </td>
+                   <td><input type="radio" class="form-check-input" name = "RR" value="0" required> </td>
+                    <td><input type="radio" class="form-check-input" name = "RR" value="1"> </td>
+                    <td><input type="radio" class="form-check-input" name = "RR" value = "2"> </td>
+                    <td><input type="radio" class="form-check-input" name = "RR" value="3"> </td>
                </tr>
                <tr>
                     <td>F BDTI</td>
-                    <td><input type="checkbox" class="form-check-input" name = "b[]" value="ltdp"></td>
-                    <td><input type="checkbox" class="form-check-input" name = "b[]" value = "aloc"></td>
-                    <td><input type="checkbox" class="form-check-input" name = "b[]" value="anav"></td>
+                   <td><input type="radio" class="form-check-input" name = "TI" value="0" required> </td>
+                    <td><input type="radio" class="form-check-input" name = "TI" value="1"></td>
+                    <td><input type="radio" class="form-check-input" name = "TI" value = "2"></td>
+                    <td><input type="radio" class="form-check-input" name = "TI" value="3"></td>
                </tr>
 
           <tr>
               <td>F BBQZ</td>
-              <td><input type="checkbox" class="form-check-input" name = "c[]" value="ltdp"></td>
-              <td><input type="checkbox" class="form-check-input" name = "c[]" value="aloc"></td>
-              <td><input type="checkbox" class="form-check-input" name = "c[]" value="anav"></td>
+              <td><input type="radio" class="form-check-input" name = "QZ" value="0" required> </td>
+              <td><input type="radio" class="form-check-input" name = "QZ" value="1"></td>
+              <td><input type="radio" class="form-check-input" name = "QZ" value="2"></td>
+              <td><input type="radio" class="form-check-input" name = "QZ" value="3"></td>
+
           </tr>
                <tr>
                    <td>F BOPH</td>
-                   <td><input type="checkbox" class="form-check-input" name = "d[]" value="ltdp"></td>
-                   <td><input type="checkbox" class="form-check-input" name = "d[]" value="aloc"></td>
-                   <td><input type="checkbox" class="form-check-input" name = "d[]" value="anav"></td>
+                   <td><input type="radio" class="form-check-input" name = "PH" value="0" required> </td>
+                   <td><input type="radio" class="form-check-input" name = "PH" value="1"></td>
+                   <td><input type="radio" class="form-check-input" name = "PH" value="2"></td>
+                   <td><input type="radio" class="form-check-input" name = "PH" value="3"></td>
                </tr>
             </tbody>
         </table>

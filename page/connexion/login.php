@@ -13,6 +13,8 @@ if (!empty($_POST) &&  !empty($_POST['password'])) {
     //récupération de la réponse du captcha
     $Return = getCaptcha($_POST['g-recaptcha-response']);
 
+
+
     //test du succès ou non du captcha, ainsi que du score, si il est en dessous de 0.5, alors il y à de grande chance que ce soit un robot
     if ($Return->success == true && $Return->score >0.5){
 

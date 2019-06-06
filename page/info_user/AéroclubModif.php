@@ -2,20 +2,25 @@
 
 
 <div class="form-row">
+
     <div class="form-group col-md-4">
         <label>Date d'entrée à l'AC</label>
-        <label><?php echo $pilote['modif']->dateEntree;?></label>
-        <input type="Date"  name="dateEntree" class="form-control">
+
+        <input type="Date"  name="dateEntree" class="form-control" value="<?php echo $pilote['modif']->dateEntree;?>">
     </div>
+
+
     <div class="form-group col-md-4">
         <label>Date de cotisation</label>
-        <label><?php echo $pilote['modif']->dateCotis;?></label>
-        <input type="Date"  name="dateCotis" class="form-control">
+
+        <input type="Date"  name="dateCotis" class="form-control" value="<?php echo $pilote['modif']->dateCotis;?>">
     </div>
+
+
     <div class="form-group col-md-4">
         <label>Date de fin de cotisation</label>
-        <label><?php echo $pilote['modif']->dateFinCotis;?></label>
-        <input type="Date" name="dateFinCotis" class="form-control">
+
+        <input type="Date" name="dateFinCotis" class="form-control" value="<?php echo $pilote['modif']->dateFinCotis;?>">
     </div>
 </div>
 
@@ -136,6 +141,7 @@
         <thead>
         <tr>
             <th scope="col">Avion</th>
+            <th scope="col">Non autorisé</th>
             <th scope="col">Laché Tdp</th>
             <th scope="col"> Autorisé local</th>
             <th scope="col">Autorisé Nav</th>
@@ -147,28 +153,32 @@
 
         <tr>
             <td>F BPRR</td>
-            <td><input <?php if ($pilote['modif']-> RRatdp ==1) {echo 'checked="checked"';}?>type="checkbox" class="form-check-input" name = "a[]" value="ltdp"> </td>
-            <td><input <?php if ($pilote['modif']-> RRaloc ==1) {echo 'checked="checked"';}?>type="checkbox" class="form-check-input" name = "a[]" value = "aloc"> </td>
-            <td><input <?php if ($pilote['modif']-> RRanav ==1) {echo 'checked="checked"';}?>type="checkbox" class="form-check-input" name = "a[]" value="anav"> </td>
+            <td><input <?php if ($autorise['modif']-> RR ==0) {echo 'checked="checked"';}?>type="radio" class="form-check-input" name = "RR" value="0"> </td>
+            <td><input <?php if ($autorise['modif']-> RR ==1) {echo 'checked="checked"';}?>type="radio" class="form-check-input" name = "RR" value="1"> </td>
+            <td><input <?php if ($autorise['modif']-> RR ==2) {echo 'checked="checked"';}?>type="radio" class="form-check-input" name = "RR" value = "2"> </td>
+            <td><input <?php if ($autorise['modif']-> RR ==3) {echo 'checked="checked"';}?>type="radio" class="form-check-input" name = "RR" value="3"> </td>
         </tr>
         <tr>
             <td>F BDTI</td>
-            <td><input <?php if ($pilote['modif']-> TIatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "b[]" value="ltdp"></td>
-            <td><input <?php if ($pilote['modif']-> TIatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "b[]" value = "aloc"></td>
-            <td><input <?php if ($pilote['modif']-> TIatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "b[]" value="anav"></td>
+            <td><input <?php if ($autorise['modif']-> TI ==0) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "TI" value="0"></td>
+            <td><input <?php if ($autorise['modif']-> TI ==1) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "TI" value="1"></td>
+            <td><input <?php if ($autorise['modif']-> TI ==2) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "TI" value = "2"></td>
+            <td><input <?php if ($autorise['modif']-> TI ==3) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "TI" value="3"></td>
         </tr>
 
         <tr>
             <td>F BBQZ</td>
-            <td><input <?php if ($pilote['modif']-> QZatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "c[]" value="ltdp"></td>
-            <td><input <?php if ($pilote['modif']-> QZatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "c[]" value="aloc"></td>
-            <td><input <?php if ($pilote['modif']-> QZatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "c[]" value="anav"></td>
+            <td><input <?php if ($autorise['modif']-> QZ ==0) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "QZ" value="0"></td>
+            <td><input <?php if ($autorise['modif']-> QZ ==1) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "QZ" value="1"></td>
+            <td><input <?php if ($autorise['modif']-> QZ ==2) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "QZ" value="2"></td>
+            <td><input <?php if ($autorise['modif']-> QZ ==3) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "QZ" value="3"></td>
         </tr>
         <tr>
             <td>F BOPH</td>
-            <td><input <?php if ($pilote['modif']-> PHatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "d[]" value="ltdp"></td>
-            <td><input <?php if ($pilote['modif']-> PHatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "d[]" value="aloc"></td>
-            <td><input <?php if ($pilote['modif']-> PHatdp ==1) {echo 'checked="checked"';}?> type="checkbox" class="form-check-input" name = "d[]" value="anav"></td>
+            <td><input <?php if ($autorise['modif']-> PH ==0) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "PH" value="0"></td>
+            <td><input <?php if ($autorise['modif']-> PH ==1) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "PH" value="1"></td>
+            <td><input <?php if ($autorise['modif']-> PH ==2) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "PH" value="2"></td>
+            <td><input <?php if ($autorise['modif']-> PH ==3) {echo 'checked="checked"';}?> type="radio" class="form-check-input" name = "PH" value="3"></td>
         </tr>
         </tbody>
     </table>

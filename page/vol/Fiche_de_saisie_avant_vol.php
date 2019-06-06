@@ -3,6 +3,13 @@ require '../../inc/bootstrap.php';
 require "../../inc/functions.php";
 require '../../inc/db.php';
 logged_only();
+
+if (!empty($_POST)){
+    var_dump($_POST['user']);
+    $user_id = $_POST['user'];
+
+}
+
 if ($_SESSION['auth']->level_user == "administrateur"){
     require "../../inc/AvionMenu.php";
 }else{
@@ -10,50 +17,89 @@ if ($_SESSION['auth']->level_user == "administrateur"){
 }
 
 ?>
-<body>
+    <script src="../../js/main.js"></script>
 
 <div class="container">
     <h3>Fiche de saisie avant le vol</h3>
             <br>
             <h4>Infos générales</h4>
             <br>
+    <form method="post" action="">
+
+
+    <select name="user" data-source ="/list.php?type=avion&filter=$id" id = "user" data-target="#avion" class="form-control linked-select">
+        <option>Selection de l'utilisateur</option>
+        <?php
+        //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
+        $dbi->set_charset("utf8");
+        $requete = 'SELECT id, nom, prenom FROM t_pilote';
+        $resultat = $dbi->query($requete);
+        while ($ligne = $resultat->fetch_assoc()) {
+            echo '<option value="'.$ligne['id'].'" >'.$ligne['nom'].' '.$ligne['prenom'].' </option>';
+        }
+        ?>
+    </select>
+        <button type="submit" class="btn-primary">Selectionner</button>
+    </form>
+<?php if(!empty($_POST)){?>
+
 
             <form method="post" action="">
                 <div class="form-row">
 
                     <div class="form-group col-md-4">
 
-                        <label>Liste des utilisateurs: </label>
-                        <select name="user" class="form-control">
+                        <!--<label>Liste des utilisateurs: </label>
+                        <select name="user" data-source ="/list.php?type=avion&filter=$id" id = "user" data-target="#avion" class="form-control linked-select">
                             <option>Selection de l'utilisateur</option>
                             <?php
                             //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
-                            $dbi->set_charset("utf8");
-                            $requete = 'SELECT * FROM t_pilote';
+                            /*$dbi->set_charset("utf8");
+                            $requete = 'SELECT id, nom, prenom FROM t_pilote';
                             $resultat = $dbi->query($requete);
                             while ($ligne = $resultat->fetch_assoc()) {
                                 echo '<option value="'.$ligne['id'].'" >'.$ligne['nom'].' '.$ligne['prenom'].' </option>';
-                            }
-
-
+                            }*/
                             ?>
-                        </select>
+                        </select>-->
 
                     </div>
                     <div class="form-group col-md-4">
                         <label>Avion: </label>
 
-                        <select name = 'avion' class="form-control ">
+                        <select name = 'avion' id="avion" class="form-control ">
                             <option>Selectionnez un avion</option>
                             <?php
+
                             $dbi->set_charset("utf8");
+                            $auto = array();
                             $requete = 'SELECT * FROM t_avion';
+                            $requete2 = 'SELECT * FROM t_autorise where id_pilote = "'.$user_id.'"';
                             $resultat = $dbi->query($requete);
+                            $auto = $dbi->query($requete2)->fetch_assoc();
 
                             while ($ligne = $resultat->fetch_assoc()) {
+
                                 if ($ligne['en_flotte'] == 1){
-                                    echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
-                                }
+
+                                        /*echo '<option >'.$auto['RR'].'</option>';*/
+
+                                        if ($ligne["codavion"] == 'F BPRR' && $auto['RR'] >= 1){
+                                            echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
+                                        }elseif ($ligne["codavion"] == 'F BDTI' && $auto['TI'] >= 1){
+
+                                            echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
+
+                                        }elseif ($ligne["codavion"] == 'F BBQZ' && $auto['QZ'] >= 1){
+                                            echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
+                                        }elseif ($ligne["codavion"] == 'F BOPH' && $auto['PH'] >= 1){
+
+                                            echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
+                                        }
+
+                                    }
+
+
                             }
 
 
@@ -201,6 +247,8 @@ if ($_SESSION['auth']->level_user == "administrateur"){
             </form>
             <br>
 </div>
-<?php //debug($_SESSION); ?>
+
+
+<?php } ?>
 
 <?php require "../../inc/newFooter.php" ?>

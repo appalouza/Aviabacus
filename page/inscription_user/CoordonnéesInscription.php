@@ -99,7 +99,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label>Téléphone domicile </label>
-                <input type="tel" name="telperso" class="form-control" >
+                <input type="tel" name="telperso" class="form-control" required>
             </div>
             <div class="form-group col-md-4">
                 <label>Téléphone professionnel</label>

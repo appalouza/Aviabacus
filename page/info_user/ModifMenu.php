@@ -7,16 +7,22 @@ logged_admin();
 $id = $_GET['id'];
 $db = App::getDatabase();
 $resultat = $db->query('SELECT * FROM t_pilote WHERE id =?', [$id])->fetch();
+$resultat2 = $db->query('SELECT * FROM t_autorise WHERE id_pilote = ?', [$id])->fetch();
 $pilote['modif'] = $resultat;
+$autorise['modif'] = $resultat2;
 
 if (!empty($_POST)){
 
     $validator = new Validator($_POST);
     $requete = 'UPDATE t_pilote SET ';
+    $automodif = 'UPDATE t_autorise SET ';
     $donnees = array();
+    $donnees2 = array();
     $requete2 = "";
+    $automodif2 = "";
     $errors = array();
     $nb_donnee = 0;
+    $nb_donnee2 = 0;
 
     //Test du nouveau nom, si le test est concluant, la requête SQL est modifiée pour mettre à jour le nouveau nom
     if ($_POST['nom']!=null){
@@ -358,15 +364,15 @@ if (!empty($_POST)){
         }
     }
 
-    if ($_POST['resticitions_medicales'] !=null){
+    if ($_POST['restrictions_medicales'] !=null){
         $nb_donnee++;
         if ($requete2 != null) {
             $requete2 .= ',';
         }
-        $validator->isAlpha('resticitions_medicales', 'resticitions_medicales');
+        $validator->isAlpha('restrictions_medicales', 'resticitions_medicales');
         if ($validator->isValid()){
-            $requete2 .='resticitions_medicales = ?';
-            $donnees[] = $_POST['resticitions_medicales'];
+            $requete2 .='restrictions_medicales = ?';
+            $donnees[] = $_POST['restrictions_medicales'];
 
         }
     }
@@ -408,6 +414,43 @@ if (!empty($_POST)){
         }
     }
 
+    if ($_POST['RR'] != null){
+        $nb_donnee2++;
+        if ($automodif2 != null) {
+            $automodif2 .= ',';
+        }
+        $automodif2 .='RR = ?';
+        $donnees2[] = $_POST['RR'];
+
+    }
+    if ($_POST['TI'] != null){
+        $nb_donnee2++;
+        if ($automodif2 != null) {
+            $automodif2 .= ',';
+        }
+        $automodif2 .='TI = ?';
+        $donnees2[] = $_POST['TI'];
+
+    }
+    if ($_POST['QZ'] != null){
+        $nb_donnee2++;
+        if ($automodif2 != null) {
+            $automodif2 .= ',';
+        }
+        $automodif2 .='QZ = ?';
+        $donnees2[] = $_POST['QZ'];
+
+    }
+    if ($_POST['PH'] != null){
+        $nb_donnee2++;
+        if ($automodif2 != null) {
+            $automodif2 .= ',';
+        }
+        $automodif2 .='PH = ?';
+        $donnees2[] = $_POST['PH'];
+
+    }
+
     if ($_POST['bours']!=null){
         $nb_donnee++;
         if ($requete2 != null) {
@@ -430,6 +473,17 @@ if (!empty($_POST)){
             $requete2 .= 'lMembre = ?';
             $donnees[] = $_POST['lMembre'];
         }
+    }
+
+    if (sizeof($donnees2) == $nb_donnee2){
+        $automodif .= $automodif2;
+        $automodif .= 'WHERE id_pilote = ?';
+        $donnees2[] = $id;
+        var_dump($automodif);
+        var_dump($donnees2);
+
+        $db->query($automodif,$donnees2);
+        $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
     }
 
     if (sizeof($donnees) == $nb_donnee){

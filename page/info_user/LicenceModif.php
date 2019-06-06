@@ -8,16 +8,16 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
 
-                <input type="date" name="datvaliditeppl" class="form-control">
-                <label><?php echo $pilote['modif']->datvaliditeppl;?></label>
+                <input type="date" name="datvaliditeppl" class="form-control" value="<?php echo $pilote['modif']->datvaliditeppl;?>">
+
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
 
-                <input type="date" name="datfinvaliditeppl" class="form-control">
-                <label><?php echo $pilote['modif']->datfinvaliditeppl;?></label>
+                <input type="date" name="datfinvaliditeppl" class="form-control" value="<?php echo $pilote['modif']->datfinvaliditeppl;?>">
+
             </div>
         </div>
     </div>
@@ -28,16 +28,16 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
 
-                <input type="date" name="datvaliditelicence" class="form-control">
-                <label><?php echo $pilote['modif']->datvaliditelicence;?></label>
+                <input type="date" name="datvaliditelicence" class="form-control" value="<?php echo $pilote['modif']->datvaliditelicence;?>">
+
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
 
-                <input type="date" name="datfinvaliditelicence" class="form-control">
-                <label><?php echo $pilote['modif']->datfinvaliditelicence;?></label>
+                <input type="date" name="datfinvaliditelicence" class="form-control" value="<?php echo $pilote['modif']->datfinvaliditelicence;?>">
+
             </div>
         </div>
     </div>
@@ -47,16 +47,16 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
 
-                <input type="date" name="datvaliditevisitemed" class="form-control">
-                <label><?php echo $pilote['modif']->datvaliditevisitemed;?></label>
+                <input type="date" name="datvaliditevisitemed" class="form-control" value="<?php echo $pilote['modif']->datvaliditevisitemed;?>">
+
             </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
 
-                <input type="date"  name="datfinvaliditevisitemed" class="form-control">
-                <label><?php echo $pilote['modif']->datfinvaliditevisitemed;?></label>
+                <input type="date"  name="datfinvaliditevisitemed" class="form-control" value="<?php echo $pilote['modif']->datfinvaliditevisitemed;?>">
+
             </div>
         </div>
     </div>

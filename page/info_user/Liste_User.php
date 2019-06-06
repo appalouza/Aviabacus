@@ -41,16 +41,24 @@ require "../../inc/ClubMenu.php"
             //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
             $dbi->set_charset("utf8");
             $requete = 'SELECT * FROM t_pilote';
+            $requete2 = 'SELECT * FROM t_autorise';
             $resultat = $dbi->query($requete);
+            $auto = $dbi->query($requete2)->fetch_assoc();
+
+            //Parcours du tableau de pilote récupéré et affichage des informations sous forme de tableau
             while ($ligne = $resultat->fetch_assoc()) {?>
+
             <tr>
                 <td><?php echo $ligne['nom'] ?></td>
                 <td><?php echo $ligne['prenom']?></td>
                 <th><?php if($ligne['mActif'] == 1){echo "<span data-feather='check'>";}?></th>
-                <th> <?php if($ligne['TIatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
-                <th><?php if($ligne['QZatdp'] == 1){echo "<span data-feather='check'>";}?></th>
-                <th><?php if($ligne['PHatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
-                <th><?php if($ligne['RRatdp'] == 1){echo "<span data-feather='check'>";}?></span></th>
+                <!-- Récupération des informations concernant les autorisations de vol sur les avions pour le pilote-->
+                <?php $requete2 = 'SELECT * FROM t_autorise where id_pilote = "'.$ligne['id'].'"';
+                $auto = $dbi->query($requete2)->fetch_assoc();?>
+                <th> <?php if($auto['TI'] >= 1){echo "<span data-feather='check'>";}?></span></th>
+                <th><?php if($auto['QZ'] >= 1){echo "<span data-feather='check'>";}?></th>
+                <th><?php if($auto['PH'] >= 1){echo "<span data-feather='check'>";}?></span></th>
+                <th><?php if($auto['RR'] >= 1){echo "<span data-feather='check'>";}?></span></th>
 
                 <th><?php if($ligne['datvaliditelicence'] != null){echo "<span data-feather='check'>";}?></span></th>
                 <th><?php if($ligne['dateFinCotis'] != null){echo "<span data-feather='check'>";}?></th>

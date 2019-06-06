@@ -56,7 +56,7 @@
         </div>
         <div class="form-group col-6">
             <label>Réstrictions "éventuelles</label>
-            <textarea class="form-control" name="restrictions_medicales" rows="3"></textarea>
+            <textarea class="form-control" name="restrictions_medicales" rows="3" required></textarea>
         </div>
 
 
