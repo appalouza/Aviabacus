@@ -8,21 +8,43 @@ $id = $_GET['id'];
 $db = App::getDatabase();
 $resultat = $db->query('SELECT * FROM t_pilote WHERE id =?', [$id])->fetch();
 $resultat2 = $db->query('SELECT * FROM t_autorise WHERE id_pilote = ?', [$id])->fetch();
+$resultat3 = $db->query('SELECT * FROM t_licence WHERE id_pilote = ?', [$id])->fetch();
+$resultat4 = $db->query('SELECT * FROM t_aeroclub WHERE id_pilote = ?', [$id])->fetch();
 $pilote['modif'] = $resultat;
 $autorise['modif'] = $resultat2;
+$licence['modif'] = $resultat3;
+$aeroclub['modif'] = $resultat4;
 
 if (!empty($_POST)){
 
     $validator = new Validator($_POST);
+    // Modification de la tabme t_pilote
     $requete = 'UPDATE t_pilote SET ';
-    $automodif = 'UPDATE t_autorise SET ';
     $donnees = array();
-    $donnees2 = array();
     $requete2 = "";
-    $automodif2 = "";
-    $errors = array();
     $nb_donnee = 0;
+
+    // Modification de la tabme t_autorise
+    $automodif = 'UPDATE t_autorise SET ';
+    $donnees2 = array();
+    $automodif2 = "";
     $nb_donnee2 = 0;
+
+    // Modification de la tabme t_licence
+    $licencemodif = 'UPDATE t_licence SET ';
+    $donnees3 = array();
+    $licencemodif2 = "";
+    $nb_donnee3 = 0;
+
+    // Modification de la tabme t_aeroclub
+    $aeroclubmodif = 'UPDATE t_aeroclub SET ';
+    $donnees4 = array();
+    $aeroclubmodif2 = "";
+    $nb_donnee4 = 0;
+
+
+    //initialisation d'un tableau d'erreurs vide, il se remplira si une erreur surviens
+    $errors = array();
 
     //Test du nouveau nom, si le test est concluant, la requête SQL est modifiée pour mettre à jour le nouveau nom
     if ($_POST['nom']!=null){
@@ -279,138 +301,138 @@ if (!empty($_POST)){
         }
     }
     if ($_POST['datvaliditeppl'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
-            $requete2 .='datvaliditeppl = ?';
-            $donnees[] = $_POST['datvaliditeppl'];
+            $licencemodif2 .='datvaliditeppl = ?';
+            $donnees3[] = $_POST['datvaliditeppl'];
 
         }
 
 
     if ($_POST['datfinvaliditeppl'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
 
-            $requete2 .='datfinvaliditeppl = ?';
-            $donnees[] = $_POST['datfinvaliditeppl'];
+            $licencemodif2 .='datfinvaliditeppl = ?';
+            $donnees3[] = $_POST['datfinvaliditeppl'];
 
 
     }
 
     if ($_POST['datvaliditelicence'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
-            $requete2 .='datvaliditelicence= ?';
-            $donnees[] = $_POST['datvaliditelicence'];
+            $licencemodif2 .='datvaliditelicence= ?';
+            $donnees3[] = $_POST['datvaliditelicence'];
 
 
     }
 
     if ($_POST['datfinvaliditelicence'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
 
 
-        $requete2 .='datfinvaliditelicence= ?';
-        $donnees[] = $_POST['datfinvaliditelicence'];
+        $licencemodif2 .='datfinvaliditelicence= ?';
+        $donnees3[] = $_POST['datfinvaliditelicence'];
 
 
     }
 
     if ($_POST['datvaliditevisitemed'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
 
 
-        $requete2 .='datvaliditevisitemed= ?';
-        $donnees[] = $_POST['datvaliditevisitemed'];
+        $licencemodif2 .='datvaliditevisitemed= ?';
+        $donnees3[] = $_POST['datvaliditevisitemed'];
 
 
     }
 
     if ($_POST['datfinvaliditevisitemed'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
 
 
-        $requete2 .='datfinvaliditevisitemed= ?';
-        $donnees[] = $_POST['datvaliditevisitemed'];
+        $licencemodif2 .='datfinvaliditevisitemed= ?';
+        $donnees3[] = $_POST['datvaliditevisitemed'];
 
 
     }
 
     if ($_POST['nom_medecin'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
         $validator->isAlpha('nom_medecin', 'Veuillez entrer un nom medecin');
         if ($validator->isValid()){
-            $requete2 .='nom_medecin = ?';
-            $donnees[] = $_POST['nom_medecin'];
+            $licencemodif2 .='nom_medecin = ?';
+            $donnees3[] = $_POST['nom_medecin'];
 
         }
     }
 
     if ($_POST['restrictions_medicales'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee3++;
+        if ($licencemodif2 != null) {
+            $licencemodif2 .= ',';
         }
         $validator->isAlpha('restrictions_medicales', 'resticitions_medicales');
         if ($validator->isValid()){
-            $requete2 .='restrictions_medicales = ?';
-            $donnees[] = $_POST['restrictions_medicales'];
+            $licencemodif2 .='restrictions_medicales = ?';
+            $donnees3[] = $_POST['restrictions_medicales'];
 
         }
     }
     if ($_POST['dateEntree']!=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee4++;
+        if ($aeroclubmodif2 != null) {
+            $aeroclubmodif2 .= ',';
         }
-            $requete2 .='dateEntree = ?';
-            $donnees[] = $_POST['dateEntree'];
+            $aeroclubmodif2 .='dateEntree = ?';
+            $donnees4[] = $_POST['dateEntree'];
 
     }
     if ($_POST['dateCotis']!=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee4++;
+        if ($aeroclubmodif2 != null) {
+            $aeroclubmodif2 .= ',';
         }
-            $requete2 .='dateCotis = ?';
-            $donnees[] = $_POST['dateCotis'];
+            $aeroclubmodif2 .='dateCotis = ?';
+            $donnees4[] = $_POST['dateCotis'];
 
     }
     if ($_POST['dateFinCotis']!=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee4++;
+        if ($aeroclubmodif2 != null) {
+            $aeroclubmodif2 .= ',';
         }
-            $requete2 .='dateFinCotis = ?';
-            $donnees[] = $_POST['dateFinCotis'];
+            $aeroclubmodif2 .='dateFinCotis = ?';
+            $donnees4[] = $_POST['dateFinCotis'];
     }
     if ($_POST['mActif']!=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee4++;
+        if ($aeroclubmodif2 != null) {
+            $aeroclubmodif2 .= ',';
         }
         $validator->ismActif($_POST['mActif'], "Veuillez spécifié si actif");
         if ($validator->isValid()) {
-            $requete2 .= 'mActif = ?';
-            $donnees[] = $_POST['mActif'];
+            $aeroclubmodif2 .= 'mActif = ?';
+            $donnees4[] = $_POST['mActif'];
         }
     }
 
@@ -475,6 +497,28 @@ if (!empty($_POST)){
         }
     }
 
+    if (sizeof($donnees4) == $nb_donnee4){
+        $aeroclubmodif .= $aeroclubmodif2;
+        $aeroclubmodif .= 'WHERE id_pilote = ?';
+        $donnees4[] = $id;
+        var_dump($aeroclubmodif);
+        var_dump($donnees4);
+
+        $db->query($aeroclubmodif,$donnees4);
+        $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
+    }
+
+    if (sizeof($donnees3) == $nb_donnee3){
+        $licencemodif .= $licencemodif2;
+        $licencemodif .= 'WHERE id_pilote = ?';
+        $donnees3[] = $id;
+        var_dump($licencemodif);
+        var_dump($donnees3);
+
+        $db->query($licencemodif,$donnees3);
+        $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
+    }
+
     if (sizeof($donnees2) == $nb_donnee2){
         $automodif .= $automodif2;
         $automodif .= 'WHERE id_pilote = ?';
@@ -483,7 +527,7 @@ if (!empty($_POST)){
         var_dump($donnees2);
 
         $db->query($automodif,$donnees2);
-        $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
+        $_SESSION['flash']['success'] = "Les modifications ont été effectuées";
     }
 
     if (sizeof($donnees) == $nb_donnee){

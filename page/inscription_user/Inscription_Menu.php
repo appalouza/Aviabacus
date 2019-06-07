@@ -86,19 +86,12 @@ if (!empty($_POST)) {
 
         $requete = "INSERT INTO t_pilote 
             SET nom= ? , prenom = ?, codsexe = ?,adresse =?, codpost = ?, ville = ?, teldomicile = ?, telcellulaire = ?,
-             email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=?,datvaliditeppl=?, datfinvaliditeppl=?,
-                datvaliditelicence=?, datfinvaliditelicence=?,
-                datvaliditevisitemed=?,datfinvaliditevisitemed=?, 
-                nom_medecin=?, restrictions_medicales=?, 
-                dateEntree = ?, dateCotis = ?, dateFinCotis = ?,
-                mActif = ?, bours = ?, lMembre = ?";
-        $donnees = array($_POST['nom'], $_POST['prenom'], $_POST['sexe'], $_POST['adresse'], $_POST['codpost'], $_POST['ville'], $_POST['telperso'], $_POST['telcell'], $_POST['email'],
+             email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=?
+                ";
+        $donnees = array($_POST['nom'], $_POST['prenom'], $_POST['sexe'], $_POST['adresse'], $_POST['codpost'], $_POST['ville'],
+            $_POST['telperso'], $_POST['telcell'], $_POST['email'],
             $_POST['profession'], $_POST['datenaissance'], $_POST['age'], $_POST['lieunaissance'],
-            $_POST['nationalite'], $_POST['lvl_user'], $token,$_POST['datvaliditeppl'],$_POST['datfinvaliditeppl'],
-            $_POST['datvaliditelicence'], $_POST['datfinvaliditelicence'],
-            $_POST['datvaliditevisitemed'], $_POST['datfinvaliditevisitemed'],
-            $_POST['nom_medecin'], $_POST['restrictions_medicales'], $_POST['dateEntree'], $_POST['dateCotis'], $_POST['dateFinCotis'],
-            $_POST['mActif'], $_POST['bours'], $_POST['lMembre']);
+            $_POST['nationalite'], $_POST['lvl_user'], $token );
 
 
 
@@ -126,6 +119,24 @@ if (!empty($_POST)) {
         $requete2 = "INSERT INTO t_autorise SET id_pilote = ?, RR = ?, TI = ?, QZ = ?, PH = ? ";
         $donnees2 = array($user_id,$_POST['RR'],$_POST['TI'], $_POST['QZ'], $_POST['PH']);
         $db->query($requete2, $donnees2);
+
+        //insertion des données de validité des licences
+        $requete3 = "INSERT INTO t_licence SET id_pilote = ? ,datvaliditeppl=?, datfinvaliditeppl=?,
+                datvaliditelicence=?, datfinvaliditelicence=?,
+                datvaliditevisitemed=?,datfinvaliditevisitemed=?, 
+                nom_medecin=?, restrictions_medicales=?";
+        $donnees3 = array($user_id, $_POST['datvaliditeppl'],$_POST['datfinvaliditeppl'],
+            $_POST['datvaliditelicence'], $_POST['datfinvaliditelicence'],
+            $_POST['datvaliditevisitemed'], $_POST['datfinvaliditevisitemed'],
+            $_POST['nom_medecin'], $_POST['restrictions_medicales']);
+        $db->query($requete3, $donnees3);
+
+        //insertion des données concernant l'aéroclub
+        $requete4 = "INSERT INTO t_aeroclub SET id_pilote = ?, dateEntree = ?, dateCotis = ?, dateFinCotis = ?,
+                mActif = ?, bours = ?, lMembre = ?";
+        $donnees4 = array($user_id, $_POST['dateEntree'], $_POST['dateCotis'], $_POST['dateFinCotis'],
+            $_POST['mActif'], $_POST['bours'], $_POST['lMembre']);
+        $db->query($requete4, $donnees4);
 
         envoie_mail($user_id, $token);
         $_SESSION['flash']['success'] = "Un email de confirmation a été envoyé à l'utilisateur pour valider son compte";

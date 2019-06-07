@@ -59,11 +59,13 @@ require "../../inc/ClubMenu.php"
                 <th><?php if($auto['QZ'] >= 1){echo "<span data-feather='check'>";}?></th>
                 <th><?php if($auto['PH'] >= 1){echo "<span data-feather='check'>";}?></span></th>
                 <th><?php if($auto['RR'] >= 1){echo "<span data-feather='check'>";}?></span></th>
+                <?php $licence = $dbi->query('SELECT * FROM t_licence where id_pilote = "'.$ligne['id'].'"')->fetch_assoc();
+                $aeroclub = $dbi->query('SELECT * FROM t_aeroclub where id_pilote = "'.$ligne['id'].'"')->fetch_assoc();?>
 
-                <th><?php if($ligne['datvaliditelicence'] != null){echo "<span data-feather='check'>";}?></span></th>
-                <th><?php if($ligne['dateFinCotis'] != null){echo "<span data-feather='check'>";}?></th>
-                <!--<th><span data-feather="check"></span></th>-->
-                <th><?php if($ligne['datvaliditevisitemed'] !=null){echo "<span data-feather='check'>";}?></span></th>
+                <th><?php if($licence['datvaliditelicence'] != null){echo "<span data-feather='check'>";}?></span></th>
+                <th><?php if($aeroclub['dateFinCotis'] != null){echo "<span data-feather='check'>";}?></th>
+
+                <th><?php if($licence['datvaliditevisitemed'] !=null){echo "<span data-feather='check'>";}?></span></th>
                 <th><a href="ModifMenu.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="eye"></span></a></th>
                 <th><a href="ModifMenu.php?id=<?php echo $ligne['id'] ?>" class="btn btn-sm mr-2"><span data-feather="edit"></span></a></th>
 

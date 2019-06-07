@@ -8,7 +8,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
 
-                <input type="date" name="datvaliditeppl" class="form-control" value="<?php echo $pilote['modif']->datvaliditeppl;?>">
+                <input type="date" name="datvaliditeppl" class="form-control" value="<?php echo $licence['modif']->datvaliditeppl;?>">
 
             </div>
         </div>
@@ -16,7 +16,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
 
-                <input type="date" name="datfinvaliditeppl" class="form-control" value="<?php echo $pilote['modif']->datfinvaliditeppl;?>">
+                <input type="date" name="datfinvaliditeppl" class="form-control" value="<?php echo $licence['modif']->datfinvaliditeppl;?>">
 
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
 
-                <input type="date" name="datvaliditelicence" class="form-control" value="<?php echo $pilote['modif']->datvaliditelicence;?>">
+                <input type="date" name="datvaliditelicence" class="form-control" value="<?php echo $licence['modif']->datvaliditelicence;?>">
 
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
 
-                <input type="date" name="datfinvaliditelicence" class="form-control" value="<?php echo $pilote['modif']->datfinvaliditelicence;?>">
+                <input type="date" name="datfinvaliditelicence" class="form-control" value="<?php echo $licence['modif']->datfinvaliditelicence;?>">
 
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Début</div>
 
-                <input type="date" name="datvaliditevisitemed" class="form-control" value="<?php echo $pilote['modif']->datvaliditevisitemed;?>">
+                <input type="date" name="datvaliditevisitemed" class="form-control" value="<?php echo $licence['modif']->datvaliditevisitemed;?>">
 
             </div>
         </div>
@@ -55,7 +55,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Fin</div>
 
-                <input type="date"  name="datfinvaliditevisitemed" class="form-control" value="<?php echo $pilote['modif']->datfinvaliditevisitemed;?>">
+                <input type="date"  name="datfinvaliditevisitemed" class="form-control" value="<?php echo $licence['modif']->datfinvaliditevisitemed;?>">
 
             </div>
         </div>
@@ -65,11 +65,11 @@
 <div class="form-g
 roup col-6">
     <label>Nom du médecin</label>
-    <input type="text" name="nom_medecin" class="form-control" placeholder="<?php echo $pilote['modif']->nom_medecin?>">
+    <input type="text" name="nom_medecin" class="form-control" placeholder="<?php echo $licence['modif']->nom_medecin?>">
 </div>
 <div class="form-group col-6">
     <label>Réstrictions "éventuelles</label>
-    <textarea class="form-control" name="restrictions_medicales" rows="3" placeholder="<?php echo $pilote['modif']->restrictions_medicales?>"></textarea>
+    <textarea class="form-control" name="restrictions_medicales" rows="3" placeholder="<?php echo $licence['modif']->restrictions_medicales?>"></textarea>
 </div>
 
 
