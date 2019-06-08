@@ -15,6 +15,7 @@ $autorise['modif'] = $resultat2;
 $licence['modif'] = $resultat3;
 $aeroclub['modif'] = $resultat4;
 
+
 if (!empty($_POST)){
 
     $validator = new Validator($_POST);
@@ -436,6 +437,7 @@ if (!empty($_POST)){
         }
     }
 
+
     if ($_POST['RR'] != null){
         $nb_donnee2++;
         if ($automodif2 != null) {
@@ -474,26 +476,26 @@ if (!empty($_POST)){
     }
 
     if ($_POST['bours']!=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee4++;
+        if ($aeroclubmodif2 != null) {
+            $aeroclubmodif2 .= ',';
         }
         $validator->isBours($_POST['bours'], "Veuillez spécifier si bousier");
         if ($validator->isValid()) {
-            $requete2 .= 'bours = ?';
-            $donnees[] = $_POST['bours'];
+            $aeroclubmodif2 .= 'bours = ?';
+            $donnees4[] = $_POST['bours'];
         }
     }
     if ($_POST['lMembre']!=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee4++;
+        if ($aeroclubmodif2 != null) {
+            $aeroclubmodif2 .= ',';
         }
         $validator->isMembre($_POST['lMembre'], "Veuillez spécifier votre niveau de membre");
 
         if ($validator->isValid()) {
-            $requete2 .= 'lMembre = ?';
-            $donnees[] = $_POST['lMembre'];
+            $aeroclubmodif2 .= 'lMembre = ?';
+            $donnees4[] = $_POST['lMembre'];
         }
     }
 

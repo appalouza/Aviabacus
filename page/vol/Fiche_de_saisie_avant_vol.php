@@ -47,23 +47,7 @@ if ($_SESSION['auth']->level_user == "administrateur"){
             <form method="post" action="">
                 <div class="form-row">
 
-                    <div class="form-group col-md-4">
 
-                        <!--<label>Liste des utilisateurs: </label>
-                        <select name="user" data-source ="/list.php?type=avion&filter=$id" id = "user" data-target="#avion" class="form-control linked-select">
-                            <option>Selection de l'utilisateur</option>
-                            <?php
-                            //$mysqli = new mysqli('localhost', 'root', '', 'tuto_mdp');
-                            /*$dbi->set_charset("utf8");
-                            $requete = 'SELECT id, nom, prenom FROM t_pilote';
-                            $resultat = $dbi->query($requete);
-                            while ($ligne = $resultat->fetch_assoc()) {
-                                echo '<option value="'.$ligne['id'].'" >'.$ligne['nom'].' '.$ligne['prenom'].' </option>';
-                            }*/
-                            ?>
-                        </select>-->
-
-                    </div>
                     <div class="form-group col-md-4">
                         <label>Avion: </label>
 

@@ -49,9 +49,11 @@ require "../../inc/ClubMenu.php"
             while ($ligne = $resultat->fetch_assoc()) {?>
 
             <tr>
+                <?php $licence = $dbi->query('SELECT * FROM t_licence where id_pilote = "'.$ligne['id'].'"')->fetch_assoc();
+                $aeroclub = $dbi->query('SELECT * FROM t_aeroclub where id_pilote = "'.$ligne['id'].'"')->fetch_assoc();?>
                 <td><?php echo $ligne['nom'] ?></td>
                 <td><?php echo $ligne['prenom']?></td>
-                <th><?php if($ligne['mActif'] == 1){echo "<span data-feather='check'>";}?></th>
+                <th><?php if($aeroclub['mActif'] == 1){echo "<span data-feather='check'>";}?></th>
                 <!-- Récupération des informations concernant les autorisations de vol sur les avions pour le pilote-->
                 <?php $requete2 = 'SELECT * FROM t_autorise where id_pilote = "'.$ligne['id'].'"';
                 $auto = $dbi->query($requete2)->fetch_assoc();?>
@@ -59,8 +61,7 @@ require "../../inc/ClubMenu.php"
                 <th><?php if($auto['QZ'] >= 1){echo "<span data-feather='check'>";}?></th>
                 <th><?php if($auto['PH'] >= 1){echo "<span data-feather='check'>";}?></span></th>
                 <th><?php if($auto['RR'] >= 1){echo "<span data-feather='check'>";}?></span></th>
-                <?php $licence = $dbi->query('SELECT * FROM t_licence where id_pilote = "'.$ligne['id'].'"')->fetch_assoc();
-                $aeroclub = $dbi->query('SELECT * FROM t_aeroclub where id_pilote = "'.$ligne['id'].'"')->fetch_assoc();?>
+
 
                 <th><?php if($licence['datvaliditelicence'] != null){echo "<span data-feather='check'>";}?></span></th>
                 <th><?php if($aeroclub['dateFinCotis'] != null){echo "<span data-feather='check'>";}?></th>
