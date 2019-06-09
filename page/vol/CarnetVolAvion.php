@@ -4,10 +4,22 @@ require '../../inc/bootstrap.php';
 require "../../inc/functions.php";
 require '../../inc/db.php';
 logged_admin();
+
+if(!empty($_POST['avion'])){
+    if ($_POST['avion'] != 666){
+        $id_avion = $_POST['avion'];
+    }
+    $dateHaute = $_POST['dateHaute'];
+    $dateBasse = $_POST['dateBasse'];
+    var_dump($id_avion);
+}
+
+
+
 require "../../inc/AvionMenu.php"
 ?>
 
-
+    <form action="" method="post">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
     <h1 class="h2">Carnet de vol</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
@@ -19,13 +31,13 @@ require "../../inc/AvionMenu.php"
             <div class="input-group-prepend">
                 <div class="input-group-text">Du</div>
             </div>
-            <input type="date" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+            <input name = "dateBasse" type="date" class="form-control" value="<?php if (!empty($dateBasse)){echo $dateBasse;}?>">
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">Au</div>
             </div>
-            <input type="date" class="form-control" id="inlineFormInputGroupUsername" placeholder="">
+            <input name = "dateHaute" type="date" class="form-control" value="<?php if (!empty($dateHaute)){echo $dateHaute;}?>">
         </div>
     </div>
 
@@ -33,26 +45,31 @@ require "../../inc/AvionMenu.php"
 
 <!-- Contenu de la page -->
 
-<div class="row">
-    <div class="form-group col-md-4">
-        <label>Avion</label>
-        <select name = 'avion' class="form-control ">
-            <option>Selectionnez un avion: </option>
-            <?php
-            $dbi->set_charset("utf8");
-            $requete = 'SELECT * FROM t_avion';
-            $resultat = $dbi->query($requete);
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>Avion</label>
+            <select name = 'avion' class="form-control ">
+                <option value="666">Selectionnez un avion: </option>
+                <?php
+                $dbi->set_charset("utf8");
+                $requete = 'SELECT * FROM t_avion';
+                $resultat = $dbi->query($requete);
 
-            while ($ligne = $resultat->fetch_assoc()) {
-                if ($ligne['en_flotte'] == 1){
-                    echo '<option value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
+                while ($ligne = $resultat->fetch_assoc()) {
+                    if ($ligne['id'] == $id_avion){
+                        $select = "selected";
+                    }else $select = "";
+                    echo '<option ' . $select . ' value="'.$ligne['id'].'" >'.$ligne['codavion'].'</option>';
                 }
-            }
 
-            ?>
+                ?>
             </select>
+        </div>
+
     </div>
-</div>
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+</form>
+
 
 <div class="table-responsive">
 
@@ -74,76 +91,168 @@ require "../../inc/AvionMenu.php"
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td type="date">04/04/19</td>
-            <td>GASNIER</td>
-            <td>Privé - vol local</td>
-            <td>LFPZ</td>
-            <td>LFPZ</td>
-            <td>16:42</td>
-            <td>17:15</td>
-            <td>00:33</td>
-            <td>3</td>
-            <td>51,60</td>
-            <td></td>
-            <td></td>
+        <?php
+        $resultat2 = $dbi->query('SELECT * FROM t_detailvol');
 
-        </tr>
-        <td type="date">04/04/19</td>
-        <td>GASNIER</td>
-        <td>Privé - vol local</td>
-        <td>LFPZ</td>
-        <td>LFPZ</td>
-        <td>16:42</td>
-        <td>17:15</td>
-        <td>00:33</td>
-        <td>3</td>
-        <td>51,60</td>
-        <td></td>
-        <td></td>
-        </tr>
-        <tr>
-            <td type="date">04/04/19</td>
-            <td>MARTEAU / LEBAS</td>
-            <td>Privé - vol local</td>
-            <td>LFPZ</td>
-            <td>LFPZ</td>
-            <td>16:42</td>
-            <td>17:15</td>
-            <td>00:33</td>
-            <td>3</td>
-            <td>78,80</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td type="date">04/04/19</td>
-            <td>ALLEMAND / LEBAS</td>
-            <td>Ecole - vol local</td>
-            <td>LFPZ</td>
-            <td>LFPZ</td>
-            <td>16:42</td>
-            <td>17:15</td>
-            <td>00:33</td>
-            <td>3</td>
-            <td></td>
-            <td>42,60</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td type="date">05/04/19</td>
-            <td>DEPRES</td>
-            <td>Ecole - navigation</td>
-            <td>LFPZ</td>
-            <td>LFPZ</td>
-            <td>16:42</td>
-            <td>17:15</td>
-            <td>00:33</td>
-            <td>3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        //Parcours du tableau de pilote récupéré et affichage des informations sous forme de tableau
+        while ($avion = $resultat2->fetch_assoc()) {
+            if (!empty($id_avion) && $avion['id_avion']== $id_avion){
+            if (!empty($dateHaute) && empty($dateBasse)){
+                if ($dateHaute >= $avion['datvol']){?>
+                    <tr>
+                    <td type="date"><?php echo $avion['datvol'];?></td>
+                    <td>GASNIER</td>
+                    <td>Privé - vol local</td>
+                    <td>LFPZ</td>
+                    <td>LFPZ</td>
+                    <td>16:42</td>
+                    <td>17:15</td>
+                    <td>00:33</td>
+                    <td>3</td>
+                    <td>51,60</td>
+                    <td></td>
+                    <td></td>
+
+                    </tr>
+                    <?php
+                }
+
+            }elseif (!empty($dateBasse) && empty($dateHaute)){
+                if ($dateBasse <= $avion['datvol']){?>
+                    <tr>
+                        <td type="date"><?php echo $avion['datvol'];?></td>
+                        <td>GASNIER</td>
+                        <td>Privé - vol local</td>
+                        <td>LFPZ</td>
+                        <td>LFPZ</td>
+                        <td>16:42</td>
+                        <td>17:15</td>
+                        <td>00:33</td>
+                        <td>3</td>
+                        <td>51,60</td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                    <?php
+            }
+            }elseif (!empty($dateBasse) && !empty($dateHaute)){
+                if ($dateBasse <= $avion['datvol'] && $dateHaute >= $avion['datvol']) { ?>
+                    <tr>
+                        <td type="date"><?php echo $avion['datvol']; ?></td>
+                        <td>GASNIER</td>
+                        <td>Privé - vol local</td>
+                        <td>LFPZ</td>
+                        <td>LFPZ</td>
+                        <td>16:42</td>
+                        <td>17:15</td>
+                        <td>00:33</td>
+                        <td>3</td>
+                        <td>51,60</td>
+                        <td></td>
+                        <td></td>
+
+                    </tr> <?php
+                }
+            }
+            elseif (empty($dateBasse) && empty($dateHaute)){?>
+                <tr>
+                    <td type="date"><?php echo $avion['datvol']; ?></td>
+                    <td>GASNIER</td>
+                    <td>Privé - vol local</td>
+                    <td>LFPZ</td>
+                    <td>LFPZ</td>
+                    <td>16:42</td>
+                    <td>17:15</td>
+                    <td>00:33</td>
+                    <td>3</td>
+                    <td>51,60</td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+
+
+        <?php }
+            }elseif (empty($id_avion)){
+                if (empty($dateBasse) && empty($dateHaute)){
+
+                ?>
+                 <tr>
+                    <td type="date"><?php echo $avion['datvol']; ?></td>
+                    <td>GASNIER</td>
+                    <td>Privé - vol local</td>
+                    <td>LFPZ</td>
+                    <td>LFPZ</td>
+                    <td>16:42</td>
+                    <td>17:15</td>
+                    <td>00:33</td>
+                    <td>3</td>
+                    <td>51,60</td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+          <?php  }elseif (!empty($dateHaute) && empty($dateBasse)){
+                    if ($dateHaute >= $avion['datvol']){?>
+                        <tr>
+                            <td type="date"><?php echo $avion['datvol'];?></td>
+                            <td>GASNIER</td>
+                            <td>Privé - vol local</td>
+                            <td>LFPZ</td>
+                            <td>LFPZ</td>
+                            <td>16:42</td>
+                            <td>17:15</td>
+                            <td>00:33</td>
+                            <td>3</td>
+                            <td>51,60</td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        <?php
+                    }
+
+                }elseif (!empty($dateBasse) && empty($dateHaute)){
+                    if ($dateBasse <= $avion['datvol']){?>
+                        <tr>
+                            <td type="date"><?php echo $avion['datvol'];?></td>
+                            <td>GASNIER</td>
+                            <td>Privé - vol local</td>
+                            <td>LFPZ</td>
+                            <td>LFPZ</td>
+                            <td>16:42</td>
+                            <td>17:15</td>
+                            <td>00:33</td>
+                            <td>3</td>
+                            <td>51,60</td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        <?php
+                    }
+                }elseif (!empty($dateBasse) && !empty($dateHaute)){
+                    if ($dateBasse <= $avion['datvol'] && $dateHaute >= $avion['datvol']) { ?>
+                        <tr>
+                            <td type="date"><?php echo $avion['datvol']; ?></td>
+                            <td>GASNIER</td>
+                            <td>Privé - vol local</td>
+                            <td>LFPZ</td>
+                            <td>LFPZ</td>
+                            <td>16:42</td>
+                            <td>17:15</td>
+                            <td>00:33</td>
+                            <td>3</td>
+                            <td>51,60</td>
+                            <td></td>
+                            <td></td>
+
+                        </tr> <?php
+                    }
+                }
+        }}$dbi->close();?>
 
         </tbody>
     </table>

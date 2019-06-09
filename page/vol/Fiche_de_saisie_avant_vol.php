@@ -109,7 +109,28 @@ if ($_SESSION['auth']->level_user == "administrateur"){
                     <div class="form-group col-md-4">
                     <label>Instructeur:</label>
                     <select class="form-control">
-                        //bdd
+                        <option>Selectionnez un instructeur: </option>
+                        <?php
+
+                        $dbi->set_charset("utf8");
+
+                        $requete = 'SELECT * FROM t_instruct';
+
+                        $resultat = $dbi->query($requete);
+
+                        while ($ligne = $resultat->fetch_assoc()) {
+
+
+                            $instruct = $dbi->query('SELECT nom, prenom FROM t_pilote WHERE id = "'.$ligne['id_pilote'].'"')->fetch_assoc();
+                                    echo '<option value="'.$ligne['id'].'" >'.$instruct['nom'].' '.$instruct['prenom'].'</option>';
+
+                            }
+
+
+
+
+
+                        ?>
                     </select>
                     </div>
                     <div class="form-group col-md-4">
@@ -233,6 +254,6 @@ if ($_SESSION['auth']->level_user == "administrateur"){
 </div>
 
 
-<?php } ?>
+<?php }  ?>
 
 <?php require "../../inc/newFooter.php" ?>
