@@ -17,7 +17,9 @@
 
     <!-- Bootstrap core CSS -->
 
-
+<script>
+    function edition() { options = "Width=700,Height=700" ; window.open( "edition.php", "edition", options ) ; }
+</script>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.css" rel="stylesheet">

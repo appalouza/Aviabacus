@@ -10,38 +10,54 @@ $resultat = $db->query('SELECT * FROM t_pilote WHERE id =?', [$id])->fetch();
 $resultat2 = $db->query('SELECT * FROM t_autorise WHERE id_pilote = ?', [$id])->fetch();
 $resultat3 = $db->query('SELECT * FROM t_licence WHERE id_pilote = ?', [$id])->fetch();
 $resultat4 = $db->query('SELECT * FROM t_aeroclub WHERE id_pilote = ?', [$id])->fetch();
+$resultat5 = $db->query('SELECT * FROM t_coordonnees WHERE id_pilote = ?', [$id])->fetch();
+
+$requete2 = 'SELECT * FROM t_qualif WHERE id_pilote = 49';
+
+$auto = $dbi->query($requete2)->fetch_assoc();
 $pilote['modif'] = $resultat;
 $autorise['modif'] = $resultat2;
 $licence['modif'] = $resultat3;
 $aeroclub['modif'] = $resultat4;
+$coordonnees['modif'] = $resultat5;
+/*while ($auto){
+ //   var_dump($auto);
+}*/
+
 
 
 if (!empty($_POST)){
 
     $validator = new Validator($_POST);
-    // Modification de la tabme t_pilote
+    // Modification de la table t_pilote
     $requete = 'UPDATE t_pilote SET ';
     $donnees = array();
     $requete2 = "";
     $nb_donnee = 0;
 
-    // Modification de la tabme t_autorise
+    // Modification de la table t_autorise
     $automodif = 'UPDATE t_autorise SET ';
     $donnees2 = array();
     $automodif2 = "";
     $nb_donnee2 = 0;
 
-    // Modification de la tabme t_licence
+    // Modification de la table t_licence
     $licencemodif = 'UPDATE t_licence SET ';
     $donnees3 = array();
     $licencemodif2 = "";
     $nb_donnee3 = 0;
 
-    // Modification de la tabme t_aeroclub
+    // Modification de la table t_aeroclub
     $aeroclubmodif = 'UPDATE t_aeroclub SET ';
     $donnees4 = array();
     $aeroclubmodif2 = "";
     $nb_donnee4 = 0;
+
+    // Modification de la table t_coordonnees
+    $coordonneesmodif = 'UPDATE t_coordonnees SET ';
+    $donnees5 = array();
+    $coordonneesmodif2 = "";
+    $nb_donnee5 = 0;
 
 
     //initialisation d'un tableau d'erreurs vide, il se remplira si une erreur surviens
@@ -62,14 +78,14 @@ if (!empty($_POST)){
 
         }
     }
-    if ($_POST['sexe']!=null  && $_POST['sexe'] != $pilote['modif']->codsexe){
-        $nb_donnee++;
+    if ($_POST['sexe']!=null  && $_POST['sexe'] != $coordonnees['modif']->codsexe){
+        $nb_donnee5++;
 
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
-        $requete2 .='codsexe = ?';
-        $donnees[] = $_POST['sexe'];
+        $coordonneesmodif2 .='codsexe = ?';
+        $donnees5[] = $_POST['sexe'];
 
 
     }
@@ -103,201 +119,198 @@ if (!empty($_POST)){
         if ($requete2 != null) {
             $requete2 .= ',';
         }
-
-
         $requete2 .='level_user = ?';
         $donnees[] = $_POST['lvl_user'];
 
-
     }
     if ($_POST['nationalite'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isAlpha('nationalite', 'Veuillez entrer une nationalité valide');
         if ($validator->isValid()){
-            $requete2 .='nationalite = ?';
-            $donnees[] = $_POST['nationalite'];
+            $coordonneesmodif2 .='nationalite = ?';
+            $donnees5[] = $_POST['nationalite'];
 
         }
     }
     if ($_POST['adresse'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isAlphanumeric('adresse', 'Veuillez entrer une adresse valide');
         if ($validator->isValid()){
-            $requete2 .='adresse = ?';
-            $donnees[] = $_POST['adresse'];
+            $coordonneesmodif2 .='adresse = ?';
+            $donnees5[] = $_POST['adresse'];
 
         }
     }
     if ($_POST['codpost'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isLen('codpost', 'Veuillez entrer un code postale valide');
         if ($validator->isValid()){
-            $requete2 .='codpost = ?';
-            $donnees[] = $_POST['codpost'];
+            $coordonneesmodif2 .='codpost = ?';
+            $donnees5[] = $_POST['codpost'];
 
         }
     }
     if ($_POST['ville'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isAlpha('ville', 'Veuillez entrer une nationalité valide');
         if ($validator->isValid()){
-            $requete2 .='ville = ?';
-            $donnees[] = $_POST['ville'];
+            $coordonneesmodif2 .='ville = ?';
+            $donnees5[] = $_POST['ville'];
 
         }
     }
     if ($_POST['telcell'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isNumeric('telcell', "Ce numéro de téléphone portable valide");
         if ($validator->isValid()){
-            $requete2 .='telcellulaire = ?';
-            $donnees[] = $_POST['telcell'];
+            $coordonneesmodif2 .='telcellulaire = ?';
+            $donnees5[] = $_POST['telcell'];
 
         }
     }
     if ($_POST['teldom'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isNumeric('teldom', "Ce numéro de téléphone domicile valide");
         if ($validator->isValid()){
-            $requete2 .='teldomicile = ?';
-            $donnees[] = $_POST['teldom'];
+            $coordonneesmodif2 .='teldomicile = ?';
+            $donnees5[] = $_POST['teldom'];
 
         }
     }
     if ($_POST['telpro'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isNumeric('telpro', 'Veuillez entrer un téléphone pro valide');
         if ($validator->isValid()){
-            $requete2 .='telpro = ?';
-            $donnees[] = $_POST['telpro'];
+            $coordonneesmodif2 .='telpro = ?';
+            $donnees5[] = $_POST['telpro'];
 
         }
     }
     if ($_POST['profession'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isAlpha('profession', 'Veuillez entrer une profession valide');
         if ($validator->isValid()){
-            $requete2 .='profession = ?';
-            $donnees[] = $_POST['profession'];
+            $coordonneesmodif2 .='profession = ?';
+            $donnees5[] = $_POST['profession'];
 
         }
     }
     if ($_POST['datenaissance'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
-        $requete2 .='datnaissance = ?';
-        $donnees[] = $_POST['datenaissance'];
+        $coordonneesmodif2 .='datnaissance = ?';
+        $donnees5[] = $_POST['datenaissance'];
 
 
     }
     if ($_POST['age'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isNumeric('age', 'Veuillez entrer un age valide');
         if ($validator->isValid()){
-            $requete2 .='age = ?';
-            $donnees[] = $_POST['age'];
+            $coordonneesmodif2 .='age = ?';
+            $donnees5[] = $_POST['age'];
 
         }
     }
     if ($_POST['lieunaissance'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2   .= ',';
         }
         $validator->isAlpha('lieunaissance', 'Veuillez entrer un lieu de naissance valide');
         if ($validator->isValid()){
-            $requete2 .='lieunaissance = ?';
-            $donnees[] = $_POST['lieunaissance'];
+            $coordonneesmodif2 .='lieunaissance = ?';
+            $donnees5[] = $_POST['lieunaissance'];
 
         }
     }
     if ($_POST['userFirstContactName'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isAlpha('userFirstContactName', 'Veuillez entrer un nom de premier contact valide');
         if ($validator->isValid()){
-            $requete2 .='userFirstContactName = ?';
-            $donnees[] = $_POST['userFirstContactName'];
+            $coordonneesmodif2 .='userFirstContactName = ?';
+            $donnees5[] = $_POST['userFirstContactName'];
 
         }
     }
     if ($_POST['userFirstContactPhone'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isNumeric('userFirstContactPhone', 'Veuillez entrer un téléphone de premier contact valide');
         if ($validator->isValid()){
-            $requete2 .='userFirstContactPhone = ?';
-            $donnees[] = $_POST['userFirstContactPhone'];
+            $coordonneesmodif2 .='userFirstContactPhone = ?';
+            $donnees5[] = $_POST['userFirstContactPhone'];
 
         }
     }
     if ($_POST['userSecondContactName'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isAlpha('userSecondContactName', 'Veuillez entrer un nom de second contact valide');
         if ($validator->isValid()){
-            $requete2 .='userSecondContactName = ?';
-            $donnees[] = $_POST['userSecondContactName'];
+            $coordonneesmodif2 .='userSecondContactName = ?';
+            $donnees5[] = $_POST['userSecondContactName'];
 
         }
     }
     if ($_POST['userSecondContactPhone'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isNumeric('userSecondContactPhone', 'Veuillez entrer un téléphone de second contact valide');
         if ($validator->isValid()){
-            $requete2 .='userSecondContactPhone = ?';
-            $donnees[] = $_POST['userSecondContactPhone'];
+            $coordonneesmodif2 .='userSecondContactPhone = ?';
+            $donnees5[] = $_POST['userSecondContactPhone'];
 
         }
     }
 
     if ($_POST['observations'] !=null){
-        $nb_donnee++;
-        if ($requete2 != null) {
-            $requete2 .= ',';
+        $nb_donnee5++;
+        if ($coordonneesmodif2 != null) {
+            $coordonneesmodif2 .= ',';
         }
         $validator->isAlphanumeric('observations', 'Veuillez entrer une observation valide');
         if ($validator->isValid()){
-            $requete2 .='Observations = ?';
-            $donnees[] = $_POST['observations'];
+            $coordonneesmodif2 .='Observations = ?';
+            $donnees5[] = $_POST['observations'];
 
         }
     }
@@ -501,21 +514,31 @@ if (!empty($_POST)){
 
     if (sizeof($donnees4) == $nb_donnee4){
         $aeroclubmodif .= $aeroclubmodif2;
-        $aeroclubmodif .= 'WHERE id_pilote = ?';
+        $aeroclubmodif .= ' WHERE id_pilote = ?';
         $donnees4[] = $id;
-        var_dump($aeroclubmodif);
-        var_dump($donnees4);
+        /*var_dump($aeroclubmodif);
+        var_dump($donnees4);*/
 
         $db->query($aeroclubmodif,$donnees4);
+        $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
+    }
+    if (sizeof($donnees5) == $nb_donnee5){
+        $coordonneesmodif .= $coordonneesmodif2;
+        $coordonneesmodif .= ' WHERE id_pilote = ?';
+        $donnees5[] = $id;
+        /*var_dump($coordonneesmodif);
+        var_dump($donnees5);*/
+
+        $db->query($coordonneesmodif,$donnees5);
         $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
     }
 
     if (sizeof($donnees3) == $nb_donnee3){
         $licencemodif .= $licencemodif2;
-        $licencemodif .= 'WHERE id_pilote = ?';
+        $licencemodif .= ' WHERE id_pilote = ?';
         $donnees3[] = $id;
-        var_dump($licencemodif);
-        var_dump($donnees3);
+        /*var_dump($licencemodif);
+        var_dump($donnees3);*/
 
         $db->query($licencemodif,$donnees3);
         $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
@@ -523,30 +546,31 @@ if (!empty($_POST)){
 
     if (sizeof($donnees2) == $nb_donnee2){
         $automodif .= $automodif2;
-        $automodif .= 'WHERE id_pilote = ?';
+        $automodif .= ' WHERE id_pilote = ?';
         $donnees2[] = $id;
-        var_dump($automodif);
-        var_dump($donnees2);
+        /*var_dump($automodif);
+        var_dump($donnees2);*/
 
         $db->query($automodif,$donnees2);
         $_SESSION['flash']['success'] = "Les modifications ont été effectuées";
     }
 
-    if (sizeof($donnees) == $nb_donnee){
+    if ($nb_donnee != 0 && sizeof($donnees) == $nb_donnee){
         $requete .= $requete2;
-        $requete .= 'WHERE id = ?';
+        $requete .= ' WHERE id = ?';
         $donnees[] = $id;
-
+        /*var_dump($requete);
+        var_dump($donnees);*/
         $db->query($requete, $donnees);
-        $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
-        unset($_POST);
-        header('Location: Liste_User.php');
-        exit();
+
     } else{
         $errors = $validator->getErrors();
         unset($_POST);
     }
-
+    $_SESSION['flash']['success'] = 'Les modifications ont été effectuées';
+    unset($_POST);
+    header('Location: Liste_User.php');
+    exit();
 
 
 }

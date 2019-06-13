@@ -61,16 +61,16 @@
 
 
         <div class="form-group">
-            <H2>Liste des qualifications</H2>
-            <!-- Trigger the modal with a button -->
+       <!--     <H2>Liste des qualifications</H2>
+             Trigger the modal with a button
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Ajouter une qualification</button>
 
 
-            <!-- Modal -->
+             Modal
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
 
-                    <!-- Modal content-->
+                    Modal content
                     <div class="modal-content">
                         <div class="container">
                             <div class="modal-header">
@@ -120,6 +120,7 @@
             </div>
 
         </div>
+        -->
         <table class="table">
             <thead>
             <tr>
@@ -130,11 +131,102 @@
             </tr>
             </thead>
             <tbody>
+
             <tr>
-                <td>Hydravion</td>
-                <td>17/08/2015</td>
-                <td>BH879AH6</td>
-                <td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button></td>
+                <td><select class="form-control"  name="Aqualif">
+                        <option value="0"></option>
+                        <option value="1">Ancien Breveté brevet de base</option>
+                        <option value="2">Ancien stagiaire déclaré</option>
+                        <option value="3">Breveté pilote brevet de base</option>
+                        <option value="4">CPL Pilote pro</option>
+                        <option value="5">Stagiaire déclaré</option>
+                        <option value="6">Hydravion</option>
+                        <option value="7">Qualification IFR</option>
+                        <option value="8">Instructeur FI, FI R et FE</option>
+                        <option value="9">A préciser. Non connu</option>
+                        <option value="10">Qualification B</option>
+                        <option value="11">Qualification Nuit</option>
+                        <option value="12">Qualification QRRI</option>
+                        <option value="13">Breveté pilote complet TT/PPL</option>
+                        <option value="14">Breveté pilote ULM</option>
+
+                    </select></td>
+
+                <td><input type="date" name="AdateValidite"  class="form-control"></td>
+                <td><input type="text" name="Anumero" class="form-control"></td>
+                <!--<td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button></td>-->
+            </tr>
+            <tr>
+                <td><select class="form-control"  name="Bqualif">
+                        <option value="0"></option>
+                        <option value="1">Ancien Breveté brevet de base</option>
+                        <option value="2">Ancien stagiaire déclaré</option>
+                        <option value="3">Breveté pilote brevet de base</option>
+                        <option value="4">CPL Pilote pro</option>
+                        <option value="5">Stagiaire déclaré</option>
+                        <option value="6">Hydravion</option>
+                        <option value="7">Qualification IFR</option>
+                        <option value="8">Instructeur FI, FI R et FE</option>
+                        <option value="9">A préciser. Non connu</option>
+                        <option value="10">Qualification B</option>
+                        <option value="11">Qualification Nuit</option>
+                        <option value="12">Qualification QRRI</option>
+                        <option value="13">Breveté pilote complet TT/PPL</option>
+                        <option value="14">Breveté pilote ULM</option>
+
+                    </select></td>
+
+                <td><input type="date" name="BdateValidite"  class="form-control"></td>
+                <td><input type="text" name="Bnumero" class="form-control"></td>
+                <!--<td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button></td>-->
+            </tr>
+            <tr>
+                <td><select class="form-control"  name="Cqualif">
+                        <option value="0"></option>
+                        <option value="1">Ancien Breveté brevet de base</option>
+                        <option value="2">Ancien stagiaire déclaré</option>
+                        <option value="3">Breveté pilote brevet de base</option>
+                        <option value="4">CPL Pilote pro</option>
+                        <option value="5">Stagiaire déclaré</option>
+                        <option value="6">Hydravion</option>
+                        <option value="7">Qualification IFR</option>
+                        <option value="8">Instructeur FI, FI R et FE</option>
+                        <option value="9">A préciser. Non connu</option>
+                        <option value="10">Qualification B</option>
+                        <option value="11">Qualification Nuit</option>
+                        <option value="12">Qualification QRRI</option>
+                        <option value="13">Breveté pilote complet TT/PPL</option>
+                        <option value="14">Breveté pilote ULM</option>
+
+                    </select></td>
+
+                <td><input type="date" name="CdateValidite"  class="form-control"></td>
+                <td><input type="text" name="Cnumero" class="form-control"></td>
+                <!--<td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button></td>-->
+            </tr>
+            <tr>
+                <td><select class="form-control"  name="Dqualif">
+                        <option></option>
+                        <option value="1">Ancien Breveté brevet de base</option>
+                        <option value="2">Ancien stagiaire déclaré</option>
+                        <option value="3">Breveté pilote brevet de base</option>
+                        <option value="4">CPL Pilote pro</option>
+                        <option value="5">Stagiaire déclaré</option>
+                        <option value="6">Hydravion</option>
+                        <option value="7">Qualification IFR</option>
+                        <option value="8">Instructeur FI, FI R et FE</option>
+                        <option value="9">A préciser. Non connu</option>
+                        <option value="10">Qualification B</option>
+                        <option value="11">Qualification Nuit</option>
+                        <option value="12">Qualification QRRI</option>
+                        <option value="13">Breveté pilote complet TT/PPL</option>
+                        <option value="14">Breveté pilote ULM</option>
+
+                    </select></td>
+
+                <td><input type="date" name="DdateValidite"  class="form-control"></td>
+                <td><input type="text" name="Dnumero" class="form-control"></td>
+                <!--<td><button type="button" class="btn btn-outline-danger btn-sm">Supprimer</button></td>-->
             </tr>
 
             </tbody>

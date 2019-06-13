@@ -1,4 +1,5 @@
 <?php
+require '../../inc/db.php';
 
 	function debug($variable){
 		echo '<pre>' . print_r($variable, true) . '</pre>';
@@ -14,6 +15,21 @@
         $Return = json_decode($Response);
         return $Return;
     }
+
+    function testInstruct($user_id,$qualif, $numero, $datevalidite){
+        if($qualif != null && $qualif == 8){
+            $db = App::getDatabase();
+            $requete6 = "INSERT INTO t_instruct SET id_pilote = ?, noagrement = ?, datvalinst = ?";
+            $donnees6 = array($user_id, $numero, $datevalidite);
+            $db->query($requete6, $donnees6);
+        }elseif ($qualif != null && $qualif != 8){
+            $db = App::getDatabase();
+            $requete7 = "INSERT INTO t_qualif SET id_pilote = ?, licence = ?, noLicence = ?, dateValidite = ?";
+            $donnees7 = array($user_id,$qualif, $numero, $datevalidite);
+            $db->query($requete7, $donnees7);
+        }
+    }
+
 
 	function logged_only(){
     if(session_status() == PHP_SESSION_NONE){

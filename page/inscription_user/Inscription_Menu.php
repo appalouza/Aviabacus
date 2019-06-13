@@ -14,6 +14,7 @@ if (!empty($_POST)) {
     $db = App::getDatabase();
     //création d'une méthode de detection d'erreurs utilisant un tableau
     $errors = array();
+    //var_dump($_POST['Aqualif']);
 
     //connexion à la bdd grâce à la classe App
 
@@ -76,6 +77,9 @@ if (!empty($_POST)) {
         $validator->isAlphanumeric('observations', 'Les observations sont invalides');
     }
 
+    if ($_POST['Aqualif']!= null){
+        //$validator->isAlphanumeric($_POST['Anumero'], "Le numéro de licence n'est pas valide");
+    }
 
 
      //requête pour enregistrer un utilisateurs
@@ -85,32 +89,9 @@ if (!empty($_POST)) {
         $token = Str::random(60);
 
         $requete = "INSERT INTO t_pilote 
-            SET nom= ? , prenom = ?, codsexe = ?,adresse =?, codpost = ?, ville = ?, teldomicile = ?, telcellulaire = ?,
-             email=?, profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?, level_user=?,confirmation_token=?
+            SET nom= ? , prenom = ?,  level_user=?,email=?,confirmation_token=?
                 ";
-        $donnees = array($_POST['nom'], $_POST['prenom'], $_POST['sexe'], $_POST['adresse'], $_POST['codpost'], $_POST['ville'],
-            $_POST['telperso'], $_POST['telcell'], $_POST['email'],
-            $_POST['profession'], $_POST['datenaissance'], $_POST['age'], $_POST['lieunaissance'],
-            $_POST['nationalite'], $_POST['lvl_user'], $token );
-
-
-
-
-        if ($_POST["userFirstContactName"] != null) {
-            $requete .= ",userFirstContactName=?, userFirstContactPhone=?";
-            $donnees[] = $_POST['userFirstContactName'];
-            $donnees[] = $_POST['userFirstContactPhone'];
-        }
-
-        if ($_POST["userSecondContactName"] != null) {
-            $requete .= ",userSecondContactName=?, userSecondContactPhone =?";
-            $donnees[] = $_POST['userSecondContactName'];
-            $donnees[] = $_POST['userSecondContactPhone'];
-        }
-        if ($_POST["observations"] != null){
-            $requete .= ',Observations=?';
-            $donnees[] = $_POST['observations'];
-        }
+        $donnees = array($_POST['nom'], $_POST['prenom'],  $_POST['lvl_user'],  $_POST['email'], $token );
 
         $db->query($requete, $donnees);
 
@@ -137,6 +118,53 @@ if (!empty($_POST)) {
         $donnees4 = array($user_id, $_POST['dateEntree'], $_POST['dateCotis'], $_POST['dateFinCotis'],
             $_POST['mActif'], $_POST['bours'], $_POST['lMembre']);
         $db->query($requete4, $donnees4);
+
+        //insertion des données concernant les coordonnées d'un utilisateur
+
+        $requete5 = "INSERT INTO t_coordonnees SET id_pilote = ?, codsexe = ?,adresse =?, codpost = ?, ville = ?, teldomicile = ?, telcellulaire = ?,
+              profession=?, datnaissance=?, age=?, lieunaissance=?, nationalite=?";
+        $donnees5 = array($user_id,$_POST['sexe'], $_POST['adresse'], $_POST['codpost'], $_POST['ville'],
+            $_POST['telperso'], $_POST['telcell'],
+            $_POST['profession'], $_POST['datenaissance'], $_POST['age'], $_POST['lieunaissance'],
+            $_POST['nationalite']);
+
+        if ($_POST["userFirstContactName"] != null) {
+            $requete5 .= ",userFirstContactName=?, userFirstContactPhone=?";
+            $donnees5[] = $_POST['userFirstContactName'];
+            $donnees5[] = $_POST['userFirstContactPhone'];
+        }
+        if ($_POST["telpro"] != null) {
+            $requete5 .= ",telpro = ? ";
+            $donnees5[] = $_POST['telpro'];
+
+        }
+
+        if ($_POST["userSecondContactName"] != null) {
+            $requete5 .= ",userSecondContactName=?, userSecondContactPhone =?";
+            $donnees5[] = $_POST['userSecondContactName'];
+            $donnees5[] = $_POST['userSecondContactPhone'];
+        }
+        if ($_POST["observations"] != null){
+            $requete5 .= ',Observations=?';
+            $donnees5[] = $_POST['observations'];
+        }
+
+        $db->query($requete5, $donnees5);
+
+        //insertion des données dans t_instruct
+        //test des Champs qualif pour voir si il y a un instructeur
+        if ($_POST['Aqualif'] != null){
+            testInstruct($user_id,$_POST['Aqualif'],$_POST['Anumero'], $_POST['AdateValidite']);
+        }
+        if ($_POST['Bqualif'] != null){
+            testInstruct($user_id, $_POST['Bqualif'],$_POST['Bnumero'], $_POST['BdateValidite']);
+        }
+        if ($_POST['Cqualif'] != null){
+            testInstruct($user_id, $_POST['Cqualif'],$_POST['Cnumero'], $_POST['CdateValidite']);
+        }
+        if ($_POST['Dqualif'] != null){
+            testInstruct($user_id, $_POST['Dqualif'],$_POST['Dnumero'], $_POST['DdateValidite']);
+        }
 
         envoie_mail($user_id, $token);
         $_SESSION['flash']['success'] = "Un email de confirmation a été envoyé à l'utilisateur pour valider son compte";
