@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../../page/info_user/ComptePiloteCrediteur.php">
                             <span data-feather="user-plus"></span>
                             Comptes créditeurs
                         </a>
@@ -87,7 +87,7 @@
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>Trésorerie</span>
-                    <a class="d-flex align-items-center text-muted" href="#">
+                    <a class="d-flex align-items-center text-muted" href="../../page/info_user/SaisieOperationsDiverses.php">
                         <span data-feather="plus-circle"></span>
                     </a>
                 </h6>

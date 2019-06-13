@@ -57,17 +57,24 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="../../page/vol/Fiche_de_saisie_avant_vol.php">
+                            <span data-feather="file"></span>
+                            Fiche de saisie avant vol <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="../../page/vol/CarnetVolAvion.php">
                             <span data-feather="file"></span>
                             Carnet de vol des avions <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../page/vol/Fiche_de_saisie_avant_vol.php">
+                        <a class="nav-link" href="../../page/vol/volvalider.php">
                             <span data-feather="file"></span>
-                            Fiche de saisie avant vol <span class="sr-only">(current)</span>
+                            Vols à valider <span class="sr-only">(current)</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="../../page/avion/Liste_Avion.php">
                             <span data-feather="file"></span>

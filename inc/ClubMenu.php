@@ -63,7 +63,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="6_1_Comptes_pilotes_débiteurs.html">
+                        <a class="nav-link" href="../../page/info_user/listeElevePilote.php">
+                            <span data-feather="user"></span>
+                            Liste des élèves pilotes <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../page/info_user/presenceCours.php">
                             <span data-feather="list"></span>
                             Présence aux cours théoriques <span class="sr-only"></span>
                         </a>
